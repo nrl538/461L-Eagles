@@ -18,3 +18,15 @@ CREATE TABLE post (
   body TEXT NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
+
+CREATE TABLE books (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ title TEXT NOT NULL,
+ author TEXT NOT NULL,
+ isbn TEXT NOT NULL,
+ cover TEXT NOT NULL,
+ description TEXT NOT NULL,
+ average_review FLOAT NOT NULL,
+ purchase_link TEXT NOT NULL,
+ date_published DATE 
+);
