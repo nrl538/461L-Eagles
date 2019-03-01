@@ -20,9 +20,12 @@ def search():
         cur.execute(
             'SELECT * FROM titles WHERE title LIKE %s', ('%'+title+'%',)
         )
+
         book=cur.fetchone()
+
         if book is None:
             error = 'No Books were found'
+            return error
 
         flash(error)
     return render_template('books/results.html')
