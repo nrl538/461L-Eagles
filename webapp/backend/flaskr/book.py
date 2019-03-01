@@ -19,7 +19,7 @@ def get_book(isbn):
         not_found = 'Sorry, but BookBrain is currently in development, and this book is not yet listed. Please try one of our currently supported books.'
         return not_found
     else:
-        return book
+        return render_template('book/book.html', book=book)
 
 @bp.route('/book/<isbn>', methods=['GET'])
 def show(isbn):
