@@ -49,15 +49,33 @@
       </div>
     </nav>
 
-
-    <div class="container-fluid" style="background-color:blue; opacity:.2;">
+    <div class="container-fluid">
+      <div class="row">
+        <img class="rounded mx-auto d-block" id='logo' src='logo.png' alt='BookBrain Logo' style="height:10%;padding-top:5%; margin-bottom:-10%">
       </div>
-      <br>
-      <br>
-      <h1 style="text-align:center">Welcome to BookBrain!</h1>
-      <h2 style="text-align:center; color:grey">Your one stop shop for high quality aggregated reviews!</h2>
-      <div class="container"></div>
-      <div class="container">apples</div>
+    </div>
+
+    <div class="jumbotron" style="text-align:center; background-color:#FFFCF9">
+      <h1 class="display-4">Welcome to BookBrain!</h1>
+      <p class="lead" style="color:grey">Your one stop shop for high quality aggregated reviews</p>
+      <hr class="my-4">
+      <p>Search for the aggregated reviews classic books below by searching by author, IBSN...</p>
+      <form class="form-inline justify-content-center">
+        <div class="input-group input-group-l" style="width:60%">
+          <div class="input-group-prepend">
+            <select class="custom-select input-group-prepend" style="width:-10%">
+              <option selected>Search by...</option>
+              <option value="1">Title</option>
+              <option value="2">Author</option>
+              <option value="3">IBSN</option>
+            </select>
+          </div>
+          <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" style="background-color:#B1EDE8">Search</button>
+          </div>
+        </div>
+      </form>
     </div>
 
     <!-- Optional JavaScript -->
