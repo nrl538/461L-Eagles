@@ -32,7 +32,7 @@
 
       <div id='book-metadata'>
         <div id='book-cover'>
-          <img  src="/static/{{ book['cover'] }}" alt='To Kill A Mockingbird - Book Cover'>
+          <img  src="{{ book['cover'] }}" alt='{{ book['title'] }} - Book Cover'>
         </div>
 
         <div id='book-rating'>
@@ -51,23 +51,7 @@
               <th> Get a copy at these retailers: </th>
               <tr>
                 <td>
-                  <button>
-                    Amazon
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button>
-                    Barnes & Noble
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button>
-                    eBay
-                  </button>
+                  <a href='{{ book['purchase-link'] }}'> GoodReads Affiliate </a>
                 </td>
               </tr>
             </table>
