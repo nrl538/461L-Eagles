@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Books{% endblock %}</h1>
+  <h1>{% block title %}Search Results{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
@@ -9,7 +9,7 @@
     <article class="post">
       <header>
         <div>
-          <h1>{{ book['title'] }}</h1>
+          <a href="/book/{{ book['isbn'] }}">{{ book['title'] }}</a>
           <div class="about">by {{ book['author'] }} on {{ book['date_published'].strftime('%Y-%m-%d') }}</div>
         </div>
       </header>
