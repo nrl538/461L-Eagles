@@ -6,11 +6,11 @@ import MySQLdb.cursors
 
 def get_db():
     if 'db' not in g:
-        g.db = MySQLdb.connect(host="127.0.0.1",  # your host 
-                     user="bookbrain",       # username
-                     passwd="461leagles",     # password
-                     db="bookbrain",# name of the database
-                     cursorclass=MySQLdb.cursors.DictCursor)   
+        g.db = MySQLdb.connect(host="35.192.163.20",  # your host
+                     user="root",       # username
+                     passwd="root",     # password
+                     db="mysqldb",  # name of the database
+                     cursorclass=MySQLdb.cursors.DictCursor)
     return g.db
 
 

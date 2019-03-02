@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Books{% endblock %}</h1>
-{% endblock %}
-
 {% block content %}
   {% for book in books %}
+  <div class="jumbotron" style="padding-top:5%">
+    <h1>Results</h1>
     <article class="post">
       <header>
         <div>
@@ -19,4 +17,5 @@
       <hr>
     {% endif %}
   {% endfor %}
+  </div>
 {% endblock %}

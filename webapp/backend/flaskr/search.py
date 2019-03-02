@@ -1,17 +1,15 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Feb 27 15:01:05 2019
+from flask import (
+    Blueprint, flash, g, redirect, render_template, request, url_for
+)
 
-@author: Doly
-"""
 import functools
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from flaskr.db import get_db
-from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
-)
 
+bp = Blueprint('search', __name__, url_prefix='/search')
+
+@bp.route('/', methods=('GET', 'POST'))
 def search():
     if request.method == 'POST':
         title = request.form['title']
@@ -28,4 +26,4 @@ def search():
             return error
 
         flash(error)
-    return render_template('books/results.html')
+    return render_template('book/results.html',books=[book])
