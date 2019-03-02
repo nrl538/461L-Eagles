@@ -31,7 +31,9 @@
         </div>
 
         <div id='search'>
-          <input type='text' placeholder="Search for a book title or author...">
+          <form method="POST" action="/search">
+            <input type='q' name='q' placeholder="Search for a book title or author...">
+          </form>
         </div>
       </div>
 

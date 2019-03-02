@@ -9,16 +9,8 @@ from flaskr.db import get_db
 bp = Blueprint('home', __name__)
 
 
-@bp.route('/', methods=['GET', 'POST'])
+@bp.route('/', methods=['GET'])
 def index():
-    """Show all the posts, most recent first."""
-    cur = get_db().cursor()
-    # cur.execute(
-        # 'SELECT p.id, title, body, created, author_id, username'
-        # ' FROM post p JOIN user u ON p.author_id = u.id'
-        # ' ORDER BY created DESC'
-    # )
-    # posts=cur.fetchall()
     return render_template('index.html')
 
 
