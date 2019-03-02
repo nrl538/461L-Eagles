@@ -32,7 +32,7 @@
 
         <div id='search'>
           <form method="POST" action="/search">
-            <input type='q' name='q' placeholder="Search for a book title or author...">
+            <input id='search-box' type='q' name='q' placeholder="Search for a book title or author...">
           </form>
         </div>
       </div>
@@ -99,7 +99,7 @@
   transform: translate(-50%, -50%);
 }
 
-#search input[type=text] {
+#search-box {
   width: 100%;
   height: 20px;
   border: 3px solid #00B4CC;
