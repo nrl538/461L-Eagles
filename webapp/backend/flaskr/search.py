@@ -1,12 +1,12 @@
-from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
-)
-
+# -*- coding: utf-8 -*-
 import functools
 
 from flaskr.db import get_db
+from flask import (
+    Blueprint, flash, g, redirect, render_template, request, session, url_for
+)
 
-bp = Blueprint('search', __name__, url_prefix='/search')
+bp = Blueprint('search', __name__)
 
 @bp.route('', methods=('GET', 'POST'))
 def search():

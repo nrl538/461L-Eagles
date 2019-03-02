@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Search Results{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  {% for book in books %}
+    <article class="post">
+      <header>
+        <div>
+          <a href="/book/{{ book['isbn'] }}">{{ book['title'] }}</a>
+          <div class="about">by {{ book['author'] }} on {{ book['date_published'].strftime('%Y-%m-%d') }}</div>
+        </div>
+      </header>
+      <p class="body">{{ book['description'] }}</p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
