@@ -35,12 +35,22 @@ def create_app(test_config=None):
     db.init_app(app)
 
     # apply the blueprints to the app
+<<<<<<< HEAD
     from flaskr import home, book, auth, search
     # app.register_blueprint(auth.bp)
     app.register_blueprint(home.bp)
     app.register_blueprint(book.bp)
     app.register_blueprint(auth.bp)
     app.register_blueprint(search.bp)
+=======
+    from flaskr import home, book, search, auth, about
+    # app.register_blueprint(auth.bp)
+    app.register_blueprint(home.bp)
+    app.register_blueprint(book.bp)
+    app.register_blueprint(search.bp)
+    app.register_blueprint(auth.bp)
+    app.register_blueprint(about.bp)
+>>>>>>> ac664e7e726f896617bc3dbc0653f051c1908cd7
 
     # make url_for('index') == url_for('blog.index')
     # in another app, you might define a separate main index here with

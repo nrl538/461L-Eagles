@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> BookBrain </title>
+  </head>
+
+  <div class='container'>
+    <body class='gray'>
+      <div id='subnav' class='centered'>
+        <span>
+          <a href='/'>
+            <img id='logo' src='/static/logo.png' alt='BookBrain Logo'>
+          </a>
+          <a class='subnav-hyperlinks' href='/login'>
+            Login
+          </a>
+        </span>
+      </div>
+
+      <div>
+        <h3> About BookBrain</h3>
+        <p id='about-us-description'>
+          The goal of BookBrain is simple: BookBrain will show users internet-aggregated ratings for books and provide book recommendations based on these ratings and genres. Usually when someone is trying to decide whether or not they want to read a book, they might do a Google search and be faced with many websites offering mixed reviews—one might display only one review with a 3/3 star rating and another might have hundreds of reviews with an average rating of 4.3 out of 5 stars. Furthermore, some of these sites might not even have reviews or ratings for books that just were just recently published. Our website would simplify the book recommendation experience for the user by compiling reviews from different merchant websites, social media feeds, and news feeds as well as providing trendy information about a book all on a single page. By doing this, we hope to give our users a more holistic review of the book based on overall internet reviews and trendiness.
+        </p>
+
+        <p id='about-us-users'>
+          The target demographic for BookBrain fall under two categories—someone that is looking for a new book to read and wants suggestions based off of genre and internet popularity or someone that is looking to purchase a specific book and would like ratings and reviews from many different internet sources aggregated in one place.
+        </p>
+
+        <br>
+
+        <h3> The BookBrain Team </h3>
+        <p id='about-us-team-description'>
+          We are EE 461L Team Eagles made up of Wesley Klock, Hiep Nguyen, Michael Flanders, Kunpeng Qin, Nabil Khan, and Nelson Levy
+        </p>
+
+        <br>
+
+        <h3> Sources, Tools, and Github </h3>
+        <p id='about-us-sources'>
+          <h5> Sources </h5>
+          <ul>
+            <li>
+              For Phase 1 of this project, our only scraper source was <a href='https://www.goodreads.com/'>Goodreads</a>
+            </li>
+            <li>
+              We have a detailed documentation of our scrape process on our <a href='https://github.com/Flandini/461L-Eagles/tree/master/scraping'>team Github.</a>
+            </li>
+          </ul>
+          <h5> Tools </h5>
+          <ul>
+            <li>
+              FrontEnd - HTML/CSS & Some React.js
+            </li>
+            <li>
+              Backend - Flask, Pytests, MySQL, GCP including FireBase and their VM's
+            </li>
+            <li>
+              Scraper - Python, Selenium, python-pandas
+            </li>
+            <li>
+              Team Coordination - GroupMe, Slack, Github, Google Docs
+            </li>
+          </ul>
+        </p>
+      </div>
+
+    </div>
+  </body>
+</html>
+
+<style>
+
+.container {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 5%;
+}
+#subnav {
+  max-height: 7em;
+  height: 5%;
+}
+
+.subnav-hyperlinks {
+  float: right;
+  text-align: center;
+  max-height: 6em;
+  padding: 1em;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 1.5em;
+}
+
+#logo {
+  padding: 1em;
+  max-height: 10%;
+  width: auto;
+  height: 90px;
+}
+
+#book-background {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  position: relative;
+}
+
+#book-brain-text {
+  position: absolute;
+  text-align: center;
+  font-size: 3em;
+  top: 15%;
+  left: 50%;
+  text-decoration: none;
+  transform: translate(-50%, -50%);
+}
+
+#search {
+  position: absolute;
+  text-align: center;
+  font-size: 17px;
+  width: 30%;
+  top: 35%;
+  left: 50%;
+  text-decoration: none;
+  transform: translate(-50%, -50%);
+}
+
+#search-box {
+  width: 100%;
+  height: 20px;
+  border: 3px solid #00B4CC;
+  float: left;
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.centered {
+  display: block;
+  margin-left: auto; margin-right: auto;
+}
+
+.gray {
+  background-color: #dfdfdf;
+}
+</style>
+
+<script>
+</script>
