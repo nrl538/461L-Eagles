@@ -1,16 +1,31 @@
+import sqlite3
+
+import click
 from flask import current_app, g
 from flask.cli import with_appcontext
-import click
 import MySQLdb
 import MySQLdb.cursors
 
 def get_db():
+    """Connect to the application's configured database. The connection
+    is unique for each request and will be reused if this is called
+    again.
+    """
     if 'db' not in g:
-        g.db = MySQLdb.connect(host="127.0.0.1",  # your host 
-                     user="bookbrain",       # username
-                     passwd="461leagles",     # password
-                     db="bookbrain",# name of the database
+        '''
+        g.db = sqlite3.connect(
+            current_app.config['DATABASE'],
+            detect_types=sqlite3.PARSE_DECLTYPES
+        )
+        g.db.row_factory = sqlite3.Row
+        '''
+        #35.192.163.20
+        g.db = MySQLdb.connect(host="35.192.163.20",  # your host 
+                     user="root",       # username
+                     passwd="root",     # password
+                     db="mysqldb",# name of the database
                      cursorclass=MySQLdb.cursors.DictCursor)   
+
     return g.db
 
 
@@ -27,15 +42,17 @@ def close_db(e=None):
 def init_db():
     """Clear existing data and create new tables."""
     db = get_db()
-    cursor = db.cursor()
 
     with current_app.open_resource('schema.sql') as f:
-        cursor.execute(f.read().decode('utf8'))
-
-    if cursor:
-        cursor.close()
-
-
+        text = f.read().decode('utf8')
+    sql_commands = text.split(';')
+    for i in range(len(sql_commands)):
+        if (i==len(sql_commands)-1):
+            break
+        command = sql_commands[i].replace('\n','')
+        command =command.replace('\t','')+';'
+        db.cursor().execute(command)
+    
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
