@@ -51,7 +51,7 @@ def init_db():
             break
         command = sql_commands[i].replace('\n','')
         command =command.replace('\t','')+';'
-        db.cursor().excute(command)
+        db.cursor().execute(command)
     
 @click.command('init-db')
 @with_appcontext
