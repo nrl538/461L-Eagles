@@ -8,7 +8,7 @@ from flask import (
 
 bp = Blueprint('search', __name__)
 
-@bp.route('/search', methods=['POST'])
+@bp.route('/search/', methods=('GET', 'POST'))
 def search():
     if request.method == 'POST':
         search_param = request.form['q']
@@ -33,4 +33,4 @@ def search():
         flash(error)
 
         books = books_by_author + books_by_title
-    return render_template('books/results.html', books=books)
+    return render_template('book/results.html', books=books)

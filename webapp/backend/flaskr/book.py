@@ -11,7 +11,7 @@ bp = Blueprint('book', __name__)
 def get_book(isbn):
     cursor = get_db().cursor()
     cursor.execute(
-        'SELECT * from books WHERE books.isbn = %s', (isbn,)
+        'SELECT * from books WHERE books.id = %s', (isbn,)
     )
     book = cursor.fetchone()
 
