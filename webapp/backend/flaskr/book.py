@@ -25,4 +25,3 @@ def get_book(isbn):
 def show(isbn):
     book = get_book(isbn)
     return book
-

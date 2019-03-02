@@ -11,7 +11,7 @@
 
   <div id='book-metadata'>
     <div id='book-cover'>
-      <img  src="/static/{{ book['cover'] }}" alt='To Kill A Mockingbird - Book Cover'>
+      <img  src="{{ book['cover'] }}" alt="{{ book['title'] }} - Book Cover">
     </div>
 
     <div id='book-rating'>
@@ -30,9 +30,9 @@
           <th> Get a copy at these retailers: </th>
           <tr>
             <td>
-              <button>
+              <a class="btn" href= "{{book['buy']}}" >
                 Amazon
-              </button>
+              </a>
             </td>
           </tr>
           <tr>

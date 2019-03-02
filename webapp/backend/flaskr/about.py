@@ -11,4 +11,3 @@ bp = Blueprint('about', __name__)
 @bp.route('/about', methods=['GET'])
 def show():
     return render_template('about/about.html')
-
