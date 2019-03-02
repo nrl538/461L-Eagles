@@ -20,11 +20,11 @@ def get_db():
         g.db.row_factory = sqlite3.Row
         '''
         #35.192.163.20
-        g.db = MySQLdb.connect(host="35.192.163.20",  # your host 
+        g.db = MySQLdb.connect(host="35.192.163.20",  # your host
                      user="root",       # username
                      passwd="root",     # password
                      db="mysqldb",# name of the database
-                     cursorclass=MySQLdb.cursors.DictCursor)   
+                     cursorclass=MySQLdb.cursors.DictCursor)
 
     return g.db
 
@@ -52,7 +52,7 @@ def init_db():
         command = sql_commands[i].replace('\n','')
         command =command.replace('\t','')+';'
         db.cursor().execute(command)
-    
+
 @click.command('init-db')
 @with_appcontext
 def init_db_command():

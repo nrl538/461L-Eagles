@@ -1,3 +1,32 @@
+<<<<<<< HEAD
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <img class="rounded mx-auto d-block" id='logo' src="{{ url_for('static', filename='logo.png') }}" alt='BookBrain Logo' style="height:10%;padding-top:5%; margin-bottom:-10%">
+  </div>
+</div>
+
+<div class="jumbotron" style="text-align:center; background-color:#FFFCF9">
+  <h1 class="display-4">Welcome to BookBrain!</h1>
+  <p class="lead" style="color:grey">Your one stop shop for high quality aggregated reviews</p>
+  <hr class="my-4">
+  <p>Search for the aggregated reviews classic books below by searching by author, IBSN...</p>
+  <form method="post" class="form-inline justify-content-center" action="/search/">
+    <div class="input-group input-group-l" style="width:60%">
+      <div class="input-group-prepend">
+        <select class="custom-select input-group-prepend" style="width:-10%">
+          <option selected>Search by...</option>
+          <option value="1">Title</option>
+          <option value="2">Author</option>
+          <option value="3">IBSN</option>
+        </select>
+      </div>
+        <input type="text" name="title" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit" style="background-color:#B1EDE8">Search</button>
+=======
 <!DOCTYPE html>
 <html>
   <head>
@@ -31,10 +60,14 @@
           <form method="POST" action="/search">
             <input id='search-box' type='q' name='q' placeholder="Search for a book title or author...">
           </form>
+>>>>>>> ac664e7e726f896617bc3dbc0653f051c1908cd7
         </div>
-      </div>
-
     </div>
+<<<<<<< HEAD
+  </form>
+</div>
+{% endblock %}
+=======
   </body>
 </html>
 
@@ -118,3 +151,4 @@
 
 <script>
 </script>
+>>>>>>> ac664e7e726f896617bc3dbc0653f051c1908cd7

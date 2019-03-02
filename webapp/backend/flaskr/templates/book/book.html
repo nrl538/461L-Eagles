@@ -1,160 +1,69 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title> BookBrain - To Kill A Mockingbird </title>
-  </head>
+{% extends 'base.html' %}
 
-  <body class='gray'>
-    <div class='container'>
+{% block content %}
+<div class="jumbotron" style="padding-top:5%">
 
-      <div id='subnav' class='centered'>
-        <span>
-          <a href='/'>
-            <img id='logo' src='/static/logo.png' alt='BookBrain Logo'>
-          </a>
-          <a class='subnav-hyperlinks' href='/books'>
-              Books
-          </a>
-          <a class='subnav-hyperlinks' href='/stores'>
-            Stores
-          </a>
-          <a class='subnav-hyperlinks' href='/login'>
-            Login
-          </a>
-        </span>
-      </div>
+  <hr class='centered'>
 
-      <hr class='centered'>
+  <div id='book-title'>
+    <h1> {{ book['title'] }} </h1>
+  </div>
 
-      <div id='book-title'>
-        <h1> {{ book['title'] }} </h1>
-      </div>
-
-      <div id='book-metadata'>
-        <div id='book-cover'>
-          <img  src="{{ book['cover'] }}" alt='{{ book['title'] }} - Book Cover'>
-        </div>
-
-        <div id='book-rating'>
-          <p> BookBrain Smart Rating: {{ book['average_review'] }}% </p>
-        </div>
-
-        <div id='book-author'>
-          <p> By {{ book['author'] }} </p>
-        </div>
-
-        <hr>
-
-        <div id='book-purchase-links'>
-          <div>
-            <table id='book-purchase-links-table'>
-              <th> Get a copy at these retailers: </th>
-              <tr>
-                <td>
-                  <a href='{{ book['purchase-link'] }}'> GoodReads Affiliate </a>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div id='book-text'>
-        <div class='container'>
-          <h3>
-            Description:
-          </h3>
-          <div id='book-description'>
-            {{ book['description'] }}
-          </div>
-        </div>
-      </div>
-
+  <div id='book-metadata'>
+    <div id='book-cover'>
+      <img  src="/static/{{ book['cover'] }}" alt='To Kill A Mockingbird - Book Cover'>
     </div>
-  </body>
 
-<style>
-.container {
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-bottom: 5%;
-}
+    <div id='book-rating'>
+      <p> BookBrain Smart Rating: {{ book['average_review'] }}% </p>
+    </div>
 
-#subnav {
-  max-height: 7em;
-  height: 5%;
-}
+    <div id='book-author'>
+      <p> By {{ book['author'] }} </p>
+    </div>
 
-.subnav-hyperlinks {
-  float: right;
-  text-align: center;
-  max-height: 6em;
-  padding: 1em;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 1.5em;
-}
+    <hr>
 
-#logo {
-  padding: 1em;
-  max-height: 10%;
-  width: auto;
-  height: 90px;
-}
+    <div id='book-purchase-links'>
+      <div>
+        <table id='book-purchase-links-table'>
+          <th> Get a copy at these retailers: </th>
+          <tr>
+            <td>
+              <button>
+                Amazon
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button>
+                Barnes & Noble
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button>
+                eBay
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 
-#book-title {
-  float: left;
-  width: 100%;
-  height: auto;
-  padding: 1em;
-}
+  <div id='book-text'>
+    <div class='container'>
+      <h3>
+        Description:
+      </h3>
+      <div id='book-description'>
+        {{ book['description'] }}
+      </div>
+    </div>
+  </div>
 
-#book-metadata {
-  max-width: 30%;
-  width: 30%;
-  height: auto;
-  float: left;
-  text-align: center;
-}
-
-#book-text {
-  max-width: 70%;
-  float: left;
-}
-
-#book-cover {
-  max-height: 30%;
-  height: auto;
-  width: auto;
-}
-
-#book-purchase-links {
-  text-align: center;
-  margin-left: 25%;
-}
-
-.centered {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.gray {
-  background-color: #dfdfdf;
-}
-
-.book-brain-blue {
-  background-color: #13A8B9;
-}
-
-.book-brain-orange {
-  background-color: #F5871D;
-}
-
-.book-brain-red {
- background-color: #EB1A59;
-}
-</style>
-<script>
-</script>
-</html>
+</div>
+{% endblock %}

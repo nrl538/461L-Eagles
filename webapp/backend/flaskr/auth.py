@@ -51,7 +51,7 @@ def register():
         db = get_db()
         cur=db.cursor()
         error = None
-        
+
         if not username:
             error = 'Username is required.'
         elif not password:
