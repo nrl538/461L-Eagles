@@ -8,7 +8,7 @@ from flask import (
 
 bp = Blueprint('search', __name__)
 
-@bp.route('', methods=('GET', 'POST'))
+@bp.route('/search/', methods=('GET', 'POST'))
 def search():
     if request.method == 'POST':
         search_param = request.form['q']
