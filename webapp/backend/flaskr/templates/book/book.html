@@ -1,69 +1,57 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="jumbotron" style="padding-top:5%">
-
-  <hr class='centered'>
+<div class="jumbotron" style="padding-top:3em;">
 
   <div id='book-title'>
-    <h1> {{ book['title'] }} </h1>
+    <h1> {{ book['title'] }} - By {{ book['author'] }} </h1>
   </div>
+
+  <h3 style='padding-top:2em;'>About this book</h3>
+  <hr class='centered'>
 
   <div id='book-metadata'>
-    <div id='book-cover'>
-      <img  src="{{ book['cover'] }}" alt="{{ book['title'] }} - Book Cover">
+    <div class='row align-items-center'>
+      <div class='col-2 align-middle text-center'>
+        <div>
+          <img id='book-cover' class = 'img-thumbnail' src="{{ book['cover'] }}" alt="{{ book['title'] }} - Book Cover">
+        </div>
+
+        <div id='book-rating' class='lead'>
+          <p> BookBrain Smart Rating: {{ book['average_review'] }}% </p>
+        </div>
+
+        <div id='book-author' class='lead'>
+          <p> By {{ book['author'] }} </p>
+        </div>
+      </div>
+
+      <div class='col-xl align-middle'>
+        <div id='book-description'>
+          <div class='container'>
+            <h3>
+              Description:
+            </h3>
+            <div id='book-description'>
+              {{ book['description'] }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div id='book-rating'>
-      <p> BookBrain Smart Rating: {{ book['average_review'] }}% </p>
-    </div>
-
-    <div id='book-author'>
-      <p> By {{ book['author'] }} </p>
-    </div>
-
-    <hr>
+    <h3 style='padding-top:2em;'>Links to purchase</h3>
+    <hr class='centered'>
 
     <div id='book-purchase-links'>
-      <div>
-        <table id='book-purchase-links-table'>
-          <th> Get a copy at these retailers: </th>
-          <tr>
-            <td>
-              <a class="btn" href= "{{book['purchase_link']}}" >
-                Amazon
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <a class="btn" href= "{{book['purchase_link']}}" >
-                Barnes and Noble
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <a class="btn" href= "{{book['purchase_link']}}" >
-                eBay
-              </a>
-            </td>
-          </tr>
-        </table>
+      <div class='row'>
+        <div class='col-2 align-middle text-center'>
+          <a class='btn' href="{{book['purchase_link']}}"> Amazon </a>
+        </div>
       </div>
     </div>
   </div>
 
-  <div id='book-text'>
-    <div class='container'>
-      <h3>
-        Description:
-      </h3>
-      <div id='book-description'>
-        {{ book['description'] }}
-      </div>
-    </div>
-  </div>
-
+  
 </div>
 {% endblock %}

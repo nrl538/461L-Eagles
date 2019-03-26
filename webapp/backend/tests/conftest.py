@@ -22,9 +22,9 @@ def app():
     })
 
     # create the database and load test data
-    with app.app_context():
-        init_db()
-        get_db().executescript(_data_sql)
+    # with app.app_context():
+        # init_db()
+        # get_db().executescript(_data_sql)
 
     yield app
 
@@ -51,12 +51,12 @@ class AuthActions(object):
 
     def login(self, username='test', password='test'):
         return self._client.post(
-            '/auth/login',
+            '/login',
             data={'username': username, 'password': password}
         )
 
     def logout(self):
-        return self._client.get('/auth/logout')
+        return self._client.get('/logout')
 
 
 @pytest.fixture

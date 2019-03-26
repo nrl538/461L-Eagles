@@ -1,213 +1,188 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title> BookBrain </title>
-  </head>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='jumbotron'>
+  <div class='container'>
+
+    <h3 style='padding-bottom: 1em;'> About BookBrain</h3>
+    <p id='about-us-description'>
+      The goal of BookBrain is simple: BookBrain will show users internet-aggregated ratings for books and provide book recommendations based on these ratings and genres. Usually when someone is trying to decide whether or not they want to read a book, they might do a Google search and be faced with many websites offering mixed reviews—one might display only one review with a 3/3 star rating and another might have hundreds of reviews with an average rating of 4.3 out of 5 stars. Furthermore, some of these sites might not even have reviews or ratings for books that just were just recently published. Our website would simplify the book recommendation experience for the user by compiling reviews from different merchant websites, social media feeds, and news feeds as well as providing trendy information about a book all on a single page. By doing this, we hope to give our users a more holistic review of the book based on overall internet reviews and trendiness.
+    </p>
+
+    <p id='about-us-users'>
+      The target demographic for BookBrain fall under two categories—someone that is looking for a new book to read and wants suggestions based off of genre and internet popularity or someone that is looking to purchase a specific book and would like ratings and reviews from many different internet sources aggregated in one place.
+    </p>
+  </div>
+
+  <br>
+  <hr class='centered' style='max-width: 56%; padding: 1em;'>
 
   <div class='container'>
-    <body class='gray'>
-      <div id='subnav' class='centered'>
-        <span>
-          <a href='/'>
-            <img id='logo' src='/static/logo.png' alt='BookBrain Logo'>
-          </a>
-          <a class='subnav-hyperlinks' href='/login'>
-            Login
-          </a>
-        </span>
-      </div>
 
-      <div>
-        <h3> About BookBrain</h3>
-        <p id='about-us-description'>
-          The goal of BookBrain is simple: BookBrain will show users internet-aggregated ratings for books and provide book recommendations based on these ratings and genres. Usually when someone is trying to decide whether or not they want to read a book, they might do a Google search and be faced with many websites offering mixed reviews—one might display only one review with a 3/3 star rating and another might have hundreds of reviews with an average rating of 4.3 out of 5 stars. Furthermore, some of these sites might not even have reviews or ratings for books that just were just recently published. Our website would simplify the book recommendation experience for the user by compiling reviews from different merchant websites, social media feeds, and news feeds as well as providing trendy information about a book all on a single page. By doing this, we hope to give our users a more holistic review of the book based on overall internet reviews and trendiness.
-        </p>
+    <h3> The BookBrain Team </h3>
+    <p id='about-us-team-description'>
+      We are EE 461L Team Eagles made up of Wesley Klock, Hiep Nguyen, Michael Flanders, Kunpeng Qin, Nabil Khan, and Nelson Levy.
+    </p>
 
-        <p id='about-us-users'>
-          The target demographic for BookBrain fall under two categories—someone that is looking for a new book to read and wants suggestions based off of genre and internet popularity or someone that is looking to purchase a specific book and would like ratings and reviews from many different internet sources aggregated in one place.
-        </p>
-
-        <br>
-
-        <h3> The BookBrain Team </h3>
-        <p id='about-us-team-description'>
-          We are EE 461L Team Eagles made up of Wesley Klock, Hiep Nguyen, Michael Flanders, Kunpeng Qin, Nabil Khan, and Nelson Levy
-        </p>
-
-        <h5> Bios </h5>
-        <ul>
-          <li>
+    <h5> Bios </h5>
+    <ul class='list-group'>
+      <li class='list-group-item'>
+        <div class='row'>
+          <div class='col-2 align-middle text-center'>
             <img style='max-width: 10em;' src="static/michael.jpg" alt="Michael">
+          </div>
+          <div class='col-xl align-middle'>
             <p>
-              Michael Flanders is a Junior at The University of Texas at Austin majoring in Electrical and Computer Engineering. Responsibilities: FrontEnd/Testing. 16 Commits.
+              Michael Flanders is a Junior at The University of Texas at Austin majoring in Electrical and Computer Engineering. Responsibilities: FrontEnd/Testing.
             </p>
-          </li>
+            <p>
+              16 commits.
+            </p>
+          </div>
+        </div>
+      </li>
 
-          <li>
+      <li class='list-group-item'>
+        <div class='row'>
+          <div class='col-2 align-middle text-center'>
             <img style='max-width: 10em;' src='static/hiep.jpg' alt='Hiep'>
+          </div>
+          <div class='col-xl align-middle'>
             <p>
-              My name is Hiep Nguyen, I am currently a Junior majoring in ECE at The University of Texas at Austin. Responsibilties: Scraping. 2 Commmits.
+              My name is Hiep Nguyen, I am currently a Junior majoring in ECE at The University of Texas at Austin. Responsibilties: Scraping.
             </p>
-          </li>
+            <p>
+              2 commits.
+            </p>
+          </div>
+        </div>
+      </li>
 
-          <li>
+      <li class='list-group-item'>
+        <div class='row'>
+          <div class='col-2 align-middle text-center'>
             <img style='max-width: 10em;' src='static/wesley.png' alt='Wesley'>
+          </div>
+          <div class='col-xl align-middle'>
             <p>
-              Wesley Klock -  I am currently a Junior at the University of Texas at Austin, I like reading books, playing board games, and watching foreign film  in my free time. Responsibilities: FrontEnd/Testing. 6 Commits.
+              Wesley Klock -  I am currently a Junior at the University of Texas at Austin, I like reading books, playing board games, and watching foreign film  in my free time. Responsibilities: FrontEnd/Testing.
             </p>
-          </li>
+            <p>
+              6 commits.
+            </p>
+          </div>
+        </div>
+      </li>
 
-          <li>
+      <li class='list-group-item'>
+
+        <div class='row'>
+          <div class='col-2 align-middle text-center'>
             <img style='max-width: 10em;' src='static/nelsonreal.jpg' alt='Nelson'>
+          </div>
+          <div class='col-xl align-middle'>
             <p>
-              Nelson Levy - I am currently a Junior at the University of Texas at Austin, majoring in Electrical and Computer Engineering. Responsibilities: Scraping. 0 Commits.
+              Nelson Levy - I am currently a Junior at the University of Texas at Austin, majoring in Electrical and Computer Engineering. Responsibilities: Scraping.
             </p>
-          </li>
+            <p>
+              0 commits.
+            </p>
+          </div>
+        </div>
+      </li>
 
-          <li>
+      <li class='list-group-item'>
+        <div class='row'>
+          <div class='col-2 align-middle text-center'>
             <img style='max-width: 10em;' src='static/kunpeng.jpg' alt='Kunpeng'>
+          </div>
+          <div class='col-xl align-middle'>
             <p>
-              My name is Kunpeng Qin, I am currently a Senior majoring in ECE at The University of Texas at Austin. Responsibilities: BackEnd/Database. 4 Commits.
+              My name is Kunpeng Qin, I am currently a Senior majoring in ECE at The University of Texas at Austin. Responsibilities: BackEnd/Database.
             </p>
-          </li>
+            <p>
+              4 commits.
+            </p>
+          </div>
+        </div>
+      </li>
 
-          <li>
+      <li class='list-group-item'>
+        <div class='row'>
+          <div class='col-2 align-middle text-center'>
             <img style='max-width: 10em;' src='static/nabil.png' alt='Nabil'>
+          </div>
+          <div class='col-xl align-middle'>
             <p>
-              My name is Nabil Khan, I am currently a Senior majoring in ECE at The University of Texas at Austin. Responsibitlies: BackEnd/Database. 1 Commit.
+              My name is Nabil Khan, I am currently a Senior majoring in ECE at The University of Texas at Austin. Responsibitlies: BackEnd/Database.
             </p>
-          </li>
-        </ul>
+            <p>
+              1 commit.
+            </p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
 
-        <br>
+  <br>
+  <br>
+  <hr class='centered' style='max-width: 56%; padding: 2em;'>
 
-        <h3> Sources, Tools, and Github </h3>
-        <p id='about-us-sources'>
-          <h5> Sources </h5>
-          <ul>
-            <li>
-              For Phase 1 of this project, our only scraper source was <a href='https://www.goodreads.com/'>Goodreads</a>
-            </li>
-            <li>
-              We have a detailed documentation of our scrape process on our <a href='https://github.com/Flandini/461L-Eagles/tree/master/scraping'>team Github.</a>
-            </li>
-          </ul>
-          <h5> Tools </h5>
-          <ul>
-            <li>
-              FrontEnd - HTML/CSS & Some React.js were used to display our search results, homepage, and basic pages.
-            </li>
-            <li>
-              Backend - Flask for our webapp, Pytests for testing, MySQL as our backend database, GCP FireBase for hosting our DB, and a GCP VM for hosting our web app
-            </li>
-            <li>
-              Scraper - Python as the language, Selenium for pulling dynamic web-content, python-pandas for saving data as a csv
-            </li>
-            <li>
-              Team Coordination - GroupMe, Slack, Github, Google Docs
-            </li>
-          </ul>
-        </p>
+  <div id='about-us-sources' class='container'>
+    <h3> Sources, Tools, and Github </h3>
 
-        <h3> Stats </h3>
-        <p id='about-us-stats'>
-          <ul>
-            <li>
-              Total Commits: 43
-            </li>
+      <h5 style='padding-top: 1em'> Sources </h5>
+      <ul class='list-group'>
+        <li class='list-group-item'>
+          For Phase 1 of this project, our only scraper source was <a href='https://www.goodreads.com/'>Goodreads</a>
+        </li>
+        <li class='list-group-item'>
+          We have a detailed documentation of our scrape process on our <a href='https://github.com/Flandini/461L-Eagles/tree/master/scraping'>team Github.</a>
+        </li>
+      </ul>
 
-            <li>
-              Total Unit Tests: 10
-            </li>
+      <h5 style='padding-top: 1em';> Tools </h5>
+      <ul class='list-group'>
+        <li class='list-group-item'>
+          FrontEnd - HTML/CSS & Some React.js were used to display our search results, homepage, and basic pages.
+        </li>
+        <li class='list-group-item'>
+          Backend - Flask for our webapp, Pytests for testing, MySQL as our backend database, GCP FireBase for hosting our DB, and a GCP VM for hosting our web app
+        </li>
+        <li class='list-group-item'>
+          Scraper - Python as the language, Selenium for pulling dynamic web-content, python-pandas for saving data as a csv
+        </li>
+        <li class='list-group-item'>
+          Team Coordination - GroupMe, Slack, Github, Google Docs
+        </li>
+      </ul>
+  </div>
 
-            <li>
-              Total Github Issues: 0
-            </li>
-          </ul>
-        </p>
-      </div>
+  <br>
+  <hr class='centered' style='max-width: 56%; padding: 1em;'>
 
-    </div>
-  </body>
-</html>
+  <div class='container'>
+    <h3> Stats </h3>
+    <p id='about-us-stats'>
+      <ul class='list-group'>
+        <li class='list-group-item'>
+          <span>Total Commits:</span>
+          <span class="badge badge-primary badge-pill">43</span>
+        </li>
 
-<style>
+        <li class='list-group-item'>
+          <span>Total Unit Tests:</span>
+          <span class="badge badge-primary badge-pill">10</span>
+        </li>
 
-.container {
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-bottom: 5%;
-}
-#subnav {
-  max-height: 7em;
-  height: 5%;
-}
+        <li class='list-group-item'>
+          <span>Total Github Issues:</span>
+          <span class="badge badge-primary badge-pill">0</span>
+        </li>
+      </ul>
+    </p>
+  </div>
 
-.subnav-hyperlinks {
-  float: right;
-  text-align: center;
-  max-height: 6em;
-  padding: 1em;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 1.5em;
-}
-
-#logo {
-  padding: 1em;
-  max-height: 10%;
-  width: auto;
-  height: 90px;
-}
-
-#book-background {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  position: relative;
-}
-
-#book-brain-text {
-  position: absolute;
-  text-align: center;
-  font-size: 3em;
-  top: 15%;
-  left: 50%;
-  text-decoration: none;
-  transform: translate(-50%, -50%);
-}
-
-#search {
-  position: absolute;
-  text-align: center;
-  font-size: 17px;
-  width: 30%;
-  top: 35%;
-  left: 50%;
-  text-decoration: none;
-  transform: translate(-50%, -50%);
-}
-
-#search-box {
-  width: 100%;
-  height: 20px;
-  border: 3px solid #00B4CC;
-  float: left;
-  padding: 5px;
-  border-radius: 5px;
-  outline: none;
-}
-
-.centered {
-  display: block;
-  margin-left: auto; margin-right: auto;
-}
-
-.gray {
-  background-color: #dfdfdf;
-}
-</style>
-
-<script>
-</script>
+</div>
+{% endblock %}

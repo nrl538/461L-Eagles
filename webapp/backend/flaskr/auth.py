@@ -72,8 +72,8 @@ def register():
             )
             db.commit()
             return redirect(url_for('auth.login'))
-
-        flash(error)
+        else:
+            flash(error)
 
     return render_template('auth/register.html')
 

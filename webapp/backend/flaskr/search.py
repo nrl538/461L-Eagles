@@ -30,8 +30,8 @@ def search():
         if books_by_title is None and books_by_author is None:
             error = 'No Books were found'
             return error
-        flash(error)
 
+        flash(error)
         books = books_by_author + books_by_title
     return render_template('book/results.html', books=books)
 
@@ -57,11 +57,9 @@ def autocomplete():
             return jsonify(matching_results=titles)
 
         elif category == 'Author':
-            cur.execute(
-                'SELECT AUTHOR FROM books WHERE books.author LIKE %s', ('%' + search_param + '%',)
-            )
+            cur.execute('SELECT AUTHOR FROM books WHERE books.author LIKE %s', ('%' + search_param + '%',))
 
-	    books_by_author = cur.fetchall()
+            books_by_author = cur.fetchall()
             authors = []
             for book_author in books_by_author:
                 author = book_author['AUTHOR']
