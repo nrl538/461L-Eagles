@@ -40,7 +40,7 @@ $(function() {
                 term: request.term, // in flask, "q" will be the argument to look for using request.args
                 cat: $('#searchOptions :selected').text()
             }, function(data) {
-                response(data.matching_results); // matching_results from jsonify
+                response(data.matching_results.slice(0,10)); // matching_results from /search/names, with top 10 results shown
             });
         },
         select: function(event, ui) {

@@ -42,6 +42,9 @@ def autocomplete():
         category = request.args.get('cat')
         cur = get_db().cursor()
         error = None
+        titles = []
+        authors = []
+
         if category == 'Title':
             cur.execute(
                 'SELECT TITLE FROM books WHERE books.title LIKE %s', ('%' + search_param + '%',)
@@ -67,5 +70,29 @@ def autocomplete():
                     authors.append(author)
 
             return jsonify(matching_results=authors)
+
+        else: 
+            cur.execute(
+                'SELECT TITLE FROM books WHERE books.title LIKE %s', ('%' + search_param + '%',)
+            )
+
+            books_by_title = cur.fetchall()
+            titles=[]
+            for book_title in books_by_title:
+                book = book_title['TITLE']
+                if book != 'title':
+                    titles.append(book)
+
+            cur.execute('SELECT AUTHOR FROM books WHERE books.author LIKE %s', ('%' + search_param + '%',))
+
+            books_by_author = cur.fetchall()
+            authors = []
+            for book_author in books_by_author:
+                author = book_author['AUTHOR']
+                if author != 'author':
+                    authors.append(author)
+
+            return jsonify(matching_results=authors+titles)
+
 
     return jsonify(matching_results=[])
