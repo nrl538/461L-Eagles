@@ -1,24 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
+
+<div class='jumbotron' style='padding-top: 2em;'>
+
+  <h1>Results</h1>
+  <hr class='centered'>
+
+  <div class='list-group'>
   {% for book in books %}
-  <div class="jumbotron" style="padding-top:5%">
-    <h1>Results</h1>
-    <article class="post">
+    <a href="/book/{{ book['id'] }}" class="list-group-item list-group-item-action" style='padding: 1em;'>
       <header>
         <div>
-          <h1>
-            <a href="/book/{{ book['id']}}" >
-              {{ book['title'] }}
-            </a>
-          </h1>
+          <h1>{{ book['title'] }}</h1>
           <div class="about">by {{ book['author'] }} on {{ book['date_published'] }}</div>
         </div>
       </header>
       <p class="body">{{ book['description'] }}</p>
-    </article>
+    </a>
     {% if not loop.last %}
       <hr>
     {% endif %}
-  </div>
   {% endfor %}
+
+  </div>
+
+</div>
+
 {% endblock %}
