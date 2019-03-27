@@ -61,19 +61,16 @@ def register():
                 'SELECT id FROM user WHERE username = %s', (username,)
             )
             if cur.fetchone() is not None:
-                error = 'User {0} is already registered.'.format(username)
+                error = 'User, {0}, is already registered.'.format(username)
+                flash(error)
 
         if error is None:
-            # the name is available, store it in the database and go to
-            # the login page
             cur.execute(
                 'INSERT INTO user (username, password) VALUES (%s, %s)',
                 (username, generate_password_hash(password))
             )
             db.commit()
             return redirect(url_for('auth.login'))
-        else:
-            flash(error)
 
     return render_template('auth/register.html')
 

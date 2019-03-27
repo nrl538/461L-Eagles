@@ -22,7 +22,7 @@ def test_register(client, app):
 @pytest.mark.parametrize(('username', 'password', 'message'), (
     ('test', 'test', b'already registered'),
 ))
-def test_register_validate_input(client, username, password, message):
+def test_register_validate_input(auth, client, username, password, message):
     for i in range(2):
         response = client.post(
             '/register',
@@ -45,7 +45,7 @@ def test_login(client, auth):
 
 
 @pytest.mark.parametrize(('username', 'password', 'message'), (
-    ('a', 'test', b'Incorrect username.'),
+    ('aaaaa', 'test', b'Incorrect username.'),
     ('test', 'a', b'Incorrect password.'),
 ))
 def test_login_validate_input(auth, username, password, message):
