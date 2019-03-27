@@ -33,7 +33,17 @@ def search():
             error = 'No Books were found'
             return error
         flash(error)
-        books = books_by_author + books_by_title
+        search_type=request.form.get("type")
+        if search_type==None:
+            search_type="None"
+        f=open("C:\\Users\\Doly\\Desktop/debug.txt","w")
+        f.write(search_type)
+        if search_type=="1":
+            books=books_by_title
+        elif search_type=="2":
+            books=books_by_author
+        else:
+            books = books_by_author + books_by_title
         total=int(math.ceil((len(books)/perpage)/2))
         if total==0:
             total=1
@@ -69,12 +79,19 @@ def search():
             error = 'No Books were found'
             return error
         flash(error)
-        books = books_by_author + books_by_title
-        
-        
-        #pagination = Pagination(page=page, total=total,  record_name='books')
+        search_type=str(request.args.get("search_type"))
+        if search_type==None:
+            search_type="None"
+        f=open("C:\\Users\\Doly\\Desktop/debug.txt","w")
+        f.write(search_type)
+        if search_type=="1":
+            books=books_by_title
+        elif search_type=="2":
+            books=books_by_author
+        else:
+            books = books_by_author + books_by_title
 
-    return render_template('book/results.html',total=total,books=books,page=page,search_param=search_param)
+    return render_template('book/results.html',total=total,books=books,page=page,search_param=search_param,search_type=search_type)
 
 
 
