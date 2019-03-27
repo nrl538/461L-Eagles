@@ -36,8 +36,7 @@ def search():
         search_type=request.form.get("type")
         if search_type==None:
             search_type="None"
-        f=open("C:\\Users\\Doly\\Desktop/debug.txt","w")
-        f.write(search_type)
+        
         if search_type=="1":
             books=books_by_title
         elif search_type=="2":
@@ -82,8 +81,8 @@ def search():
         search_type=str(request.args.get("search_type"))
         if search_type==None:
             search_type="None"
-        f=open("C:\\Users\\Doly\\Desktop/debug.txt","w")
-        f.write(search_type)
+        
+        
         if search_type=="1":
             books=books_by_title
         elif search_type=="2":
