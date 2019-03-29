@@ -21,26 +21,27 @@ def search():
         
         cur = get_db().cursor()
         error = None 
-
         cur.execute(
             'SELECT * FROM books WHERE books.title LIKE %s', ('%' + search_param + '%',)
         )
-
         books_by_title = cur.fetchall()
-
         cur.execute(
             'SELECT * FROM books WHERE books.author LIKE %s', ('%' + search_param + '%',)
         )
-
         books_by_author = cur.fetchall()
-
+        cur.execute(
+            'SELECT * FROM books WHERE books.isbn LIKE %s', ('%' + search_param + '%',)
+        )
+        books_by_isbn = cur.fetchall()
+        cur.execute(
+            'SELECT * FROM books WHERE books.isbn LIKE %s OR books.title LIKE %s OR books.author LIKE %s;', ('%' + search_param + '%','%' + search_param + '%','%' + search_param + '%',)
+        )
+        books_by_integrate = cur.fetchall()
         if books_by_title is None and books_by_author is None:
             error = 'No Books were found'
             return error
-
         flash(error)
         search_type=request.form.get("type")
-
         if search_type==None:
             search_type="None"
         
@@ -48,11 +49,11 @@ def search():
             books=books_by_title
         elif search_type=="2":
             books=books_by_author
+        elif search_type=="3":
+            books=books_by_isbn
         else:
-            books = books_by_author + books_by_title
-
+            books=books_by_integrate
         total=int(math.ceil((len(books)/perpage)/2))
-
         if total==0:
             total=1
         books = books[0:3]
@@ -83,6 +84,14 @@ def search():
             'SELECT * FROM books WHERE books.author LIKE %s LIMIT %s, %s;', ('%' + search_param + '%',startat,perpage,)
         )
         books_by_author = cur.fetchall()
+        cur.execute(
+            'SELECT * FROM books WHERE books.isbn LIKE %s LIMIT %s, %s;', ('%' + search_param + '%',startat,perpage,)
+        )
+        books_by_isbn = cur.fetchall()
+        cur.execute(
+                    'SELECT * FROM books WHERE books.isbn LIKE %s OR books.title LIKE %s OR books.author LIKE %s LIMIT %s, %s;', ('%' + search_param + '%','%' + search_param + '%','%' + search_param + '%',startat,perpage,)
+            )
+        books_by_integrate = cur.fetchall()
         if books_by_title is None and books_by_author is None:
             error = 'No Books were found'
             return error
@@ -96,8 +105,10 @@ def search():
             books=books_by_title
         elif search_type=="2":
             books=books_by_author
+        elif search_type=="3":
+            books=books_by_isbn
         else:
-            books = books_by_author + books_by_title
+            books=books_by_integrate
 
     return render_template('book/results.html',total=total,books=books,page=page,search_param=search_param,search_type=search_type)
 
@@ -110,7 +121,6 @@ def autocomplete():
         category = request.args.get('cat')
         cur = get_db().cursor()
         error = None
-
         if category == 'Title':
             cur.execute(
                 'SELECT TITLE FROM books WHERE books.title LIKE %s', ('%' + search_param + '%',)
@@ -126,16 +136,17 @@ def autocomplete():
             return jsonify(matching_results=titles)
 
         elif category == 'Author':
-            cur.execute('SELECT AUTHOR FROM books WHERE books.author LIKE %s', ('%' + search_param + '%',))
+            cur.execute(
+                'SELECT AUTHOR FROM books WHERE books.author LIKE %s', ('%' + search_param + '%',)
+            )
 
-        books_by_author = cur.fetchall()
-        authors = []
+	    books_by_author = cur.fetchall()
+            authors = []
+            for book_author in books_by_author:
+                author = book_author['AUTHOR']
+                if author != 'author':
+                    authors.append(author)
 
-        for book_author in books_by_author:
-            author = book_author['AUTHOR']
-            if author != 'author':
-                authors.append(author)
-
-        return jsonify(matching_results=authors)
+            return jsonify(matching_results=authors)
 
     return jsonify(matching_results=[])
