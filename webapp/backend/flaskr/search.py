@@ -21,19 +21,26 @@ def search():
         
         cur = get_db().cursor()
         error = None 
+
         cur.execute(
             'SELECT * FROM books WHERE books.title LIKE %s', ('%' + search_param + '%',)
         )
+
         books_by_title = cur.fetchall()
+
         cur.execute(
             'SELECT * FROM books WHERE books.author LIKE %s', ('%' + search_param + '%',)
         )
+
         books_by_author = cur.fetchall()
+
         if books_by_title is None and books_by_author is None:
             error = 'No Books were found'
             return error
+
         flash(error)
         search_type=request.form.get("type")
+
         if search_type==None:
             search_type="None"
         
@@ -43,7 +50,9 @@ def search():
             books=books_by_author
         else:
             books = books_by_author + books_by_title
+
         total=int(math.ceil((len(books)/perpage)/2))
+
         if total==0:
             total=1
         books = books[0:3]
@@ -101,6 +110,7 @@ def autocomplete():
         category = request.args.get('cat')
         cur = get_db().cursor()
         error = None
+
         if category == 'Title':
             cur.execute(
                 'SELECT TITLE FROM books WHERE books.title LIKE %s', ('%' + search_param + '%',)
@@ -116,17 +126,16 @@ def autocomplete():
             return jsonify(matching_results=titles)
 
         elif category == 'Author':
-            cur.execute(
-                'SELECT AUTHOR FROM books WHERE books.author LIKE %s', ('%' + search_param + '%',)
-            )
+            cur.execute('SELECT AUTHOR FROM books WHERE books.author LIKE %s', ('%' + search_param + '%',))
 
-	    books_by_author = cur.fetchall()
-            authors = []
-            for book_author in books_by_author:
-                author = book_author['AUTHOR']
-                if author != 'author':
-                    authors.append(author)
+        books_by_author = cur.fetchall()
+        authors = []
 
-            return jsonify(matching_results=authors)
+        for book_author in books_by_author:
+            author = book_author['AUTHOR']
+            if author != 'author':
+                authors.append(author)
+
+        return jsonify(matching_results=authors)
 
     return jsonify(matching_results=[])

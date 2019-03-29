@@ -17,4 +17,5 @@ def test_shows_book_publish_date(client,auth,app):
     response = client.post('/search/', data = {'q': 'mockingbird'} )
     assert b'1988-10-11' in response.data
 
-# def test_no_results_found(client, auth, app):
+def test_no_results_found(client, auth, app):
+    response = client.post('/search/', data = {'q': 'aowipdjqopwidjq'} )
