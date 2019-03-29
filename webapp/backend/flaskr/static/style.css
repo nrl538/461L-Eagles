@@ -37,9 +37,3 @@ body {
   background-color: #FFFCF9;
   font-family: 'Krub';
 }
-
-#book-cover {
-  max-width: 68%;
-  height: auto;
-  width: auto;
-}

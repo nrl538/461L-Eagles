@@ -3,55 +3,134 @@
 {% block content %}
 <div class="jumbotron" style="padding-top:3em;">
 
-  <div id='book-title'>
-    <h1> {{ book['title'] }} - By {{ book['author'] }} </h1>
-  </div>
-
-  <h3 style='padding-top:2em;'>About this book</h3>
-  <hr class='centered'>
-
   <div id='book-metadata'>
-    <div class='row align-items-center'>
-      <div class='col-2 align-middle text-center'>
-        <div>
-          <img id='book-cover' class = 'img-thumbnail' src="{{ book['cover'] }}" alt="{{ book['title'] }} - Book Cover">
+    <div class='row'>
+
+      <div class='col-2 align-middle text-center' style='margin-left: 5%;'>
+
+        <div class='card align-middle' style='width: 20em; margin-bottom: 3em;'>
+          <img id='book-cover' class='img-thumbnail' src="{{ book['cover'] }}" alt="{{ book['title'] }} - Book Cover">
+          <div class='card-body'>
+            <h3 class='card-title'>{{ book['title'] }}</h3>
+            <p class='card-text'>{{ book['author'] }}</p>
+            <p class='card-text'>{{ book['description'] }}</p>
+          </div>
         </div>
 
-        <div id='book-rating' class='lead'>
-          <p> BookBrain Smart Rating: {{ book['average_review'] }}% </p>
+        <div class='card align-middle' style='width: 20em;'>
+          <div class='card-body'>
+            <h3 class='card-title'>Similar books</h3>
+
+            <div id='book-similar-books'>
+              <div id='similarBooksCarouselIndicators' class='carousel slide' data-ride='carousel'>
+                <ol class='carousel-indicators'>
+                  <li data-target='#similarBooksCarouselIndicators' data-slide-to='0' class='active'></li>
+                  <li data-target='#similarBooksCarouselIndicators' data-slide-to='1'></li>
+                  <li data-target='#similarBooksCarouselIndicators' data-slide-to='2'></li>
+                </ol>
+                <div class='carousel-inner'>
+                  <div class='carousel-item active'>
+                    <a href='/book/2'>
+                      <img src='https://images.gr-assets.com/books/1265814659l/7716140.jpg' class='d-block'>
+                    </a>
+                  </div>
+                  <div class='carousel-item'>
+                    <a href='/book/3'>
+                      <img src='https://images.gr-assets.com/books/1528312647l/8908.jpg' class='d-block'>
+                    </a>
+                  </div>
+                  <div class='carousel-item'>
+                    <a href='/book/4'>
+                      <img src='https://images.gr-assets.com/books/1550929007l/44095135.jpg' class='d-block'>
+                    </a>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#similarBooksCarouselIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#similarBooksCarouselIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
         </div>
 
-        <div id='book-author' class='lead'>
-          <p> By {{ book['author'] }} </p>
-        </div>
+        
       </div>
 
-      <div class='col-xl align-middle'>
-        <div id='book-description'>
-          <div class='container'>
-            <h3>
-              Description:
-            </h3>
-            <div id='book-description'>
-              {{ book['description'] }}
+      <div class='col-xl' style='margin-left: 5%; margin-right: 5%;'>
+
+        <div class='container-fluid' id='book-critic-review' style='margin-bottom: 5%;'>
+          <div class='card'>
+            <h5 class='card-header'>Critic Review</h5>
+            <div class='card-body'>
+              <p class='card-text'>
+                I was shocked by how good this book was! I would recommend it to anyone who likes zombie stories. It was humorous as well, which is always a plus.
+              </p>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <h3 style='padding-top:2em;'>Links to purchase</h3>
-    <hr class='centered'>
+        <div class='container-fluid' id='book-audience-review' style='margin-bottom: 5%;'>
+          <div class='card'>
+            <h5 class='card-header'>Audience Review</h5>
+            <div class='card-body'>
+              <p class='card-text'>
+                JESUS CHRIST, HOW MANY TIMES AM I GOING TO HAVE TO EDIT THIS!! THIS MASCOT COMPETITION IS TURNING INTO SOME MISS AMERICA SCANDAL!! WALBERT IS BACK IN THE RUNNING. HE HAS NO SHOT OF WINNING, BUT LOOK HOW CUTE HE IS!!! LOOOOOOK!! COMPARED TO THE BEE, HE IS THE PMOAT!!!
 
-    <div id='book-purchase-links'>
-      <div class='row'>
-        <div class='col-2 align-middle text-center'>
-          <a class='btn' href="{{book['purchase_link']}}"> Amazon </a>
+http://www.goodreads.com/blog/show/24...
+
+as an aside- i really hate that bee, and it would make the site look like one for doofy toddlers, not bookish adults. i can stand to lose to a hedgehog, but that bee has got to go down (LGM)
+
+so but zombies.
+
+this book was much more enjoyable than i had feared. humorous zombie books are tricky to pull off. on the one hand, a creature that only wants to eat your brains is funny. on the other hand- seriously - it really wants to eat your brains. that's not funny.
+
+but i found myself reluctantly charmed by this couple and their struggles to maintain their relationship and not get turned into zombies, all in the same day. thankfully, they had seen some zombie movies (which they were not afraid to reference). the "figuring out" part of zombie movies and books is always a real downer. "what are these creatures?? what do they want???" please. if i go outside today and see someone shuffling down the street, head cocked, moaning a little, i am going to crossbow it in the head. and if it is simply a stroke victim - well, mea culpa. you would have been thanking me if it was a zombie. but when characters waste too much time scratching their heads and wondering "what do we dooooo?", it just frustrates the audience.
+
+this book had good ass-kickery mixed with actual humor (i.e. - humor that made me laugh, not just cheap placeholder humor) and a bonus cult situation. the surprises never felt contrived - there were some genuinely intense moments, and i ended up rooting for the pair to rekindle their love and shoot some corpses in the head. good times.
+
+
+on halloween, i was read-walking this very book down the street, and i saw the saddest thing: a little princess had rung the doorbell of an old man's house, and he opened the door and bellowed "no trick or treaters!!!" dude! just don't answer the door, no need to be a jerk about it.i kind of wish she had been a zombie, and had eaten him. then i wrote a story in my head where all the trick-or-treaters were zombies and i walked a little more quickly to escape them.
+
+in summary:
+
+bee= bad
+this book = good.
+
+also - just for the record - i do not like how this book tore the rbrs apart into two factions. can we come together again for next month, pleeeeeze??
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+
+
+        <div id='book-details' class='container-fluid'>
+          <h3>Details</h3>
+          <hr class='align-middle'>
+
+          <div class='card'>
+            <div class='card-body'>
+              <p class='card-text'>
+                A heartwarming tale of terror in the middle of the zombie apocalypse.
+
+Meet Sarah and David.
+
+Once upon a time they met and fell in love. But now they're on the verge of divorce and going to couples' counseling. On a routine trip to their counselor, they notice a few odd things - the lack of cars on the highway, the missing security guard, and the fact that their counselor, Dr. Kelly, is ripping out her previous client's throat.
+
+Meet the Zombies.
+
+Now, Sarah and David are fighting for survival in the middle of the zombie apocalypse. But, just because there are zombies, doesn't mean your other problems go away. If the zombies don't eat their brains, they might just kill each other. (less)`
+              </p>
+            </div>
+          </div>
+        </div>
+
     </div>
   </div>
-
-  
 </div>
 {% endblock %}
