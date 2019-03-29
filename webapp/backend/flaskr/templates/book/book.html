@@ -6,10 +6,10 @@
   <div id='book-metadata'>
     <div class='row'>
 
-      <div class='col-2 align-middle text-center' style='margin-left: 5%;'>
+      <div class='col-2 align-middle text-center' style='margin-left: 5%; max-width: 20%;'>
 
-        <div class='card align-middle' style='width: 20em; margin-bottom: 3em;'>
-          <img id='book-cover' class='img-thumbnail' src="{{ book['cover'] }}" alt="{{ book['title'] }} - Book Cover">
+        <div class='card align-middle' style='width: 100%; margin-bottom: 3em;'>
+          <img style='max-height: 30%; height: auto;' id='book-cover' class='img-thumbnail' src="{{ book['cover'] }}" alt="{{ book['title'] }} - Book Cover">
           <div class='card-body'>
             <h3 class='card-title'>{{ book['title'] }}</h3>
             <p class='card-text'>{{ book['author'] }}</p>
@@ -17,7 +17,7 @@
           </div>
         </div>
 
-        <div class='card align-middle' style='width: 20em;'>
+        <div class='card align-middle' style='max-height: 40%; width: auto;'>
           <div class='card-body'>
             <h3 class='card-title'>Similar books</h3>
 
