@@ -15,7 +15,7 @@ bp = Blueprint('search', __name__)
 def search():
     if request.method == 'POST':
         page=1
-        perpage=3
+        perpage=10
         startat=(page-1)*perpage
         search_param = request.form['q']
         
@@ -56,13 +56,13 @@ def search():
         total=int(math.ceil((len(books)/perpage)/2))
         if total==0:
             total=1
-        books = books[0:3]
+        books = books[0:perpage]
         
         #pagination = Pagination(page=page, pagination=pagination,total=users.count(),  record_name='books')
 
         
     elif request.method == 'GET':
-        perpage=3
+        perpage=10
         search_param=request.args.get("q")
         
         if search_param==None:
