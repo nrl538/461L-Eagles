@@ -22,15 +22,15 @@ def test_no_results_found(client, auth, app):
 def test_pagination_shows_only_10_results(client, auth, app):
     response = search(client, 'e')
     print(response.data)
-    assert b'Page 1 of 3' in response.data
+    assert b'href="?page=1&q=e&total=3&search_type=None' in response.data
 
 def test_pagination_lists_multiple_page_links(client, auth, app):
     response = search(client, 'e')
-    assert b'Page 1 of 3' in response.data
+    assert b'href="?page=1&q=e&total=3&search_type=None' in response.data
 
 def test_search_results_displays_page_one(client, auth, app):
     response = search(client, 'Frankenstein')
-    assert b'Page 1 of 1' in response.data
+    assert b'href="?page=1&q=Frankenstein&total=1&search_type=None' in response.data
 
 def search(client, text):
     return client.post('/search/', data={'q': text})

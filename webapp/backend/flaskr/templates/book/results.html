@@ -27,7 +27,11 @@
           <a class="page-link" href="?page={{ 1 }}&q={{search_param}}&total={{total}}&search_type={{search_type}}">&laquo;</a>
         </li>
 
-        {% if page == total %}
+        {% if page == 1 and total == 1 %}
+          <li class="page-item active" id="current">
+            <a class="page-link" href="?page=1&q={{search_param}}&total=1&search_type={{search_type}}">1</a>
+          </li>
+        {% elif page == total %}
         <!--we're on the last page-->
 
           <li class="page-item" id="current">
