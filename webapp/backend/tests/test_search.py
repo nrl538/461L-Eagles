@@ -17,7 +17,7 @@ def test_shows_book_author(client,auth,app):
 
 def test_no_results_found(client, auth, app):
     response = search(client, 'aowipdjqopwidjq')
-    print(response.data)
+    assert b'href="?page=1&q=aowipdjqopwidjq&total=1&search_type=Nonoe' not in response.data
 
 def test_pagination_shows_only_10_results(client, auth, app):
     response = search(client, 'e')
@@ -27,6 +27,8 @@ def test_pagination_shows_only_10_results(client, auth, app):
 def test_pagination_lists_multiple_page_links(client, auth, app):
     response = search(client, 'e')
     assert b'href="?page=1&q=e&total=3&search_type=None' in response.data
+    assert b'href="?page=2&q=e&total=3&search_type=None' in response.data
+    assert b'href="?page=3&q=e&total=3&search_type=None' in response.data
 
 def test_search_results_displays_page_one(client, auth, app):
     response = search(client, 'Frankenstein')
