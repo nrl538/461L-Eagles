@@ -7,11 +7,11 @@ df['details'] = df.details.str.decode('utf-8')
 df['title'] = df.title.str.decode('utf-8')
 df['author'] = df.author.str.decode('utf-8')
 
-df['description'] = df.author.str.encode("ascii","ignore")
+df['description'] = df.description.str.encode("ascii","ignore")
 
-df['details'] = df.author.str.encode("ascii","ignore")
+df['details'] = df.details.str.encode("ascii","ignore")
 
-df['title'] = df.author.str.encode("ascii","ignore")
+df['title'] = df.title.str.encode("ascii","ignore")
 
 df['author'] = df.author.str.encode("ascii","ignore")
 
