@@ -31,16 +31,19 @@
                 <div class='carousel-inner'>
                   <div class='carousel-item active'>
                     <a href='/book/2'>
+                      <!-- Templatize after data is scraped -->
                       <img src='https://images.gr-assets.com/books/1265814659l/7716140.jpg' class='d-block'>
                     </a>
                   </div>
                   <div class='carousel-item'>
                     <a href='/book/3'>
+                      <!-- Templatize after data is scraped -->
                       <img src='https://images.gr-assets.com/books/1528312647l/8908.jpg' class='d-block'>
                     </a>
                   </div>
                   <div class='carousel-item'>
                     <a href='/book/4'>
+                      <!-- Templatize after data is scraped -->
                       <img src='https://images.gr-assets.com/books/1550929007l/44095135.jpg' class='d-block'>
                     </a>
                   </div>
@@ -67,7 +70,16 @@
         <div class='container-fluid' id='book-rating' style='margin-bottom: 5%;'>
           <div class='card'>
             <h5 class='card-header'>Rating</h5>
-            <div class='card-body'>
+            <div class='card-body text-center'>
+
+              <p class='card-text lead'>
+                BookBrain Averaged Internet Rating: {{ book['average_review'] }}
+              </p>
+
+              <p class='card-text'>
+                This rating is based on a weighted sum of ratings and reviews pulled from multiple other websites and sources.
+              </p>
+
             </div>
           </div>
         </div>
@@ -77,6 +89,7 @@
             <h5 class='card-header'>Critic Review</h5>
             <div class='card-body'>
               <p class='card-text'>
+                <!-- Templatize after data is scraped -->
                 I was shocked by how good this book was! I would recommend it to anyone who likes zombie stories. It was humorous as well, which is always a plus.
               </p>
             </div>
@@ -88,6 +101,7 @@
             <h5 class='card-header'>Audience Review</h5>
             <div class='card-body'>
               <p class='card-text'>
+                <!-- Templatize after data is scraped -->
                 JESUS CHRIST, HOW MANY TIMES AM I GOING TO HAVE TO EDIT THIS!! THIS MASCOT COMPETITION IS TURNING INTO SOME MISS AMERICA SCANDAL!! WALBERT IS BACK IN THE RUNNING. HE HAS NO SHOT OF WINNING, BUT LOOK HOW CUTE HE IS!!! LOOOOOOK!! COMPARED TO THE BEE, HE IS THE PMOAT!!!
 
 http://www.goodreads.com/blog/show/24...
@@ -124,6 +138,7 @@ also - just for the record - i do not like how this book tore the rbrs apart int
           <div class='card'>
             <div class='card-body'>
               <p class='card-text'>
+                <!-- Templatize after data is scraped -->
                 A heartwarming tale of terror in the middle of the zombie apocalypse.
 
 Meet Sarah and David.
@@ -145,6 +160,7 @@ Now, Sarah and David are fighting for survival in the middle of the zombie apoca
           <div class='card'>
             <div class='card-body'>
               <p class='card-text'>
+                <!-- Templatize after data is scraped -->
                 Paperback, US Edition, 870 pages
               </p>
             </div>
@@ -156,7 +172,8 @@ Now, Sarah and David are fighting for survival in the middle of the zombie apoca
           <hr class='align-middle'>
           <div class='card'>
             <div class='card-body'>
-              <a class="btn btn-outline-secondary" href="https://www.goodreads.com/buy_buttons/12/follow?book_id=2&ref=x_gr_w_glide_ku_bb&tag=x_gr_w_glide_ku_bb-20" style="background-color:#B1EDE8">Buy</a>
+              <!-- Templatize after data is scraped -->
+              <a class="btn btn-outline-secondary" href="{{ book['purchase_link'] }}" style="background-color:#B1EDE8">Buy</a>
             </div>
           </div>
         </div>
