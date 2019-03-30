@@ -32,5 +32,5 @@ create table reviews (
   date_published date
 );
 
-load data local infile 'seedbookdata.csv' into table books fields terminated by ',' lines terminated by '\n';
+load data local infile 'tests/seedbookdata.csv' into table books fields terminated by ',' lines terminated by '\n';
 
