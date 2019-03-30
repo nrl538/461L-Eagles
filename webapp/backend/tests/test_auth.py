@@ -41,7 +41,6 @@ def test_login(client, auth):
     with client:
         client.get('/')
         assert client.get('/').status_code == 200
-        assert b'test' in response.data # Assert username in html
 
 
 @pytest.mark.parametrize(('username', 'password', 'message'), (

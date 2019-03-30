@@ -7,42 +7,84 @@
   <hr class='centered'>
 
   <div class='list-group'>
-  {% for book in books %}
-    <a href="/book/{{ book['id'] }}" class="list-group-item list-group-item-action" style='padding: 1em;'>
-      <header>
-        <div>
-          <h1>{{ book['title'] }}</h1>
-          <div class="about">by {{ book['author'] }} on {{ book['date_published'] }}</div>
-        </div>
-      </header>
-      <p class="body">{{ book['description'] }}</p>
-    </a>
-  {% endfor %}
-
+    {% for book in books %}
+      <a href="/book/{{ book['id'] }}" class="list-group-item list-group-item-action" style='padding: 1em;'>
+        <header>
+          <div>
+            <h1>{{ book['title'] }}</h1>
+            <div class="about">by {{ book['author'] }} on {{ book['date_published'] }}</div>
+          </div>
+        </header>
+        <p class="body">{{ book['description'] }}</p>
+      </a>
+    {% endfor %}
   </div>
+
+
+  <nav aria-label="Pagination buttons" style='margin-top: 3%;'>
+    <ul class='pagination justify-content-center'>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ 1 }}&q={{search_param}}&total={{total}}&search_type={{search_type}}">&laquo;</a>
+        </li>
+
+        {% if page == total %}
+        <!--we're on the last page-->
+
+          <li class="page-item" id="current">
+            <a class="page-link" href="?page={{ page-2 }}&q={{search_param}}&total={{total}}&search_type={{search_type}}">{{ page-2 }}</a>
+          </li>
+
+          <li class="page-item" id="current">
+            <a class="page-link" href="?page={{ page-1 }}&q={{search_param}}&total={{total}}&search_type={{search_type}}">{{ page-1 }}</a>
+          </li>
+
+          <li class="page-item active" id="current">
+            <a class="page-link" href="?page={{ page }}&q={{search_param}}&total={{total}}&search_type={{search_type}}">{{ page }}</a>
+          </li>
+
+        {% elif (page-1) >= 1 %}
+        <!--if we're not on the first page-->
+
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page-1 }}&q={{search_param}}&total={{total}}&search_type={{search_type}}">{{ page-1 }}</a>
+          </li>
+
+          <li class="page-item active" id="current">
+            <a class="page-link" href="?page={{ page }}&q={{search_param}}&total={{total}}&search_type={{search_type}}">{{ page }}</a>
+          </li>
+
+          <li class="page-item" id="current">
+            <a class="page-link" href="?page={{ page+1 }}&q={{search_param}}&total={{total}}&search_type={{search_type}}">{{ page+1 }}</a>
+          </li>
+
+        {% else %}
+        <!--if we're on the first page (don't show zero, just pages 1, 2, and 3 -->
+
+          <li class="page-item active" id="current">
+            <a class="page-link" href="?page={{ 1 }}&q={{search_param}}&total={{total}}&search_type={{search_type}}">1</a>
+          </li>
+
+          {% if 2 <= total %}
+            <li class="page-item" id="current">
+              <a class="page-link" href="?page={{ 2 }}&q={{search_param}}&total={{total}}&search_type={{search_type}}">2</a>
+            </li>
+          {% endif %}
+
+          {% if 3 <= total %}
+            <li class="page-item" id="current">
+              <a class="page-link" href="?page={{ 3 }}&q={{search_param}}&total={{total}}&search_type={{search_type}}">3</a>
+            </li>
+          {% endif %}
+
+
+        {% endif %}
+
+        <li class="page-item">
+          <a class="page-link" href="?page={{ total }}&q={{search_param}}&total={{total}}&search_type={{search_type}}">&raquo;</a>
+        </li>
+    </ul>
+  </nav>
 
 </div>
 
-  
-  <div class="pagination">
-    <span class="step-links">
-        
-        <a href="?page={{ page-1 }}&q={{search_param}}&total={{total}}&search_type={{search_type}}">previous</a>
-
-        
-        <span class="current">
-            Page {{ page }} of {{ total }}.
-        </span>
- 
-        
-        <a href="?page={{ page+1 }}&q={{search_param}}&total={{total}}&search_type={{search_type}}">next</a>
-            
-        
-        
-    </span>
-    
-   </div>
-   
-   
- 
 {% endblock %}
