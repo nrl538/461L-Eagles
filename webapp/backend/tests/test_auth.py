@@ -40,14 +40,17 @@ def test_login(client, auth):
     # check that the user is loaded from the session
     with client:
         client.get('/')
-        assert g.user['username'] == 'test'
+        assert client.get('/').status_code == 200
+        assert b'test' in response.data # Assert username in html
 
 
 @pytest.mark.parametrize(('username', 'password', 'message'), (
     ('aaaaa', 'test', b'Incorrect username.'),
     ('test', 'a', b'Incorrect password.'),
 ))
-def test_login_validate_input(auth, username, password, message):
+def test_login_validate_input(client, auth, username, password, message):
+    # Register 'test' user for incorrect passsword check.
+    client.post('/register', data={'username': 'test', 'password': '123abc'})
     response = auth.login(username, password)
     assert message in response.data
 
