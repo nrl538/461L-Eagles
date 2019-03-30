@@ -22,8 +22,8 @@ def app():
     })
 
     # create the database and load test data
-    # with app.app_context():
-        # init_db()
+    with app.app_context():
+        init_db()
         # get_db().executescript(_data_sql)
 
     yield app

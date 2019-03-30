@@ -1,8 +1,10 @@
 import click
-from flask import current_app, g
-from flask.cli import with_appcontext
 import MySQLdb
 import MySQLdb.cursors
+import os
+
+from flask import current_app, g
+from flask.cli import with_appcontext
 
 def get_db():
     """Connect to the application's configured database. The connection
@@ -10,19 +12,28 @@ def get_db():
     again.
     """
     if 'db' not in g:
-        '''
-        g.db = sqlite3.connect(
-            current_app.config['DATABASE'],
-            detect_types=sqlite3.PARSE_DECLTYPES
-        )
-        g.db.row_factory = sqlite3.Row
-        '''
-        #35.192.163.20
-        g.db = MySQLdb.connect(host="35.192.163.20",  # your host
-                     user="root",       # username
-                     passwd="root",     # password
-                     db="mysqldb",# name of the database
-                     cursorclass=MySQLdb.cursors.DictCursor)
+        # IP address of GCP database: 35.192.163.20
+        environment = os.environ.get('FLASK_ENV')
+
+        if environment == 'development':
+            g.db = MySQLdb.connect(host="127.0.0.1",
+                         user="bookbrain",
+                         passwd="461leagles",
+                         db="bookbrain",
+                         cursorclass=MySQLdb.cursors.DictCursor)
+        elif environment == 'test':
+            g.db = MySQLdb.connect(host="127.0.0.1",  # your host
+                         user="bookbrain",       # username
+                         passwd="461leagles",     # password
+                         db="testbookbrain",# name of the database
+                         cursorclass=MySQLdb.cursors.DictCursor)
+        else:
+            # `export FLASK_ENV=production`
+            g.db = MySQLdb.connect(host="35.192.163.20",  # your host
+                    user="root",       # username
+                    passwd="root",     # password
+                    db="mysqldb",# name of the database
+                    cursorclass=MySQLdb.cursors.DictCursor)
 
     return g.db
 
@@ -41,15 +52,26 @@ def init_db():
     """Clear existing data and create new tables."""
     db = get_db()
 
-    with current_app.open_resource('schema.sql') as f:
-        text = f.read().decode('utf8')
-    sql_commands = text.split(';')
+
+    environment = os.environ.get('FLASK_ENV')
+
+    if environment == 'test':
+        with current_app.open_resource('test_schema.sql') as f:
+            schema = f.read().decode('utf8')
+    else:
+        # `export FLASK_ENV=production` or `export FLASK_ENV=development`
+        with current_app.open_resource('schema.sql') as f:
+            schema = f.read().decode('utf8')
+
+    sql_commands = schema.split(';')
+
     for i in range(len(sql_commands)):
         if (i==len(sql_commands)-1):
             break
         command = sql_commands[i].replace('\n','')
-        command =command.replace('\t','')+';'
+        command = command.replace('\t','') + ';'
         db.cursor().execute(command)
+    return
 
 @click.command('init-db')
 @with_appcontext
