@@ -15,7 +15,12 @@ def get_book(isbn):
     )
     book = cursor.fetchone()
 
-    return render_template('book/book.html', book=book)
+    cursor = get_db().cursor()
+    cursor.execute(
+        'SELECT * from reviews WHERE books.id = %s', (isbn,)
+    )
+    review = cursor.fetchone()
+    return render_template('book/book.html', book=book, review=review)
 
 @bp.route('/book/<isbn>', methods=['GET'])
 def show(isbn):
