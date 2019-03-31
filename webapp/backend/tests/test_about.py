@@ -20,4 +20,3 @@ def test_shows_stats(client, auth, app):
     assert b'Stats' in html
     assert b'Total Unit Tests:' in html
     assert b'Total Github Issues:' in html
-    assert b'Total Commits:' in html
