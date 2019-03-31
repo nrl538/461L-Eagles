@@ -18,7 +18,8 @@ def search():
         perpage=10
         startat=(page-1)*perpage
         search_param = request.form['q']
-        
+        if search_param==None or str(search_param).replace(" ","")=="":
+            return render_template('index.html')
         cur = get_db().cursor()
         error = None 
         cur.execute(

@@ -4,8 +4,8 @@
 DROP TABLE IF EXISTS user;
 
 CREATE TABLE user (
- id INTEGER PRIMARY KEY AUTOINCREMENT,
- username TEXT UNIQUE NOT NULL,
+ id INTEGER PRIMARY KEY AUTO_INCREMENT,
+ username TEXT NOT NULL,
  password TEXT NOT NULL
 );
 
@@ -27,7 +27,7 @@ CREATE TABLE books (
  description TEXT NOT NULL,
  average_review FLOAT NOT NULL,
  purchase_link TEXT NOT NULL,
- date_published DATE,
+ date_published TEXT,
  isbn13 TEXT NOT NULL,
  ratings_count FLOAT NOT NULL,
  work_ratings_count FLOAT NOT NULL, 
