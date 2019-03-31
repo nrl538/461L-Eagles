@@ -30,7 +30,7 @@ CREATE TABLE books (
  date_published TEXT,
  isbn13 TEXT NOT NULL,
  ratings_count FLOAT NOT NULL,
- work_ratings_count FLOAT NOT NULL, 
+ work_ratings_count FLOAT NOT NULL,
  work_text_reviews_count FLOAT NOT NULL,
  ratings_1 FLOAT NOT NULL,
  ratings_2 FLOAT NOT NULL,
@@ -38,4 +38,15 @@ CREATE TABLE books (
  ratings_4 FLOAT NOT NULL,
  ratings_5 FLOAT NOT NULL,
  details TEXT NOT NULL
+);
+
+CREATE TABLE reviews (
+  id INTEGER PRIMARY KEY,
+  title TEXT NOT NULL,
+  author TEXT NOT NULL,
+  isbn TEXT NOT NULL,
+  review_source TEXT NOT NULL,
+  average_rating FLOAT NOT NULL,
+  review_author TEXT NOT NULL,
+  review_content TEXT NOT NULL
 );
