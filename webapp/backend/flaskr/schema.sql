@@ -2,7 +2,6 @@
 -- Drop any existing data and create empty tables.
 
 DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS post;
 
 CREATE TABLE user (
  id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -28,5 +27,15 @@ CREATE TABLE books (
  description TEXT NOT NULL,
  average_review FLOAT NOT NULL,
  purchase_link TEXT NOT NULL,
- date_published DATE 
+ date_published DATE,
+ isbn13 TEXT,
+ ratings_count FLOAT,
+ work_ratings_count FLOAT, 
+ work_text_reviews_count FLOAT,
+ ratings_1 FLOAT,
+ ratings_2 FLOAT,
+ ratings_3 FLOAT,
+ ratings_4 FLOAT,
+ ratings_5 FLOAT,
+ details TEXT
 );
