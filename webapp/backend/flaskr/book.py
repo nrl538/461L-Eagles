@@ -17,7 +17,7 @@ def get_book(isbn):
 
     cursor = get_db().cursor()
     cursor.execute(
-        'SELECT * from reviews WHERE books.id = %s', (isbn,)
+        'SELECT * from reviews WHERE reviews.id = %s', (isbn,)
     )
     review = cursor.fetchone()
     return render_template('book/book.html', book=book, review=review)
