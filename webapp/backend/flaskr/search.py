@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import functools
 import math
-
+import urllib
 from flask_paginate import Pagination, get_page_parameter
 
 from flaskr.db import get_db
@@ -68,6 +68,8 @@ def search():
         
         if search_param==None:
             search_param=""
+        search_param=urllib.unquote(search_param)
+
         page=int(request.args.get("page"))
         total=int(request.args.get("total"))
         if page>total:
@@ -110,6 +112,7 @@ def search():
             books=books_by_isbn
         else:
             books=books_by_integrate
+    search_param=urllib.quote(search_param)
 
     return render_template('book/results.html',total=total,books=books,page=page,search_param=search_param,search_type=search_type)
 
