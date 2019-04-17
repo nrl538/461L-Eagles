@@ -21,5 +21,5 @@ for index, row in bookdata.iterrows():
 
 
 bookdata['book_id'] = book_ids
-bookdata.drop_duplicates(subset=['title'])
+bookdata = bookdata.drop_duplicates(subset=['title'])
 bookdata.to_csv('./bookdata_fixed.csv', encoding='utf-8', header=True, index=False)
