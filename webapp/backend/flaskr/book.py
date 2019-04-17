@@ -15,12 +15,29 @@ def get_book(isbn):
     )
     book = cursor.fetchone()
 
-    cursor = get_db().cursor()
+
     cursor.execute(
         'SELECT * from reviews WHERE reviews.id = %s', (isbn,)
     )
     review = cursor.fetchone()
-    return render_template('book/book.html', book=book, review=review)
+
+
+    cursor.execute(
+        'SELECT * from twitter WHERE twitter.id = %s', (isbn,)
+    )
+    twitter_review = cursor.fetchone()
+
+    #initialize a dict to store all review sentiments
+    #The key is the kind of review it is, and the value is a size 2 tuple representing the polarity and subjectivity
+    all_reviews = {}
+
+    review_sentiment = TextBlob(str(review['review_content'])).sentiment
+    all_reviews['original_review'] = review_sentiment
+    
+    twitter_review_sentiment = TextBlob(str(twitter_review['review_content'])).sentiment
+    all_reviews['twitter_review'] = twitter_review_sentiment
+
+    return render_template('book/book.html', book=book, review=all_reviews)
 
 @bp.route('/book/<isbn>', methods=['GET'])
 def show(isbn):
