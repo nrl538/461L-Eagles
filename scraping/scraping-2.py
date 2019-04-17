@@ -29,7 +29,7 @@ df = df.drop(columns=['book_id','authors','goodreads_book_id','best_book_id','wo
 
 books = df['title'].tolist()
 
-print("books:",books)
+#print("books:",books)
 
 sign_in('wesclock777@gmail.com', 'apples')
 
@@ -41,6 +41,8 @@ authors = []
 count = 0
 
 for book in books:
+    if count == 1000:
+        break
     if book in books_completed:
         continue
 
@@ -52,7 +54,10 @@ for book in books:
     search = driver.find_element_by_xpath("/html/body/div[3]/div/header/div[1]/div/div[2]/form/input")
     search.click()
     search.send_keys(book)
-    search.send_keys(Keys.RETURN)
+    try:
+        search.send_keys(Keys.RETURN)
+    except:
+        pass
     try:
         try:
             first_res = driver.find_element_by_xpath(   \
