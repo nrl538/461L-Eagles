@@ -5,9 +5,11 @@
     {% if messages %}
       <ul class='list-group text-center'>
         {% for message in messages %}
+          {% if message %}
           <li class='list-group-item'>
             {{ message }}
           </li>
+          {% endif %}
         {% endfor %}
       </ul>
     {% endif %}
