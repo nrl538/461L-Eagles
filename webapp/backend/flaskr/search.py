@@ -130,13 +130,15 @@ def autocomplete():
 
         elif category == 'Author':
             return jsonify(matching_results=get_authors(cur, search_param))
-        
 
-        aggregated = get_titles(cur, search_param) + get_authors(cur, search_param)
+        elif category == 'ISBN':
+            return jsonify(matching_results=get_isbns(cur, search_param))
+
+        aggregated = get_titles(cur, search_param) + get_authors(cur, search_param) + get_isbns(cur, search_param)
         return jsonify(matching_results=aggregated)
 
 def get_titles(cur, search_param):
-    cur.execute('SELECT TITLE FROM books WHERE books.title LIKE %s', ('%' + search_param + '%',))
+    cur.execute('SELECT DISTINCT TITLE FROM books WHERE books.title LIKE %s', ('%' + search_param + '%',))
     books_by_title = cur.fetchall()
     titles=[]
     for book_title in books_by_title:
@@ -149,7 +151,7 @@ def get_titles(cur, search_param):
 
 
 def get_authors(cur, search_param):
-    cur.execute('SELECT AUTHOR FROM books WHERE books.author LIKE %s', ('%' + search_param + '%',))
+    cur.execute('SELECT DISTINCT AUTHOR FROM books WHERE books.author LIKE %s', ('%' + search_param + '%',))
     books_by_author = cur.fetchall()
     authors = []
     for book_author in books_by_author:
@@ -158,4 +160,17 @@ def get_authors(cur, search_param):
             authors.append(author)
     
     return authors
+
+
+def get_isbns(cur, search_param):
+    cur.execute('SELECT DISTINCT ISBN FROM books WHERE books.isbn LIKE %s', ('%' + search_param + '%',))
+    books_by_isbn = cur.fetchall()
+    isbns = []
+    for book_isbn in books_by_isbn:
+        isbn = book_isbn['ISBN']
+        if isbn != 'isbn':
+            isbns.append(isbn)
+    
+    return isbns
+
 
