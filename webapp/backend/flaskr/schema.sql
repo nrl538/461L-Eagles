@@ -71,7 +71,7 @@ CREATE TABLE amazon (
   review_content TEXT NOT NULL
 );
 
-CREATE TABLE B&N (
+CREATE TABLE BN (
   id INTEGER PRIMARY KEY,
   title TEXT NOT NULL,
   isbn TEXT NOT NULL,
