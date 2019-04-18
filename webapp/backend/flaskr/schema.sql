@@ -59,3 +59,25 @@ CREATE TABLE twitter (
   review_source TEXT NOT NULL,
   review_content TEXT NOT NULL
 );
+
+CREATE TABLE amazon (
+  id INTEGER PRIMARY KEY,
+  title TEXT NOT NULL,
+  isbn TEXT NOT NULL,
+  author TEXT NOT NULL,
+  review_source TEXT NOT NULL,
+  average_rating FLOAT NOT NULL,
+  review_author TEXT NOT NULL,
+  review_content TEXT NOT NULL
+);
+
+CREATE TABLE B&N (
+  id INTEGER PRIMARY KEY,
+  title TEXT NOT NULL,
+  isbn TEXT NOT NULL,
+  author TEXT NOT NULL,
+  review_source TEXT NOT NULL,
+  average_rating FLOAT NOT NULL,
+  review_author TEXT NOT NULL,
+  review_content TEXT NOT NULL
+);

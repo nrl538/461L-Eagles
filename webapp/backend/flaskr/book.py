@@ -26,7 +26,16 @@ def get_book(isbn):
         'SELECT * from twitter WHERE twitter.id = %s', (isbn,)
     )
     twitter_review = cursor.fetchone()
+    
+    cursor.execute(
+        'SELECT * from twitter WHERE twitter.id = %s', (isbn,)
+    )
+    amazon_review = cursor.fetchone()
 
+    cursor.execute(
+        'SELECT * from twitter WHERE twitter.id = %s', (isbn,)
+    )
+    B&N_review = cursor.fetchone()
     #initialize a dict to store all review sentiments
     #The key is the kind of review it is, and the value is a size 2 tuple representing the polarity and subjectivity
     all_reviews = {}
@@ -36,6 +45,12 @@ def get_book(isbn):
     
     twitter_review_sentiment = TextBlob(str(twitter_review['review_content'])).sentiment
     all_reviews['twitter_review'] = twitter_review_sentiment
+    
+    amazon_review_sentiment = TextBlob(str(amazon_review['review_content'])).sentiment
+    all_reviews['amazon_review'] = amazon_review_sentiment
+    
+    B&N_review_sentiment = TextBlob(str(B&N_review['review_content'])).sentiment
+    all_reviews['B&N_review'] = B&N_review_sentiment
 
     return render_template('book/book.html', book=book, review=all_reviews)
 

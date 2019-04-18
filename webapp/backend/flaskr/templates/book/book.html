@@ -101,14 +101,55 @@
               <div class='card-body'>
 
                 <p class='card-text'>
-                  Written by {{ review['review_content'] }} <br>
+                  Written by {{ review['original_review'] }} <br>
                   <!-- Templatize after data is scraped -->
-                  {{ review['review_content'] }}
+                  {{ review['original_review'] }}
                 </p>
               </div>
             </div>
           </div>
+          
+          <div class='container-fluid' id='book-twitter-review' style='margin-bottom: 5%;'>
+            <div class='card'>
+              <h5 class='card-header'>Twitter Review</h5>
+              <div class='card-body'>
 
+                <p class='card-text'>
+                  Written by {{ review['twitter_review'] }} <br>
+                  <!-- Templatize after data is scraped -->
+                  {{ review['twitter_review'] }}
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div class='container-fluid' id='book-amazon-review' style='margin-bottom: 5%;'>
+            <div class='card'>
+              <h5 class='card-header'>Amazon Review</h5>
+              <div class='card-body'>
+
+                <p class='card-text'>
+                  Written by {{ review['amazon_review'] }} <br>
+                  <!-- Templatize after data is scraped -->
+                  {{ review['amazon_review'] }}
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div class='container-fluid' id='book-B&N-review' style='margin-bottom: 5%;'>
+            <div class='card'>
+              <h5 class='card-header'>B&N Review</h5>
+              <div class='card-body'>
+
+                <p class='card-text'>
+                  Written by {{ review['B&N_review'] }} <br>
+                  <!-- Templatize after data is scraped -->
+                  {{ review['B&N_review'] }}
+                </p>
+              </div>
+            </div>
+          </div>
 
           <div id='book-description' class='container-fluid' style='margin-bottom: 5%;'>
             <h3>Description</h3>
