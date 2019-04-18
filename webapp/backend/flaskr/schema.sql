@@ -59,3 +59,18 @@ CREATE TABLE twitter (
   review_source TEXT NOT NULL,
   review_content TEXT NOT NULL
 );
+
+CREATE TABLE similar (
+  id INTEGER PRIMARY KEY,
+  title TEXT NOT NULL,
+  similar_1 INTEGER NOT NULL,
+  similar_2 INTEGER NOT NULL,
+  similar_3 INTEGER NOT NULL,
+  similar_4 INTEGER NOT NULL,
+  similar_5 INTEGER NOT NULL,
+  similar_6 INTEGER NOT NULL,
+  similar_7 INTEGER NOT NULL,
+  similar_8 INTEGER NOT NULL,
+  similar_9 INTEGER NOT NULL,
+  similar_10 INTEGER NOT NULL
+);
