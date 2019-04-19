@@ -50,7 +50,7 @@ def get_book(isbn):
     all_reviews['amazon_review'] = amazon_review_sentiment
     
     BN_review_sentiment = TextBlob(str(BN_review['review_content'])).sentiment
-    all_reviews['B&N_review'] = BN_review_sentiment
+    all_reviews['BN_review'] = BN_review_sentiment
 
     return render_template('book/book.html', book=book, review=all_reviews)
 
