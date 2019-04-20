@@ -41,7 +41,7 @@ CREATE TABLE books (
 );
 
 CREATE TABLE reviews (
-  id INTEGER PRIMARY KEY,
+  id INTEGER,
   title TEXT NOT NULL,
   isbn TEXT NOT NULL,
   author TEXT NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE reviews (
 );
 
 CREATE TABLE twitter (
-  id INTEGER PRIMARY KEY,
+  id INTEGER,
   title TEXT NOT NULL,
   isbn TEXT NOT NULL,
   author TEXT NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE twitter (
 );
 
 CREATE TABLE amazon (
-  id INTEGER PRIMARY KEY,
+  id INTEGER,
   title TEXT NOT NULL,
   isbn TEXT NOT NULL,
   author TEXT NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE amazon (
 );
 
 CREATE TABLE BN (
-  id INTEGER PRIMARY KEY,
+  id INTEGER,
   title TEXT NOT NULL,
   isbn TEXT NOT NULL,
   author TEXT NOT NULL,
