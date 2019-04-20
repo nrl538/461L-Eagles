@@ -33,8 +33,7 @@ def get_book(isbn):
         'SELECT * FROM amazon WHERE amazon.id = %s;', (isbn,)
     )
     amazon_reviews = cursor.fetchall()
-    for a in amazon_reviews:
-        print(a['review_content'])
+
     for amazon_review in amazon_reviews:
         id_index = amazon_review['review_content'].find(str(isbn))
         amazon_review['review_content'] = amazon_review['review_content'][:id_index]
@@ -43,8 +42,6 @@ def get_book(isbn):
         'SELECT * FROM BN WHERE BN.id = %s;', (isbn,)
     )
     BN_reviews = cursor.fetchall()
-    for b in BN_reviews:
-        print(b['review_content'])
     for BN_review in BN_reviews:
         id_index = BN_review['review_content'].find(str(isbn))
         BN_review['review_content'] = BN_review['review_content'][:id_index]
