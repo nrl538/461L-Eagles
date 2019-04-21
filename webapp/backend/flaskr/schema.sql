@@ -85,6 +85,17 @@ CREATE TABLE BN (
   review_content TEXT NOT NULL
 );
 
+CREATE TABLE reddit (
+  id INTEGER not null auto_increment primary key,
+  book_id INTEGER,
+  title TEXT NOT NULL,
+  isbn TEXT NOT NULL,
+  author TEXT NOT NULL,
+  review_source TEXT NOT NULL,
+  review_author TEXT NOT NULL,
+  review_content TEXT NOT NULL
+);
+
 CREATE TABLE recently_viewed (
   id integer not null auto_increment primary key,
   user_id int(10),

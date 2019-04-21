@@ -56,34 +56,25 @@ def get_book(isbn):
         'SELECT * FROM twitter WHERE twitter.book_id = %s;',(isbn,)
     )
     twitter_reviews = cursor.fetchall()
-    for twitter_review in twitter_reviews:
-        id_index = twitter_review['review_content'].find(str(isbn))
-        twitter_review['review_content'] = twitter_review['review_content'][:id_index]
-
+    
     cursor.execute(
         'SELECT * FROM amazon WHERE amazon.book_id = %s;', (isbn,)
     )
     amazon_reviews = cursor.fetchall()
 
-    for amazon_review in amazon_reviews:
-        id_index = amazon_review['review_content'].find(str(isbn))
-        amazon_review['review_content'] = amazon_review['review_content'][:id_index]
+    
 
     cursor.execute(
         'SELECT * FROM BN WHERE BN.book_id = %s;', (isbn,)
     )
     BN_reviews = cursor.fetchall()
-    for BN_review in BN_reviews:
-        id_index = BN_review['review_content'].find(str(isbn))
-        BN_review['review_content'] = BN_review['review_content'][:id_index]
+   
         
     cursor.execute(
-        'SELECT * FROM BN WHERE reddit.book_id = %s;', (isbn,)
+        'SELECT * FROM reddit WHERE reddit.book_id = %s;', (isbn,)
     )
     reddit_reviews = cursor.fetchall()
-    for reddit_review in reddit_reviews:
-        id_index = reddit_review['review_content'].find(str(isbn))
-        reddit_review['review_content'] = reddit_review['review_content'][:id_index]
+   
     #initialize a dict to store all review sentiments
     #The key is the kind of review it is, and the value is a size 2 tuple representing the polarity and subjectivity
     all_reviews = {}
