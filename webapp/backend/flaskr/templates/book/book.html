@@ -150,6 +150,21 @@
               </div>
             </div>
           </div>
+          
+          <div class='container-fluid' id='book-reddit-review' style='margin-bottom: 5%;'>
+            <div class='card'>
+              <h5 class='card-header'>BN Review</h5>
+              <div class='card-body'>
+                {% for reddit_review in review['reddit_review'] %}
+                <p class='card-text'>
+                  Written by {{ reddit_review['review_author'] }} <br>
+                  <!-- Templatize after data is scraped -->
+                  {{ reddit_review['review_content'] }}
+                </p>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
         
           <div id='book-description' class='container-fluid' style='margin-bottom: 5%;'>
             <h3>Description</h3>

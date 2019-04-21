@@ -29,7 +29,7 @@ def get_db():
                          cursorclass=MySQLdb.cursors.DictCursor)
         else:
             # `export FLASK_ENV=production`
-            g.db = MySQLdb.connect(host="35.192.163.20",  # your host
+            g.db = MySQLdb.connect(host="35.188.171.68",  # your host
                     user="root",       # username
                     passwd="root",     # password
                     db="mysqldb",# name of the database
