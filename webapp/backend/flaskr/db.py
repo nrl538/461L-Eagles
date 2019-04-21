@@ -16,10 +16,9 @@ def get_db():
         environment = os.environ.get('FLASK_ENV')
 
         if environment == 'development':
-            g.db = MySQLdb.connect(host="127.0.0.1",
-                         user="bookbrain",
-                         passwd="461leagles",
-                         db="bookbrain",
+            g.db = MySQLdb.connect(host="104.155.175.236",
+                         user="root",
+                         db="mysqldb",
                          cursorclass=MySQLdb.cursors.DictCursor)
         elif environment == 'test':
             g.db = MySQLdb.connect(host="127.0.0.1",  # your host

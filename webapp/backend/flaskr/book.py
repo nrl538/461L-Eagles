@@ -9,6 +9,9 @@ from flaskr.db import get_db
 bp = Blueprint('book', __name__)
 
 def get_book(isbn):
+
+    similar = similar(ibsn)
+
     cursor = get_db().cursor()
     cursor.execute(
         'SELECT * from books WHERE books.id = %s;', (isbn,)
@@ -37,7 +40,7 @@ def get_book(isbn):
     for amazon_review in amazon_reviews:
         id_index = amazon_review['review_content'].find(str(isbn))
         amazon_review['review_content'] = amazon_review['review_content'][:id_index]
-    
+
     cursor.execute(
         'SELECT * FROM BN WHERE BN.id = %s;', (isbn,)
     )
@@ -55,26 +58,67 @@ def get_book(isbn):
     sentiments['audience_review'] = review_sentiment
     '''
     twitter_review_sentiments=[]
-    for twitter_review in twitter_reviews: 
+    for twitter_review in twitter_reviews:
         twitter_review_sentiment = TextBlob(str(twitter_review['review_content'])).sentiment
         twitter_review_sentiments.append(twitter_review_sentiment)
     all_reviews['twitter_review'] = twitter_reviews
     sentiments['twitter_review_sentiment'] = twitter_review_sentiments
-    
+
     amazon_review_sentiments = []
     for amazon_review in amazon_reviews:
         amazon_review_sentiment = TextBlob(str(amazon_review['review_content'])).sentiment
         amazon_review_sentiments.append(amazon_review_sentiment)
     all_reviews['amazon_review'] = amazon_reviews
     sentiments['amazon_review_sentiment'] = amazon_review_sentiments
-    
+
     BN_review_sentiments=[]
     for BN_review in BN_reviews:
         BN_review_sentiment = TextBlob(str(BN_review['review_content'])).sentiment
         BN_review_sentiments.append(BN_review_sentiment)
     all_reviews['BN_review'] = BN_reviews
     sentiments['BN_review_sentiment'] = BN_review_sentiments
-    return render_template('book/book.html', book=book, review=all_reviews, sentiments=sentiments)
+    return render_template('book/book.html', book=book, review=all_reviews, sentiments=sentiments, similar=similar)
+
+# added functionality for returning array of book
+def similar(id):
+    cursor = get_db().cursor()
+    cursor.execute(
+        'SELECT * from similar WHERE similar.id = %s', (id,)
+    )
+    similar = cursor.fetchone()
+
+    return [ret_book(similar['similar_1']),ret_book(similar['similar_2']),ret_book(similar['similar_3']),ret_book(similar['similar_4'])\
+    ,ret_book(similar['similar_5'])]
+
+# return the book based on id
+def ret_book(id):
+    cursor = get_db().cursor()
+    cursor.execute(
+        'SELECT * from books WHERE books.id = %s', (id,)
+    )
+    return cursor.fetchone()
+
+def set_recently_viewed_books(isbn):
+    if session['user_id']:
+        user_id = session['user_id']
+        cursor = get_db().cursor()
+        insert_query = "insert into recently_viewed (user_id, book_id) values (%s, %s)"
+        cursor.execute(
+            "insert into recently_viewed (user_id, book_id) values (%s, %s)", (user_id, isbn,)
+        )
+        get_db().commit()
+
+
+def set_recently_viewed_books(isbn):
+    if session['user_id']:
+        user_id = session['user_id']
+        cursor = get_db().cursor()
+        insert_query = "insert into recently_viewed (user_id, book_id) values (%s, %s)"
+        cursor.execute(
+            "insert into recently_viewed (user_id, book_id) values (%s, %s)", (user_id, isbn,)
+        )
+        get_db().commit()
+
 
 def set_recently_viewed_books(isbn):
     if session['user_id']:

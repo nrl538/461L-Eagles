@@ -8,7 +8,6 @@ CREATE TABLE users (
  username TEXT NOT NULL,
  password TEXT NOT NULL
 );
-
 -- CREATE TABLE post (
   -- id INTEGER PRIMARY KEY AUTOINCREMENT,
   -- author_id INTEGER NOT NULL,
@@ -41,7 +40,7 @@ CREATE TABLE books (
 );
 
 CREATE TABLE reviews (
-  id INTEGER,
+  id INTEGER not null auto_increment primary key,
   title TEXT NOT NULL,
   isbn TEXT NOT NULL,
   author TEXT NOT NULL,
@@ -52,7 +51,7 @@ CREATE TABLE reviews (
 );
 
 CREATE TABLE twitter (
-  id INTEGER,
+  id INTEGER not null auto_increment primary key,
   title TEXT NOT NULL,
   isbn TEXT NOT NULL,
   author TEXT NOT NULL,
@@ -61,7 +60,7 @@ CREATE TABLE twitter (
 );
 
 CREATE TABLE amazon (
-  id INTEGER,
+  id INTEGER not null auto_increment primary key,
   title TEXT NOT NULL,
   isbn TEXT NOT NULL,
   author TEXT NOT NULL,
@@ -72,7 +71,7 @@ CREATE TABLE amazon (
 );
 
 CREATE TABLE BN (
-  id INTEGER,
+  id INTEGER not null auto_increment primary key,
   title TEXT NOT NULL,
   isbn TEXT NOT NULL,
   author TEXT NOT NULL,
@@ -92,6 +91,21 @@ CREATE TABLE saved_books (
   id integer not null auto_increment primary key,
   user_id int(10),
   book_id int(10)
+);
+
+CREATE TABLE similar (
+  id INTEGER PRIMARY KEY,
+  title TEXT NOT NULL,
+  similar_1 INTEGER NOT NULL,
+  similar_2 INTEGER NOT NULL,
+  similar_3 INTEGER NOT NULL,
+  similar_4 INTEGER NOT NULL,
+  similar_5 INTEGER NOT NULL,
+  similar_6 INTEGER NOT NULL,
+  similar_7 INTEGER NOT NULL,
+  similar_8 INTEGER NOT NULL,
+  similar_9 INTEGER NOT NULL,
+  similar_10 INTEGER NOT NULL
 );
 
 alter table saved_books add foreign key (user_id) references users(id);

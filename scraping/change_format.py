@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("./newbookdata.csv", header = 0, index_col = 0)
+df = pd.read_csv("./bookdata.csv", header = 0, index_col = 0)
 print(df.dtypes)
 df['description'] = df.description.str.decode('utf-8')
 df['details'] = df.details.str.decode('utf-8')
@@ -36,4 +36,4 @@ df['author'] = df.author.str.encode("ascii","ignore")
 
 
 
-df.to_csv('../newbookdata_formatted.csv', encoding='ascii', header=True)
+df.to_csv('../bookdata_formatted.csv', encoding='ascii', header=True)
