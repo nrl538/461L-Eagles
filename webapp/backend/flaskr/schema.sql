@@ -41,7 +41,7 @@ CREATE TABLE books (
 );
 
 CREATE TABLE reviews (
-  id INTEGER PRIMARY KEY,
+  id INTEGER,
   title TEXT NOT NULL,
   isbn TEXT NOT NULL,
   author TEXT NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE reviews (
 );
 
 CREATE TABLE twitter (
-  id INTEGER PRIMARY KEY,
+  id INTEGER,
   title TEXT NOT NULL,
   isbn TEXT NOT NULL,
   author TEXT NOT NULL,
@@ -60,6 +60,29 @@ CREATE TABLE twitter (
   review_content TEXT NOT NULL
 );
 
+CREATE TABLE amazon (
+  id INTEGER,
+  title TEXT NOT NULL,
+  isbn TEXT NOT NULL,
+  author TEXT NOT NULL,
+  review_source TEXT NOT NULL,
+  average_rating FLOAT NOT NULL,
+  review_author TEXT NOT NULL,
+  review_content TEXT NOT NULL
+);
+
+CREATE TABLE BN (
+  id INTEGER,
+  title TEXT NOT NULL,
+  isbn TEXT NOT NULL,
+  author TEXT NOT NULL,
+  review_source TEXT NOT NULL,
+  average_rating FLOAT NOT NULL,
+  review_author TEXT NOT NULL,
+  review_content TEXT NOT NULL
+);
+
+<<<<<<< HEAD
 CREATE TABLE similar (
   id INTEGER PRIMARY KEY,
   title TEXT NOT NULL,

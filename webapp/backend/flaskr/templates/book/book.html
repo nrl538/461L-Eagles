@@ -93,15 +93,58 @@
               <div class='card-body'>
 
                 <p class='card-text'>
-                  Written by {{ review['review_content'] }} <br>
+                  Written by {{ review['audience_review'] }} <br>
                   <!-- Templatize after data is scraped -->
-                  {{ review['review_content'] }}
+                  {{ review['audience_review'] }}
                 </p>
               </div>
             </div>
           </div>
-
-
+          
+          <div class='container-fluid' id='book-twitter-review' style='margin-bottom: 5%;'>
+            <div class='card'>
+              <h5 class='card-header'>Twitter Review</h5>
+              <div class='card-body'>
+                {% for twitter_review in review['twitter_review'] %}
+                <p class='card-text'>
+                  {{ twitter_review['review_content'] }}
+                </p>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          
+          <div class='container-fluid' id='book-amazon-review' style='margin-bottom: 5%;'>
+            <div class='card'>
+              <h5 class='card-header'>Amazon Review</h5>
+              <div class='card-body'>
+                {% for amazon_review in review['amazon_review'] %}
+                <p class='card-text'>
+                  Written by {{ amazon_review['review_author'] }} <br>
+                  <!-- Templatize after data is scraped -->
+                  {{ amazon_review['review_content'] }}
+                </p>
+                {% endfor %}
+              </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class='container-fluid' id='book-BN-review' style='margin-bottom: 5%;'>
+            <div class='card'>
+              <h5 class='card-header'>BN Review</h5>
+              <div class='card-body'>
+                {% for BN_review in review['BN_review'] %}
+                <p class='card-text'>
+                  Written by {{ BN_review['review_author'] }} <br>
+                  <!-- Templatize after data is scraped -->
+                  {{ BN_review['review_content'] }}
+                </p>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        
           <div id='book-description' class='container-fluid' style='margin-bottom: 5%;'>
             <h3>Description</h3>
             <hr class='align-middle'>
