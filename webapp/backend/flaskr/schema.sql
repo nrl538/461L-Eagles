@@ -82,7 +82,6 @@ CREATE TABLE BN (
   review_content TEXT NOT NULL
 );
 
-<<<<<<< HEAD
 CREATE TABLE similar (
   id INTEGER PRIMARY KEY,
   title TEXT NOT NULL,
