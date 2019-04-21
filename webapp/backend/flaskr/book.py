@@ -28,7 +28,7 @@ def ret_book(id):
     return cursor.fetchone()
 
 def set_recently_viewed_books(isbn):
-    if session['user_id']:
+    if g.user and session['user_id']:
         user_id = session['user_id']
         cursor = get_db().cursor()
         insert_query = "insert into recently_viewed (user_id, book_id) values (%s, %s)"
@@ -36,29 +36,6 @@ def set_recently_viewed_books(isbn):
             "insert into recently_viewed (user_id, book_id) values (%s, %s)", (user_id, isbn,)
         )
         get_db().commit()
-
-
-def set_recently_viewed_books(isbn):
-    if session['user_id']:
-        user_id = session['user_id']
-        cursor = get_db().cursor()
-        insert_query = "insert into recently_viewed (user_id, book_id) values (%s, %s)"
-        cursor.execute(
-            "insert into recently_viewed (user_id, book_id) values (%s, %s)", (user_id, isbn,)
-        )
-        get_db().commit()
-
-
-def set_recently_viewed_books(isbn):
-    if session['user_id']:
-        user_id = session['user_id']
-        cursor = get_db().cursor()
-        insert_query = "insert into recently_viewed (user_id, book_id) values (%s, %s)"
-        cursor.execute(
-            "insert into recently_viewed (user_id, book_id) values (%s, %s)", (user_id, isbn,)
-        )
-        get_db().commit()
-
 
 @bp.route('/book/<isbn>', methods=['GET'])
 def show(isbn):
