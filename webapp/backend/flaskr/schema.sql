@@ -82,6 +82,7 @@ CREATE TABLE BN (
   review_content TEXT NOT NULL
 );
 
+
 CREATE TABLE recently_viewed (
   id integer not null auto_increment primary key,
   user_id int(10),
@@ -92,6 +93,21 @@ CREATE TABLE saved_books (
   id integer not null auto_increment primary key,
   user_id int(10),
   book_id int(10)
+);
+
+CREATE TABLE similar (
+  id INTEGER PRIMARY KEY,
+  title TEXT NOT NULL,
+  similar_1 INTEGER NOT NULL,
+  similar_2 INTEGER NOT NULL,
+  similar_3 INTEGER NOT NULL,
+  similar_4 INTEGER NOT NULL,
+  similar_5 INTEGER NOT NULL,
+  similar_6 INTEGER NOT NULL,
+  similar_7 INTEGER NOT NULL,
+  similar_8 INTEGER NOT NULL,
+  similar_9 INTEGER NOT NULL,
+  similar_10 INTEGER NOT NULL
 );
 
 alter table saved_books add foreign key (user_id) references users(id);
