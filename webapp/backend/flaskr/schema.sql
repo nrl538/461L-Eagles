@@ -42,6 +42,7 @@ CREATE TABLE books (
 
 CREATE TABLE reviews (
   id INTEGER not null auto_increment primary key,
+  book_id INTEGER,
   title TEXT NOT NULL,
   isbn TEXT NOT NULL,
   author TEXT NOT NULL,
@@ -53,6 +54,7 @@ CREATE TABLE reviews (
 
 CREATE TABLE twitter (
   id INTEGER not null auto_increment primary key,
+  book_id INTEGER,
   title TEXT NOT NULL,
   isbn TEXT NOT NULL,
   author TEXT NOT NULL,
@@ -62,6 +64,7 @@ CREATE TABLE twitter (
 
 CREATE TABLE amazon (
   id INTEGER not null auto_increment primary key,
+  book_id INTEGER,
   title TEXT NOT NULL,
   isbn TEXT NOT NULL,
   author TEXT NOT NULL,
@@ -73,6 +76,7 @@ CREATE TABLE amazon (
 
 CREATE TABLE BN (
   id INTEGER not null auto_increment primary key,
+  book_id INTEGER,
   title TEXT NOT NULL,
   isbn TEXT NOT NULL,
   author TEXT NOT NULL,
