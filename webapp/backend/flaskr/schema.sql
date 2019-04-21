@@ -1,10 +1,10 @@
 -- Initialize the database.
 -- Drop any existing data and create empty tables.
 
-DROP TABLE IF EXISTS user;
+drop table if exists users, books, reviews, recently_viewed, saved_books;
 
-CREATE TABLE user (
- id INTEGER PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE users (
+ id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
  username TEXT NOT NULL,
  password TEXT NOT NULL
 );
@@ -19,7 +19,7 @@ CREATE TABLE user (
 -- );
 
 CREATE TABLE books (
- id INTEGER PRIMARY KEY,
+ id INTEGER not null auto_increment PRIMARY KEY,
  title TEXT NOT NULL,
  author TEXT NOT NULL,
  isbn TEXT NOT NULL,
@@ -81,3 +81,21 @@ CREATE TABLE BN (
   review_author TEXT NOT NULL,
   review_content TEXT NOT NULL
 );
+
+CREATE TABLE recently_viewed (
+  id integer not null auto_increment primary key,
+  user_id int(10),
+  book_id int(10)
+);
+
+CREATE TABLE saved_books (
+  id integer not null auto_increment primary key,
+  user_id int(10),
+  book_id int(10)
+);
+
+alter table saved_books add foreign key (user_id) references users(id);
+alter table saved_books add foreign key (book_id) references books(id);
+
+alter table recently_viewed add foreign key (user_id) references users(id);
+alter table recently_viewed add foreign key (book_id) references books(id);

@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, url_for, session
 )
 from werkzeug.exceptions import abort
 from textblob import TextBlob
@@ -76,7 +76,19 @@ def get_book(isbn):
     sentiments['BN_review_sentiment'] = BN_review_sentiments
     return render_template('book/book.html', book=book, review=all_reviews, sentiments=sentiments)
 
+def set_recently_viewed_books(isbn):
+    if session['user_id']:
+        user_id = session['user_id']
+        cursor = get_db().cursor()
+        insert_query = "insert into recently_viewed (user_id, book_id) values (%s, %s)"
+        cursor.execute(
+            "insert into recently_viewed (user_id, book_id) values (%s, %s)", (user_id, isbn,)
+        )
+        get_db().commit()
+
+
 @bp.route('/book/<isbn>', methods=['GET'])
 def show(isbn):
     book = get_book(isbn)
+    set_recently_viewed_books(isbn)
     return book
