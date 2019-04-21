@@ -33,7 +33,7 @@ def load_logged_in_user():
     else:
         cur=get_db().cursor()
         cur.execute(
-            'SELECT * FROM user WHERE id = %s', (user_id,)
+            'SELECT * FROM users WHERE id = %s', (user_id,)
         )
         g.user=cur.fetchone()
 
@@ -58,7 +58,7 @@ def register():
             error = 'Password is required.'
         else:
             cur.execute(
-                'SELECT id FROM user WHERE username = %s', (username,)
+                'SELECT id FROM users WHERE username = %s', (username,)
             )
             if cur.fetchone() is not None:
                 error = 'User, {0}, is already registered.'.format(username)
@@ -66,7 +66,7 @@ def register():
 
         if error is None:
             cur.execute(
-                'INSERT INTO user (username, password) VALUES (%s, %s)',
+                'INSERT INTO users (username, password) VALUES (%s, %s)',
                 (username, generate_password_hash(password))
             )
             db.commit()
@@ -84,7 +84,7 @@ def login():
         cur = get_db().cursor()
         error = None
         cur.execute(
-            'SELECT * FROM user WHERE username = %s', (username,)
+            'SELECT * FROM users WHERE username = %s', (username,)
         )
         user=cur.fetchone()
 
