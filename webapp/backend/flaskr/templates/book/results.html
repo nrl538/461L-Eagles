@@ -16,9 +16,9 @@
           </div>
         </header>
         <p class="body">
-          {{ ' '.join(map(str,book['description'].split()[:41]))}
+          { ' '.join(map(str,book['description'].split()[:41]))}
           <span class="collapse" id="more">
-            {{ ' '.join(map(str,book['description'].split()[41:]))}
+            { ' '.join(map(str,book['description'].split()[41:]))}
           </span>
           <a data-toggle="collapse" data-target="#viewdetails3"> more... &raquo;</a>
         </p>
