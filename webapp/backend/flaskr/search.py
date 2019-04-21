@@ -2,9 +2,9 @@
 import functools
 import math
 try:
-    from urllib import quote
+    from urllib import quote, unquote
 except:
-    from urllib.parse import quote
+    from urllib.parse import quote, unquote
 
 from flask_paginate import Pagination, get_page_parameter
 
