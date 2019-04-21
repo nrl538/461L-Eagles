@@ -8,9 +8,66 @@ from flaskr.db import get_db
 
 bp = Blueprint('book', __name__)
 
-def get_book(isbn):
+# added functionality for returning array of book
+def get_similar(id):
+    cursor = get_db().cursor()
+    cursor.execute(
+        'SELECT * from similar WHERE similar.id = %s', (id,)
+    )
+    similar = cursor.fetchone()
 
-    similar = similar(ibsn)
+    return [ret_book(similar['similar_1']),ret_book(similar['similar_2']),ret_book(similar['similar_3']),ret_book(similar['similar_4'])\
+    ,ret_book(similar['similar_5'])]
+
+# return the book based on id
+def ret_book(id):
+    cursor = get_db().cursor()
+    cursor.execute(
+        'SELECT * from books WHERE books.id = %s', (id,)
+    )
+    return cursor.fetchone()
+
+def set_recently_viewed_books(isbn):
+    if session['user_id']:
+        user_id = session['user_id']
+        cursor = get_db().cursor()
+        insert_query = "insert into recently_viewed (user_id, book_id) values (%s, %s)"
+        cursor.execute(
+            "insert into recently_viewed (user_id, book_id) values (%s, %s)", (user_id, isbn,)
+        )
+        get_db().commit()
+
+
+def set_recently_viewed_books(isbn):
+    if session['user_id']:
+        user_id = session['user_id']
+        cursor = get_db().cursor()
+        insert_query = "insert into recently_viewed (user_id, book_id) values (%s, %s)"
+        cursor.execute(
+            "insert into recently_viewed (user_id, book_id) values (%s, %s)", (user_id, isbn,)
+        )
+        get_db().commit()
+
+
+def set_recently_viewed_books(isbn):
+    if session['user_id']:
+        user_id = session['user_id']
+        cursor = get_db().cursor()
+        insert_query = "insert into recently_viewed (user_id, book_id) values (%s, %s)"
+        cursor.execute(
+            "insert into recently_viewed (user_id, book_id) values (%s, %s)", (user_id, isbn,)
+        )
+        get_db().commit()
+
+
+@bp.route('/book/<isbn>', methods=['GET'])
+def show(isbn):
+    book = get_book(isbn)
+    set_recently_viewed_books(isbn)
+    return book
+
+def get_book(isbn):
+    similar = get_similar(isbn)
 
     cursor = get_db().cursor()
     cursor.execute(
@@ -79,60 +136,4 @@ def get_book(isbn):
     sentiments['BN_review_sentiment'] = BN_review_sentiments
     return render_template('book/book.html', book=book, review=all_reviews, sentiments=sentiments, similar=similar)
 
-# added functionality for returning array of book
-def similar(id):
-    cursor = get_db().cursor()
-    cursor.execute(
-        'SELECT * from similar WHERE similar.id = %s', (id,)
-    )
-    similar = cursor.fetchone()
 
-    return [ret_book(similar['similar_1']),ret_book(similar['similar_2']),ret_book(similar['similar_3']),ret_book(similar['similar_4'])\
-    ,ret_book(similar['similar_5'])]
-
-# return the book based on id
-def ret_book(id):
-    cursor = get_db().cursor()
-    cursor.execute(
-        'SELECT * from books WHERE books.id = %s', (id,)
-    )
-    return cursor.fetchone()
-
-def set_recently_viewed_books(isbn):
-    if session['user_id']:
-        user_id = session['user_id']
-        cursor = get_db().cursor()
-        insert_query = "insert into recently_viewed (user_id, book_id) values (%s, %s)"
-        cursor.execute(
-            "insert into recently_viewed (user_id, book_id) values (%s, %s)", (user_id, isbn,)
-        )
-        get_db().commit()
-
-
-def set_recently_viewed_books(isbn):
-    if session['user_id']:
-        user_id = session['user_id']
-        cursor = get_db().cursor()
-        insert_query = "insert into recently_viewed (user_id, book_id) values (%s, %s)"
-        cursor.execute(
-            "insert into recently_viewed (user_id, book_id) values (%s, %s)", (user_id, isbn,)
-        )
-        get_db().commit()
-
-
-def set_recently_viewed_books(isbn):
-    if session['user_id']:
-        user_id = session['user_id']
-        cursor = get_db().cursor()
-        insert_query = "insert into recently_viewed (user_id, book_id) values (%s, %s)"
-        cursor.execute(
-            "insert into recently_viewed (user_id, book_id) values (%s, %s)", (user_id, isbn,)
-        )
-        get_db().commit()
-
-
-@bp.route('/book/<isbn>', methods=['GET'])
-def show(isbn):
-    book = get_book(isbn)
-    set_recently_viewed_books(isbn)
-    return book
