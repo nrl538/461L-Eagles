@@ -31,10 +31,16 @@
                     <li data-target='#similarBooksCarouselIndicators' data-slide-to='4'></li>
                   </ol>
                   <div class='carousel-inner'>
-                    {% for b in similar %}
                     <div class='carousel-item active'>
+                      <a href='/book/{{similar[0]["id"]}}'>
+                        <img src='{{ similar[0]["cover"] }}'>
+                      </a>
+                    </div>
+
+                    {% for b in similar[1:] %}
+                    <div class='carousel-item'>
                       <a href='/book/{{b["id"]}}'>
-                        <img src='{{ b["cover"] }}' class='d-block'>
+                        <img src='{{ b["cover"] }}'>
                       </a>
                     </div>
                     {% endfor %}
