@@ -1,7 +1,7 @@
 -- Initialize the database.
 -- Drop any existing data and create empty tables.
 
-drop table if exists users, books, reviews, recently_viewed, saved_books;
+drop table if exists users, books, reviews, recently_viewed, saved_books, twitter, BN, amazon;
 
 CREATE TABLE users (
  id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,

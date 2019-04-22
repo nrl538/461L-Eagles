@@ -4,63 +4,43 @@
 <div class='jumbotron' style='padding-top: 2em;'>
 
 
-  <div class='container-fluid' id='recently-viewed-books' style='padding: 5%;'>
-    <div class='card'>
-      <h4 class='card-header'>Recently Viewed</h4>
-      <div class='card-body'>
-        <div class='row'>
-          <div class='col-md-12'>
-            <div id='recently-viewed-carousel' class='carousel slide' data-ride='carousel'>
-              <ol class='carousel-indicators'>
-                <li data-target='#recently-viewed-carousel' data-slide-to='0' class='active'>
-                {% for i in range(1, recently_viewed|length) %}
-                  <li data-target='#recently-viewed-carousel' data-slide-to='{{i}}'>
-                {% endfor %}
-              </ol>
-
-              <div class='carousel-inner'>
-                <div class='carousel-item active'>
-                  <div class='row'>
-                    {% for i in range(recently_viewed[0]|length) %}
-                    <div class='col-md-3'>
-                      <a href="/book/{{recently_viewed[0][i]['isbn']}}">
-                        <img src="{{recently_viewed[0][i]['cover']}}" alt="Book Cover" style="max-width: 100%;">
-                      </a>
-                    </div>
-                    {% endfor %}
-                  </div>
-                </div>
-                {% for n in range(1, recently_viewed|length) %}
-                <div class='carousel-item'>
-                  <div class='row'>
-                    {% for i in range(recently_viewed[n]|length) %}
-                    <div class='col-md-3'>
-                      <a href="/book/{{recently_viewed[n][i]['id']}}">
-                        <img src="{{recently_viewed[n][i]['cover']}}" alt="Book Cover" style="max-width: 100%;">
-                      </a>
-                    </div>
-                    {% endfor %}
-                  </div>
-                </div>
-                {% endfor %}
+  {% if recently_viewed|length > 0 %}
+    <div class='container-fluid' id='recently-viewed-books' style='padding: 5%;'>
+      <div class='card'>
+        <h4 class='card-header'>Recently Viewed</h4>
+        <div class='card-body'>
+          <div class='row'>
+            {% for book in recently_viewed %}
+              <div class='col-sm' style='max-width: 30%';>
+                <a href="/book/{{book['books.id']}}">
+                  <img src="{{book['cover']}}" alt="RecentlyViewed-BookCover">
+                </a>
               </div>
-
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
     </div>
-  </div>
+  {% endif %}
 
-  <div class='container-fluid' id='saved-books' style='padding: 5%;'>
-    <div class='card'>
-      <h4 class='card-header'>Saved</h4>
-      <div class='card-body'>
-        <div class='row'>
+  {% if saved_books|length > 0 %}
+    <div class='container-fluid' id='saved-books' style='padding: 5%;'>
+      <div class='card'>
+        <h4 class='card-header'>My Saved Books</h4>
+        <div class='card-body'>
+          <div class='row'>
+            {% for book in saved_books %}
+              <div class='col-sm' style='max-width: 30%';>
+                <a href="/book/{{book['books.id']}}">
+                  <img src="{{book['cover']}}" alt="RecentlyViewed-BookCover">
+                </a>
+              </div>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  {% endif %}
 
 
 </div>

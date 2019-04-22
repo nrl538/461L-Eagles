@@ -1,4 +1,4 @@
-
+import re
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for, session
 )
@@ -9,7 +9,17 @@ from flaskr.db import get_db
 
 bp = Blueprint('book', __name__)
 
-import re
+def book_is_saved(book_id):
+    if g.user and session['user_id']:
+        cursor = get_db().cursor()
+        cursor.execute("select * from saved_books where user_id = %s and book_id = %s", (session['user_id'], book_id,))
+        result = cursor.fetchall()
+        if result is not None and len(result) >= 1:
+            return True
+        else:
+            return False
+    else:
+        return False
 
 # added functionality for returning array of book
 def get_similar(id):
@@ -54,9 +64,18 @@ def get_book(isbn):
         'SELECT * from books WHERE books.id = %s;', (isbn,)
     )
     book = cursor.fetchone()
+    
+    '''
+    cursor.execute(
+        'SELECT * from reviews WHERE reviews.book_id = %s;', (isbn,)
+    )
+    audience_review = cursor.fetchone()
+    '''
+    
     for k,v in book.items():
         if type(book[k])==str:
             book[k]=re.sub("[^A-Za-z0-9\.\,\?\!\(\)\;\:\'\"\\n\ \/\=\+\-\_\*\#\%_]+", '', v)
+
     cursor.execute(
         'SELECT * FROM twitter WHERE twitter.book_id = %s;',(isbn,)
     )
@@ -108,13 +127,14 @@ def get_book(isbn):
         BN_review_sentiments.append(BN_review_sentiment)
     all_reviews['BN_review'] = BN_reviews
     sentiments['BN_review_sentiment'] = BN_review_sentiments
-    
+
     reddit_review_sentiments=[]
     for reddit_review in reddit_reviews:
         reddit_review_sentiment = TextBlob(str(reddit_review['review_content'])).sentiment
         reddit_review_sentiments.append(reddit_review_sentiment)
     all_reviews['reddit_review'] = reddit_reviews
     sentiments['reddit_review_sentiment'] = reddit_review_sentiments
-    return render_template('book/book.html', book=book, review=all_reviews, sentiments=sentiments, similar=similar)
+    
+    return render_template('book/book.html', book=book, review=all_reviews, sentiments=sentiments, similar=similar, saved=book_is_saved(book['id']))
 
 
