@@ -11,7 +11,7 @@
         <div class='card-body'>
           <div class='row'>
             {% for book in recently_viewed %}
-              <div class='col-sm' style='max-width: 30%';>
+              <div class='col-md-2' style='max-width: 30%';>
                 <a href="/book/{{book['books.id']}}">
                   <img src="{{book['cover']}}" alt="RecentlyViewed-BookCover">
                 </a>
@@ -30,7 +30,7 @@
         <div class='card-body'>
           <div class='row'>
             {% for book in saved_books %}
-              <div class='col-sm' style='max-width: 30%';>
+              <div class='col-md-2' style='max-width: 30%';>
                 <a href="/book/{{book['books.id']}}">
                   <img src="{{book['cover']}}" alt="RecentlyViewed-BookCover">
                 </a>
@@ -39,6 +39,12 @@
           </div>
         </div>
       </div>
+    </div>
+  {% endif %}
+
+  {% if saved_books|length == 0 and recently_viewed|length == 0 %}
+    <div class='container-fluid' id='no-results' style='padding: 5%;'>
+      <p> No recent activity for this user. </p>
     </div>
   {% endif %}
 

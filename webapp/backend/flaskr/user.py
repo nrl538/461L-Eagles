@@ -100,7 +100,7 @@ def get_recently_viewed_query():
             "right outer join books "\
             "on books.id = recently_viewed.book_id "\
             "where users.id = %s order by "\
-            "recently_viewed.id desc limit 10"
+            "recently_viewed.id desc limit 12"
 
     return query
 

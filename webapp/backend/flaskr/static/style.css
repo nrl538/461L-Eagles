@@ -37,3 +37,8 @@ body {
   background-color: #FFFCF9;
   font-family: 'Krub';
 }
+
+.sentiment-tool-tip {
+  height: 15px;
+  width: 15px;
+}

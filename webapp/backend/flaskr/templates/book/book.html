@@ -9,10 +9,10 @@
 
         <div class='col-2 align-middle text-center' style='margin-left: 5%; max-width: 30%;'>
 
-          <div class='card align-middle' style='margin-bottom: 3em;'>
+          <div class='card align-middle justify-content-center' style='margin-bottom: 3em;'>
             <img style="height: 460px; width: 309px;" class='img-thumbnail' src="{{ book['cover'] }}" alt="{{ book['title'] }} - Book Cover">
             <div class='card-body'>
-              <h3 class='card-title'>{{ book['title'] }}</h3>
+              <h3 class='card-title' style='max-width: 309px;'>{{ book['title'] }}</h3>
               <p style='padding-bottom: 3em;' class='card-text'>{{ book['author'] }}</p>
               {% if g.user %}
                 {% if saved %}
@@ -24,7 +24,7 @@
             </div>
           </div>
 
-          <div class='card align-middle' style=''>
+          <div class='card align-middle' style='max-width: 349px;'>
             <div class='card-body'>
               <h3 class='card-title'>Similar books</h3>
 
@@ -93,30 +93,170 @@
 
           <div class='container-fluid' id='book-critic-review' style='margin-bottom: 3%;'>
             <div class='card'>
-              <h5 class='card-header'>Critic Review</h5>
+              <h5 class='card-header'>Critic Reviews</h5>
               <div class='card-body'>
                 <p class='card-text'>
-                  <!-- Templatize after data is scraped -->
-                  I was shocked by how good this book was! I would recommend it to anyone who likes zombie stories. It was humorous as well, which is always a plus.
-                </p>
-              </div>
+                  <style>
+                    /*Overall container*/
+                    #idb_main{
+                      float:left;
+                      font-family:Arial, Helvetica, sans-serif;
+                      background-color:#fff;
+                      }
+
+                      #idb_main h1{
+                        margin:0px;   
+                        border-radius:5px;
+                        -webkit-border-radius:5px;
+                        -moz-border-radius:5px;
+                        border:solid 1px #CCCCCC;
+                        padding:5px;
+                        padding-left:20px;
+                        font-size:14px;
+                        font-weight:bold;
+                        color:#000;
+                        border-bottom-width: 2px;
+                        border-bottom-color: #666666;
+                      }
+
+                      /*Scroll Box for all the reviews*/
+                      .scroll_box{
+                        float:left;
+                        overflow:scroll;
+                        overflow-y: auto;
+                        overflow-x: hidden;
+                      }
+
+                      /*Each review  box*/
+                      .review_strip{
+                        float:left;
+                        padding:5px;
+                        width: 100%;
+                        margin-top:0px;
+                        padding-bottom: 10px;
+                        border-bottom-width: 1px;
+                        border-bottom-style: solid;
+                        border-bottom-color: #DDDDDD;
+                      }
+
+                      /*Publication name*/
+                      .review_strip h2{
+                        font-size:13px;
+                        font-weight:bold;
+                        color:#333;
+                        margin:0px;
+                        padding:0px;
+                        padding-top: 2px;
+                        padding-left: 2px;
+                        float:left; 
+                      }
+                      .review_strip h2.linked{
+                        background:url(../images/light-grey-plus-32.png) left no-repeat;
+                        background-size:12px 12px;
+                        font-size:13px;
+                        font-weight:bold;
+                        color:#333;
+                        margin:0px;
+                        padding:0px;
+                        padding-top: 2px;
+                        padding-left: 18px;
+                        float:left;    
+                      }
+
+                      /*Publication name link hover*/
+                      .review_strip h2.linked:hover{
+                        color:#e84f4f;;
+                      }
+                      a.tooltip {outline:none; } a.tooltip strong {line-height:10px;} a.tooltip:hover {text-decoration:none;} a.tooltip span { z-index:10;display:none; padding:5px 5px; margin-top:0px; margin-left:50px; line-height:10px; } a.tooltip:hover span{ display:inline; position:absolute; border:0px solid #FFF; color:#EEE; background:#000 url(../images/css-tooltip-gradient-bg.png) repeat-x 0 0; } .callout {z-index:20;position:absolute;border:0;top:-8px;left:20px;} /*CSS3 extras*/ a.tooltip span { border-radius:2px; -moz-border-radius: 2px; -webkit-border-radius: 2px; -moz-box-shadow: 0px 0px 8px 4px #666; -webkit-box-shadow: 0px 0px 8px 4px #666; box-shadow: 0px 0px 8px 4px #666; opacity: 0.8; }
+
+
+                      /*Review Date*/
+                      .review_time{
+                        float:left;
+                        margin-left:15px;
+                        font-size:12px;
+                        padding-top: 2px;
+                        color:#999999;
+                      }
+
+                      /*Review smiley or sentiment (only displays if smiley option is set to true in widget script)*/
+                      .review_sentiment{
+                        float:right;
+                        margin-right:15px;
+                        font-size:12px; 
+                      }
+
+                      /*Review snippet text*/
+                      .review_strip p{
+                        color:#333;
+                        margin:0px;
+                        padding:0px;
+                        font-size:12px;
+                        line-height:22px;
+                        padding-bottom:10px;
+                        width:90%;
+                        clear:both;
+                        text-align: justify;
+                      }
+
+                      .scroll_box h4{margin:2px;}
+                      .scroll_box a{margin:2px;font-size:12px; color:#64717A;outline:none; text-decoration:none;}
+                      .scroll_box a:hover{color:#e84f4f;}
+                      /*.biography-block {background:url(../images/dot-sep.jpg)    left top repeat-x; padding:18px 0;}*/
+
+                      .biography-thumb-wrap {float:left; margin-right:14px;margin-top:10px;}
+                      /*.biography-thumb {width:169px; height:195px; background-color:#fff; -webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px; text-align:center; padding-top:10px; margin-bottom:9px;height:auto;}*/
+                      .biography-thumb img {display: inline-block; height: 70px; left: 0px; top: 0px; width: 50px;}
+                      /*.biography-thumb span {display:none; position:absolute;margin-top:100px; z-index:100; width:149px;  font-family:"DroidSansBold"; font-size:14px; color:#fff; -webkit-border-radius:4px; -moz-border-radius:4px; }*/
+                      /*.biography-thumb span img {display:none; position:absolute; z-index:100;width:80px; height:70px; left:80px; top:100; font-family:"DroidSansBold"; font-size:14px; color:#fff; -webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px; padding-top:40px;}*/
+
+                      .biography-r {overflow:hidden;}
+                      .biography-r h3 { font-size:14px; font-weight:normal; padding: 10px 0px 5px 0px;margin:0px;}
+                      .biography-r h5 { font-size:10px; font-weight:normal; padding:  0px 0px 5px 0px;margin:0px;}
+                      .biography-r p { font-size:14px; }
+                      .biography-r a {outline:none; text-decoration:none;}
+                      .link8 {font-size:12px; color:#64717A;}
+                      .link8:hover {color:#e84f4f;}
+
+                      .smileygreen {background:url(../images/embed/smiley-cloud-green1.png);}
+                      .smileygrey {background:url(../images/embed/smiley-cloud-grey1.png);}
+
+                      .smileygreen, .smileygrey {background-size: 24px 14px; background-position: 0px 0px; background-repeat: no-repeat; padding-left: 28px;  height:15px; margin-top: 3px; font-size: 11px; }
+
+                      </style>
+
+                      <div id="idb_iframe_container">
+                      </div>
+
+                      <script type="text/javascript">
+                        var isbn = {{ book['isbn'] }}; // Replace with ISBN / EISBN / ASIN of the book
+                        var api_key = "606f342ab6dc508aa72d9332945344c9e47c7f57"; //Replace with the developer key (Submit the form to get a key)
+
+                        //Optional Settings
+                        var smiley = 'true'; // Change to false if do not want to show smiley with each review
+                        var width = 700;     // Width of the reviews iframe
+                        var height = 400;    // Height of the reviews iframe
+
+
+                        // DO NOT EDIT   
+                        (function() {
+                        var wf = document.createElement('script');
+                        var host = "idreambooks.com";  
+                        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                        '://'+ host+'/reviews_widget.js?api_key='+ api_key +'&isbn='+ isbn +
+                        '&smiley='+ smiley +'&width='+width + '&height=' + height;
+                        wf.type = 'text/javascript';
+                        wf.async = 'true';
+                        var s = document.getElementsByTagName('script')[0];
+                        s.parentNode.insertBefore(wf, s);
+                        })();
+
+                      </script>
+                  </p>
+                </div>
             </div>
           </div>
 
-          <div class='container-fluid' id='book-audience-review' style='margin-bottom: 3%;'>
-            <div class='card'>
-              <h5 class='card-header'>Audience Review</h5>
-              <div class='card-body'>
-
-                <p class='card-text'>
-                  Written by {{ review['audience_review'] }} <br>
-                  <!-- Templatize after data is scraped -->
-                  {{ review['audience_review'] }}
-                </p>
-              </div>
-            </div>
-          </div>
-          
           <div class='container-fluid' id='book-twitter-review' style='margin-bottom: 3%;'>
             <div class='card'>
               <h5 class='card-header'>
@@ -124,15 +264,39 @@
                 Tweets Mentioning This Book
               </h5>
               <div class='card-body'>
-                {% for twitter_review in review['twitter_review'] %}
-                <p class='card-text'>
-                  {{ twitter_review['review_content'] }}
-                </p>
-                {% endfor %}
+                <div class='container rounded'>
+                  <div class='row'>
+                    {% for i in range(review['twitter_review']|length) %}
+                    {% if i < 8 %}
+                    <div class='col-sm-6'>
+                      <p class='card-text'>
+                        <div class='card'>
+                          <div class='card-body'>
+                            <div style='margin-bottom: 1em;'>
+                              <span>{{ review['twitter_review'][i]['review_content'] }}</span>
+                            </div>
+
+                            <div class='card-subtitle text-muted mb-2'>
+                              <div class='subjectivity'>
+                                <span> Subjectivity: {{ '%.2f' % sentiments['twitter_review_sentiment'][i].subjectivity }} </span>
+                              </div>
+
+                              <div class='polarity'>
+                                <span>Polarity: {{ '%.2f' % sentiments['twitter_review_sentiment'][i].polarity }}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </p>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          
+
           <div class='container-fluid' id='book-amazon-review' style='margin-bottom: 3%;'>
             <div class='card'>
               <h5 class='card-header'>Amazon Review</h5>
@@ -148,22 +312,34 @@
               </div>
             </div>
           </div>
-          
+
           <div class='container-fluid' id='book-BN-review' style='margin-bottom: 3%;'>
             <div class='card'>
               <h5 class='card-header'>BN Review</h5>
               <div class='card-body'>
-                {% for BN_review in review['BN_review'] %}
+                {% for i in range(review['BN_review']|length) %}
                 <p class='card-text'>
-                  Written by {{ BN_review['review_author'] }} <br>
-                  <!-- Templatize after data is scraped -->
-                  {{ BN_review['review_content'] }}
+                  <div class='subjectivity'>
+                    <span>Subjectivity {{ '%.2f' % sentiments['BN_review_sentiment'][i].subjectivity }}</span>
+                  </div>
+
+                  <div class='polarity'>
+                    <span>Polarity {{ '%.2f' % sentiments['BN_review_sentiment'][i].polarity }}</span>
+                  </div>
+
+                  <div style='padding-bottom: 1em;'>
+                    Written by {{ review['BN_review'][i]['review_author'] }}
+                  </div>
+
+                  <div>
+                  {{ review['BN_review'][i]['review_content'] }}
+                  </div>
                 </p>
                 {% endfor %}
               </div>
             </div>
           </div>
-          
+
           <div class='container-fluid' id='book-reddit-review' style='margin-bottom: 5%;'>
             <div class='card'>
               <h5 class='card-header'>Reddit Review</h5>
@@ -178,7 +354,7 @@
               </div>
             </div>
           </div>
-        
+
           <div id='book-description' class='container-fluid' style='margin-bottom: 3%;'>
             <h3>Description</h3>
             <hr class='align-middle'>
@@ -289,6 +465,16 @@
     $(document).ready(function() {
       register_save_button();
       register_delete_button();
+
+      $('.subjectivity').each(function() {
+        var toolTipIcon = "<img src='/static/help.png' style='height: 15px; width: 15px;' class='sentiment-tool-tip' data-toggle='tooltip' data-placement='right' title='The subjectivity score measures how subjective a review is with 0 being completely objective and 1 being completely subjective. BookBrain calculates these scores based on machine learning and the word choice of the reviewer.'>";
+        $(this).append(toolTipIcon);
+      });
+
+      $('.polarity').each(function() {
+        var toolTipIcon = "<img src='/static/help.png' style='height: 15px; width: 15px;' class='sentiment-tool-tip' data-toggle='tooltip' data-place,ent='right' title='The polarity score measure how positive or negative a review is with -1 being completely negative and 1 being complete positive. BookBrain calculates these scores based on machine learning and the word choice of the reviewer.'>";
+        $(this).append(toolTipIcon);
+      });
     });
   </script>
 {% endblock %}
