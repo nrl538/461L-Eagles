@@ -148,8 +148,8 @@
                     </div>
 
                       <script type="text/javascript">
-                        //var isbn = parseInt({{ book['isbn13'] }}); // Replace with ISBN / EISBN / ASIN of the book
-                        var isbn = 9780743273565;
+                        var isbn = parseInt({{ book['isbn13'] }}); // Replace with ISBN / EISBN / ASIN of the book
+                        //var isbn = 9780743273565;
                         //console.log(isbn);
                         var api_key = "606f342ab6dc508aa72d9332945344c9e47c7f57"; //Replace with the developer key (Submit the form to get a key)
 
@@ -178,6 +178,7 @@
             </div>
           </div>
 
+          {% if review['twitter_review']|length > 0 %}
           <div class='container-fluid' id='book-twitter-review' style='margin-bottom: 3%;'>
             <div class='card'>
               <h5 class='card-header'>
@@ -221,7 +222,9 @@
               </div>
             </div>
           </div>
+          {% endif %}
 
+          {% if review['amazon_review']|length %}
           <div class='container-fluid' id='book-amazon-review' style='margin-bottom: 3%;'>
             <div class='card'>
               <h5 class='card-header'>Reviews from Amazon</h5>
@@ -262,8 +265,10 @@
               </div>
             </div>
           </div>
+          {% endif %}
 
 
+          {% if review['BN_review']|length > 0 %}
           <div class='container-fluid' id='book-BN-review' style='margin-bottom: 3%;'>
             <div class='card'>
               <h5 class='card-header'>Reviews from Barnes and Noble</h5>
@@ -305,27 +310,52 @@
               </div>
             </div>
           </div>
+          {% endif %}
 
-      </div>
-
-        
-
+          {% if review['reddit_review']|length > 0 %}
           <div class='container-fluid' id='book-reddit-review' style='margin-bottom: 5%;'>
             <div class='card'>
-              <h5 class='card-header'>Reddit Review</h5>
+              <h5 class='card-header'>Reddit Posts About This Book</h5>
               <div class='card-body'>
-                {% for reddit_review in review['reddit_review'] %}
                 <p class='card-text'>
-                  Written by {{ reddit_review['review_author'] }} <br>
-                  <!-- Templatize after data is scraped -->
-                  {{ reddit_review['review_content'] }}
-                </p>
+                {% for i in range(review['reddit_review']|length) %}
+                  {% if i < 6 %}
+                  <div class='card'>
+                    <div class='card-body rounded'>
+                      <div class='row'>
+                        <div>
+                          {{ review['reddit_review'][i]['review_content'] }}
+                        </div>
+                      </div>
+
+                      <div class='row'>
+                        <div class='col-md-3 offset-md-9 justify-content-end text-right card-subtitle text-muted mb-2'>
+                          <div>
+                            Written by {{ review['reddit_review'][i]['review_author'] }}
+                          </div>
+
+                          <div class='subjectivity'>
+                            <span>Subjectivity {{ '%.2f' % sentiments['reddit_review_sentiment'][i].subjectivity }}</span>
+                          </div>
+
+                          <div class='polarity'>
+                            <span>Polarity {{ '%.2f' % sentiments['reddit_review_sentiment'][i].polarity }}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endif %}
                 {% endfor %}
+                </p>
               </div>
             </div>
           </div>
+          {% endif %}
 
-               </div>
+      </div>
+
+    </div>
     {% else %}
       <div class='justify-content-center text-center'>
         <div style='padding: 5%;'>
@@ -404,6 +434,13 @@
         var toolTipIcon = "<img src='/static/help.png' style='height: 15px; width: 15px;' class='sentiment-tool-tip' data-toggle='tooltip' data-place,ent='right' title='The polarity score measure how positive or negative a review is with -1 being completely negative and 1 being complete positive. BookBrain calculates these scores based on machine learning and the word choice of the reviewer.'>";
         $(this).append(toolTipIcon);
       });
+
+      window.setTimeout(function() {
+        if ( !$.trim( $('#idb_iframe_container').html() ).length )
+        {
+          $('#book-critic-review').remove();
+        }
+      }, 1000);
     });
   </script>
 {% endblock %}
