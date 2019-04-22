@@ -8,6 +8,18 @@ from flaskr.db import get_db
 
 bp = Blueprint('book', __name__)
 
+def book_is_saved(book_id):
+    if g.user and session['user_id']:
+        cursor = get_db().cursor()
+        cursor.execute("select * from saved_books where user_id = %s and book_id = %s", (session['user_id'], book_id,))
+        result = cursor.fetchall()
+        if result is not None and len(result) >= 1:
+            return True
+        else:
+            return False
+    else:
+        return False
+
 # added functionality for returning array of book
 def get_similar(id):
     cursor = get_db().cursor()
@@ -53,13 +65,13 @@ def get_book(isbn):
     book = cursor.fetchone()
     '''
     cursor.execute(
-        'SELECT * from reviews WHERE reviews.id = %s;', (isbn,)
+        'SELECT * from reviews WHERE reviews.book_id = %s;', (isbn,)
     )
     audience_review = cursor.fetchone()
     '''
 
     cursor.execute(
-        'SELECT * FROM twitter WHERE twitter.id = %s;',(isbn,)
+        'SELECT * FROM twitter WHERE twitter.book_id = %s;',(isbn,)
     )
     twitter_reviews = cursor.fetchall()
     for twitter_review in twitter_reviews:
@@ -67,7 +79,7 @@ def get_book(isbn):
         twitter_review['review_content'] = twitter_review['review_content'][:id_index]
 
     cursor.execute(
-        'SELECT * FROM amazon WHERE amazon.id = %s;', (isbn,)
+        'SELECT * FROM amazon WHERE amazon.book_id = %s;', (isbn,)
     )
     amazon_reviews = cursor.fetchall()
 
@@ -76,7 +88,7 @@ def get_book(isbn):
         amazon_review['review_content'] = amazon_review['review_content'][:id_index]
 
     cursor.execute(
-        'SELECT * FROM BN WHERE BN.id = %s;', (isbn,)
+        'SELECT * FROM BN WHERE BN.book_id = %s;', (isbn,)
     )
     BN_reviews = cursor.fetchall()
     for BN_review in BN_reviews:
@@ -111,6 +123,6 @@ def get_book(isbn):
         BN_review_sentiments.append(BN_review_sentiment)
     all_reviews['BN_review'] = BN_reviews
     sentiments['BN_review_sentiment'] = BN_review_sentiments
-    return render_template('book/book.html', book=book, review=all_reviews, sentiments=sentiments, similar=similar)
+    return render_template('book/book.html', book=book, review=all_reviews, sentiments=sentiments, similar=similar, saved=book_is_saved(book['id']))
 
 

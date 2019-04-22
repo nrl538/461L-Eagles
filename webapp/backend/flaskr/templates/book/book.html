@@ -6,14 +6,22 @@
   <div id='book-metadata'>
     {% if book is not none %}
       <div class='row'>
+        <p id='book-id' style='display: none;'>{{ book['id'] }}</p>
 
         <div class='col-2 align-middle text-center' style='margin-left: 5%; max-width: 30%;'>
 
           <div class='card align-middle' style='margin-bottom: 3em;'>
-            <img style='height:500px;' class='img-thumbnail' src="{{ book['cover'] }}" alt="{{ book['title'] }} - Book Cover">
+            <img style="height: 460px; width: 309px;" class='img-thumbnail' src="{{ book['cover'] }}" alt="{{ book['title'] }} - Book Cover">
             <div class='card-body'>
               <h3 class='card-title'>{{ book['title'] }}</h3>
-              <p class='card-text'>{{ book['author'] }}</p>
+              <p style='padding-bottom: 3em;' class='card-text'>{{ book['author'] }}</p>
+              {% if g.user %}
+                {% if saved %}
+                  <button id='delete-button' type='button' class='btn btn-primary'>Removed From Saved Books</button>
+                {% else %}
+                  <button id='save-button' type="button" class='btn btn-primary'>Save</button>
+                {% endif %}
+              {% endif %}
             </div>
           </div>
 
@@ -30,29 +38,32 @@
                     <li data-target='#similarBooksCarouselIndicators' data-slide-to='3'></li>
                     <li data-target='#similarBooksCarouselIndicators' data-slide-to='4'></li>
                   </ol>
-                  <div class='carousel-inner'>
-                    <div class='carousel-item active'>
-                      <a href='/book/{{similar[0]["id"]}}'>
-                        <img src='{{ similar[0]["cover"] }}'>
-                      </a>
-                    </div>
 
-                    {% for b in similar[1:] %}
-                    <div class='carousel-item'>
-                      <a href='/book/{{b["id"]}}'>
-                        <img src='{{ b["cover"] }}'>
-                      </a>
+                  <div class='container text-center justify-content-center'>
+                    <div class='carousel-inner justify-content-center'>
+                      <div style='width: 148px; height: 220px;' class='carousel-item active'>
+                        <a href='/book/{{similar[0]["id"]}}'>
+                          <img style='width: 148px; height: 220px;' src='{{ similar[0]["cover"] }}'>
+                        </a>
+                      </div>
+
+                      {% for b in similar[1:] %}
+                      <div style='width: 148px; height: 220px;' class='justify-content-center carousel-item'>
+                        <a href='/book/{{b["id"]}}'>
+                          <img style='width: 148px; height: 220px;' src='{{ b["cover"] }}'>
+                        </a>
+                      </div>
+                      {% endfor %}
                     </div>
-                    {% endfor %}
+                    <a class="carousel-control-prev" href="#similarBooksCarouselIndicators" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#similarBooksCarouselIndicators" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
                   </div>
-                  <a class="carousel-control-prev" href="#similarBooksCarouselIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#similarBooksCarouselIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
                 </div>
               </div>
 
@@ -64,8 +75,8 @@
 
         <div class='col-xl' style='margin-left: 3%; margin-right: 5%;'>
 
-          <div class='container-fluid' id='book-rating' style='margin-bottom: 5%;'>
-            <div class='card'>
+          <div class='container-fluid' id='book-rating' style='margin-bottom: 3%;'>
+            <div class='card'> 
               <h5 class='card-header'>Rating</h5>
               <div class='card-body text-center'>
 
@@ -81,7 +92,7 @@
             </div>
           </div>
 
-          <div class='container-fluid' id='book-critic-review' style='margin-bottom: 5%;'>
+          <div class='container-fluid' id='book-critic-review' style='margin-bottom: 3%;'>
             <div class='card'>
               <h5 class='card-header'>Critic Review</h5>
               <div class='card-body'>
@@ -93,7 +104,7 @@
             </div>
           </div>
 
-          <div class='container-fluid' id='book-audience-review' style='margin-bottom: 5%;'>
+          <div class='container-fluid' id='book-audience-review' style='margin-bottom: 3%;'>
             <div class='card'>
               <h5 class='card-header'>Audience Review</h5>
               <div class='card-body'>
@@ -107,9 +118,12 @@
             </div>
           </div>
           
-          <div class='container-fluid' id='book-twitter-review' style='margin-bottom: 5%;'>
+          <div class='container-fluid' id='book-twitter-review' style='margin-bottom: 3%;'>
             <div class='card'>
-              <h5 class='card-header'>Twitter Review</h5>
+              <h5 class='card-header'>
+                <img style='height: 35px; width: auto;' src="http://socialbarrel.com/wp-content/uploads/2018/12/Twitter.png" alt="Twitter-Logo">
+                Tweets Mentioning This Book
+              </h5>
               <div class='card-body'>
                 {% for twitter_review in review['twitter_review'] %}
                 <p class='card-text'>
@@ -120,7 +134,7 @@
             </div>
           </div>
           
-          <div class='container-fluid' id='book-amazon-review' style='margin-bottom: 5%;'>
+          <div class='container-fluid' id='book-amazon-review' style='margin-bottom: 3%;'>
             <div class='card'>
               <h5 class='card-header'>Amazon Review</h5>
               <div class='card-body'>
@@ -136,7 +150,7 @@
             </div>
           </div>
           
-          <div class='container-fluid' id='book-BN-review' style='margin-bottom: 5%;'>
+          <div class='container-fluid' id='book-BN-review' style='margin-bottom: 3%;'>
             <div class='card'>
               <h5 class='card-header'>BN Review</h5>
               <div class='card-body'>
@@ -151,7 +165,7 @@
             </div>
           </div>
         
-          <div id='book-description' class='container-fluid' style='margin-bottom: 5%;'>
+          <div id='book-description' class='container-fluid' style='margin-bottom: 3%;'>
             <h3>Description</h3>
             <hr class='align-middle'>
 
@@ -165,7 +179,7 @@
             </div>
           </div>
 
-          <div id='book-details' class='container-fluid' style='margin-bottom: 5%;'>
+          <div id='book-details' class='container-fluid' style='margin-bottom: 3%;'>
             <h3>Details</h3>
             <hr class='align-middle'>
 
@@ -202,4 +216,65 @@
     {% endif %}
   </div>
 </div>
+
+<style>
+.book-thumbnail {
+  max-width: 120px;
+  max-height: 150px;
+  height: 150px;
+  width: 120px;
+}
+
+.large-book-cover {
+  height: 460px;
+  width: 309px;
+}
+</style>
+
+  {{ super() }}
+
+  <script>
+    function register_save_button() {
+      $('#save-button').mouseup( function() {
+        $.ajax({
+          url: '/profile',
+          type: 'POST',
+          dataType: 'json',
+          data: { book_id: $('#book-id').text() },
+          contentType: "application/json; charset=utf-8;"
+        });
+
+        $(this).attr('disabled', 'true');
+
+        var newButton = "<button id='delete-button' class='btn btn-primary' type='button'>Remove From Saved Books</button>";
+        $(this).parent().append(newButton);
+        $(this).css("display", "none");
+        register_delete_button();
+      });
+    }
+
+    function register_delete_button() {
+      $('#delete-button').mouseup( function() {
+        $.ajax({
+          url: '/profile',
+          type: 'POST',
+          dataType: 'json',
+          data: { book_id: $('#book-id').text(), remove: true },
+          contentType: "application/json; charset=utf-8;"
+        });
+
+        $(this).attr('disabled', 'true');
+
+        var newButton = "<button id='save-button' class='btn btn-primary' type='button'>Remove From Saved Books</button>";
+        $(this).parent().append(newButton);
+        $(this).css("display", "none");
+        register_save_button();
+      });
+    }
+
+    $(document).ready(function() {
+      register_save_button();
+      register_delete_button();
+    });
+  </script>
 {% endblock %}
