@@ -173,76 +173,63 @@
             </div>
           </div>
 
-          <div class='container-fluid'>
-            <div class='row'>
-              <div class='col-md-6'>
-
-                <div class='container-fluid' id='book-amazon-review' style='margin-bottom: 3%;'>
-                  <div class='card'>
-                    <h5 class='card-header'>Amazon Review</h5>
-                    <div class='card-body'>
-                      {% for amazon_review in review['amazon_review'] %}
-                      <p class='card-text'>
-                        Written by {{ amazon_review['review_author'] }} <br>
-                        <!-- Templatize after data is scraped -->
-                        {{ amazon_review['review_content'] }}
-                      </p>
-                      {% endfor %}
-                    </div>
-                    </div>
-                  </div>
-                </div>
-
+          <div class='container-fluid' id='book-amazon-review' style='margin-bottom: 3%;'>
+            <div class='card'>
+              <h5 class='card-header'>Amazon Review</h5>
+              <div class='card-body'>
+                {% for amazon_review in review['amazon_review'] %}
+                <p class='card-text'>
+                  Written by {{ amazon_review['review_author'] }} <br>
+                  <!-- Templatize after data is scraped -->
+                  {{ amazon_review['review_content'] }}
+                </p>
+                {% endfor %}
               </div>
-
-              <div class='col-md-6'>
-
-                <div class='container-fluid' id='book-BN-review' style='margin-bottom: 3%;'>
-                  <div class='card'>
-                    <h5 class='card-header'>Reviews from Barnes and Noble</h5>
-                    <div class='card-body'>
-                      <p class='card-text'>
-                      {% for i in range(review['BN_review']|length) %}
-                      <div class='card'>
-
-                        <div class='card-body rounded'>
-
-                          <div class='row'>
-                              <div>
-                              {{ review['BN_review'][i]['review_content'] }}
-                              </div>
-                          </div>
-
-                          <div class='row'>
-                            <div class='col-md-3 offset-md-9 justify-content-end text-right card-subtitle text-muted mb-2'>
-                              <div>
-                                Written by {{ review['BN_review'][i]['review_author'] }}
-                              </div>
-
-                              <div class='subjectivity'>
-                                <span>Subjectivity {{ '%.2f' % sentiments['BN_review_sentiment'][i].subjectivity }}</span>
-                              </div>
-
-                              <div class='polarity'>
-                                <span>Polarity {{ '%.2f' % sentiments['BN_review_sentiment'][i].polarity }}</span>
-                              </div>
-                            </div>
-                          </div>
-
-                        </div>
-
-                      </div>
-
-                      {% endfor %}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
               </div>
-
             </div>
           </div>
+
+        <div class='container-fluid' id='book-BN-review' style='margin-bottom: 3%;'>
+          <div class='card'>
+            <h5 class='card-header'>Reviews from Barnes and Noble</h5>
+            <div class='card-body'>
+              <p class='card-text'>
+              {% for i in range(review['BN_review']|length) %}
+              <div class='card'>
+
+                <div class='card-body rounded'>
+
+                  <div class='row'>
+                      <div>
+                      {{ review['BN_review'][i]['review_content'] }}
+                      </div>
+                  </div>
+
+                  <div class='row'>
+                    <div class='col-md-3 offset-md-9 justify-content-end text-right card-subtitle text-muted mb-2'>
+                      <div>
+                        Written by {{ review['BN_review'][i]['review_author'] }}
+                      </div>
+
+                      <div class='subjectivity'>
+                        <span>Subjectivity {{ '%.2f' % sentiments['BN_review_sentiment'][i].subjectivity }}</span>
+                      </div>
+
+                      <div class='polarity'>
+                        <span>Polarity {{ '%.2f' % sentiments['BN_review_sentiment'][i].polarity }}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+              {% endfor %}
+              </p>
+            </div>
+          </div>
+        </div>
 
           <div class='container-fluid' id='book-reddit-review' style='margin-bottom: 5%;'>
             <div class='card'>
