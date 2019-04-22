@@ -38,11 +38,13 @@
                     <li data-target='#similarBooksCarouselIndicators' data-slide-to='4'></li>
                   </ol>
 
-                  <div class='container text-center justify-content-center'>
-                    <div class='carousel-inner justify-content-center'>
+                  <div class='container'>
+                    <div class='offset-md-2'>
+                    <div class='center-block carousel-inner'>
+
                       <div style='width: 148px; height: 220px;' class='carousel-item active'>
                         <a href='/book/{{similar[0]["id"]}}'>
-                          <img style='width: 148px; height: 220px;' src='{{ similar[0]["cover"] }}'>
+                          <img class='img center-block' style='width: 148px; height: 220px;' src='{{ similar[0]["cover"] }}'>
                         </a>
                       </div>
 
@@ -62,6 +64,7 @@
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
                       <span class="sr-only">Next</span>
                     </a>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -93,143 +96,16 @@
 
           <div class='container-fluid' id='book-critic-review' style='margin-bottom: 3%;'>
             <div class='card'>
-              <h5 class='card-header'>Critic Reviews</h5>
+              <h5 class='card-header'>Critic Reviews From IDreamBooks</h5>
               <div class='card-body'>
                 <p class='card-text'>
-                  <style>
-                    /*Overall container*/
-                    #idb_main{
-                      float:left;
-                      font-family:Arial, Helvetica, sans-serif;
-                      background-color:#fff;
-                      }
-
-                      #idb_main h1{
-                        margin:0px;   
-                        border-radius:5px;
-                        -webkit-border-radius:5px;
-                        -moz-border-radius:5px;
-                        border:solid 1px #CCCCCC;
-                        padding:5px;
-                        padding-left:20px;
-                        font-size:14px;
-                        font-weight:bold;
-                        color:#000;
-                        border-bottom-width: 2px;
-                        border-bottom-color: #666666;
-                      }
-
-                      /*Scroll Box for all the reviews*/
-                      .scroll_box{
-                        float:left;
-                        overflow:scroll;
-                        overflow-y: auto;
-                        overflow-x: hidden;
-                      }
-
-                      /*Each review  box*/
-                      .review_strip{
-                        float:left;
-                        padding:5px;
-                        width: 100%;
-                        margin-top:0px;
-                        padding-bottom: 10px;
-                        border-bottom-width: 1px;
-                        border-bottom-style: solid;
-                        border-bottom-color: #DDDDDD;
-                      }
-
-                      /*Publication name*/
-                      .review_strip h2{
-                        font-size:13px;
-                        font-weight:bold;
-                        color:#333;
-                        margin:0px;
-                        padding:0px;
-                        padding-top: 2px;
-                        padding-left: 2px;
-                        float:left; 
-                      }
-                      .review_strip h2.linked{
-                        background:url(../images/light-grey-plus-32.png) left no-repeat;
-                        background-size:12px 12px;
-                        font-size:13px;
-                        font-weight:bold;
-                        color:#333;
-                        margin:0px;
-                        padding:0px;
-                        padding-top: 2px;
-                        padding-left: 18px;
-                        float:left;    
-                      }
-
-                      /*Publication name link hover*/
-                      .review_strip h2.linked:hover{
-                        color:#e84f4f;;
-                      }
-                      a.tooltip {outline:none; } a.tooltip strong {line-height:10px;} a.tooltip:hover {text-decoration:none;} a.tooltip span { z-index:10;display:none; padding:5px 5px; margin-top:0px; margin-left:50px; line-height:10px; } a.tooltip:hover span{ display:inline; position:absolute; border:0px solid #FFF; color:#EEE; background:#000 url(../images/css-tooltip-gradient-bg.png) repeat-x 0 0; } .callout {z-index:20;position:absolute;border:0;top:-8px;left:20px;} /*CSS3 extras*/ a.tooltip span { border-radius:2px; -moz-border-radius: 2px; -webkit-border-radius: 2px; -moz-box-shadow: 0px 0px 8px 4px #666; -webkit-box-shadow: 0px 0px 8px 4px #666; box-shadow: 0px 0px 8px 4px #666; opacity: 0.8; }
-
-
-                      /*Review Date*/
-                      .review_time{
-                        float:left;
-                        margin-left:15px;
-                        font-size:12px;
-                        padding-top: 2px;
-                        color:#999999;
-                      }
-
-                      /*Review smiley or sentiment (only displays if smiley option is set to true in widget script)*/
-                      .review_sentiment{
-                        float:right;
-                        margin-right:15px;
-                        font-size:12px; 
-                      }
-
-                      /*Review snippet text*/
-                      .review_strip p{
-                        color:#333;
-                        margin:0px;
-                        padding:0px;
-                        font-size:12px;
-                        line-height:22px;
-                        padding-bottom:10px;
-                        width:90%;
-                        clear:both;
-                        text-align: justify;
-                      }
-
-                      .scroll_box h4{margin:2px;}
-                      .scroll_box a{margin:2px;font-size:12px; color:#64717A;outline:none; text-decoration:none;}
-                      .scroll_box a:hover{color:#e84f4f;}
-                      /*.biography-block {background:url(../images/dot-sep.jpg)    left top repeat-x; padding:18px 0;}*/
-
-                      .biography-thumb-wrap {float:left; margin-right:14px;margin-top:10px;}
-                      /*.biography-thumb {width:169px; height:195px; background-color:#fff; -webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px; text-align:center; padding-top:10px; margin-bottom:9px;height:auto;}*/
-                      .biography-thumb img {display: inline-block; height: 70px; left: 0px; top: 0px; width: 50px;}
-                      /*.biography-thumb span {display:none; position:absolute;margin-top:100px; z-index:100; width:149px;  font-family:"DroidSansBold"; font-size:14px; color:#fff; -webkit-border-radius:4px; -moz-border-radius:4px; }*/
-                      /*.biography-thumb span img {display:none; position:absolute; z-index:100;width:80px; height:70px; left:80px; top:100; font-family:"DroidSansBold"; font-size:14px; color:#fff; -webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px; padding-top:40px;}*/
-
-                      .biography-r {overflow:hidden;}
-                      .biography-r h3 { font-size:14px; font-weight:normal; padding: 10px 0px 5px 0px;margin:0px;}
-                      .biography-r h5 { font-size:10px; font-weight:normal; padding:  0px 0px 5px 0px;margin:0px;}
-                      .biography-r p { font-size:14px; }
-                      .biography-r a {outline:none; text-decoration:none;}
-                      .link8 {font-size:12px; color:#64717A;}
-                      .link8:hover {color:#e84f4f;}
-
-                      .smileygreen {background:url(../images/embed/smiley-cloud-green1.png);}
-                      .smileygrey {background:url(../images/embed/smiley-cloud-grey1.png);}
-
-                      .smileygreen, .smileygrey {background-size: 24px 14px; background-position: 0px 0px; background-repeat: no-repeat; padding-left: 28px;  height:15px; margin-top: 3px; font-size: 11px; }
-
-                      </style>
-
-                      <div id="idb_iframe_container">
-                      </div>
+                    <div class='container-fluid' id="idb_iframe_container">
+                    </div>
 
                       <script type="text/javascript">
-                        var isbn = {{ book['isbn'] }}; // Replace with ISBN / EISBN / ASIN of the book
+                        //var isbn = parseInt({{ book['isbn13'] }}); // Replace with ISBN / EISBN / ASIN of the book
+                        var isbn = 9780743273565;
+                        //console.log(isbn);
                         var api_key = "606f342ab6dc508aa72d9332945344c9e47c7f57"; //Replace with the developer key (Submit the form to get a key)
 
                         //Optional Settings
@@ -297,46 +173,74 @@
             </div>
           </div>
 
-          <div class='container-fluid' id='book-amazon-review' style='margin-bottom: 3%;'>
-            <div class='card'>
-              <h5 class='card-header'>Amazon Review</h5>
-              <div class='card-body'>
-                {% for amazon_review in review['amazon_review'] %}
-                <p class='card-text'>
-                  Written by {{ amazon_review['review_author'] }} <br>
-                  <!-- Templatize after data is scraped -->
-                  {{ amazon_review['review_content'] }}
-                </p>
-                {% endfor %}
+          <div class='container-fluid'>
+            <div class='row'>
+              <div class='col-md-6'>
+
+                <div class='container-fluid' id='book-amazon-review' style='margin-bottom: 3%;'>
+                  <div class='card'>
+                    <h5 class='card-header'>Amazon Review</h5>
+                    <div class='card-body'>
+                      {% for amazon_review in review['amazon_review'] %}
+                      <p class='card-text'>
+                        Written by {{ amazon_review['review_author'] }} <br>
+                        <!-- Templatize after data is scraped -->
+                        {{ amazon_review['review_content'] }}
+                      </p>
+                      {% endfor %}
+                    </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
+
+              <div class='col-md-6'>
+
+                <div class='container-fluid' id='book-BN-review' style='margin-bottom: 3%;'>
+                  <div class='card'>
+                    <h5 class='card-header'>Reviews from Barnes and Noble</h5>
+                    <div class='card-body'>
+                      <p class='card-text'>
+                      {% for i in range(review['BN_review']|length) %}
+                      <div class='card'>
+
+                        <div class='card-body rounded'>
+
+                          <div class='row'>
+                              <div>
+                              {{ review['BN_review'][i]['review_content'] }}
+                              </div>
+                          </div>
+
+                          <div class='row'>
+                            <div class='col-md-3 offset-md-9 justify-content-end text-right card-subtitle text-muted mb-2'>
+                              <div>
+                                Written by {{ review['BN_review'][i]['review_author'] }}
+                              </div>
+
+                              <div class='subjectivity'>
+                                <span>Subjectivity {{ '%.2f' % sentiments['BN_review_sentiment'][i].subjectivity }}</span>
+                              </div>
+
+                              <div class='polarity'>
+                                <span>Polarity {{ '%.2f' % sentiments['BN_review_sentiment'][i].polarity }}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                      {% endfor %}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
               </div>
-            </div>
-          </div>
 
-          <div class='container-fluid' id='book-BN-review' style='margin-bottom: 3%;'>
-            <div class='card'>
-              <h5 class='card-header'>BN Review</h5>
-              <div class='card-body'>
-                {% for i in range(review['BN_review']|length) %}
-                <p class='card-text'>
-                  <div class='subjectivity'>
-                    <span>Subjectivity {{ '%.2f' % sentiments['BN_review_sentiment'][i].subjectivity }}</span>
-                  </div>
-
-                  <div class='polarity'>
-                    <span>Polarity {{ '%.2f' % sentiments['BN_review_sentiment'][i].polarity }}</span>
-                  </div>
-
-                  <div style='padding-bottom: 1em;'>
-                    Written by {{ review['BN_review'][i]['review_author'] }}
-                  </div>
-
-                  <div>
-                  {{ review['BN_review'][i]['review_content'] }}
-                  </div>
-                </p>
-                {% endfor %}
-              </div>
             </div>
           </div>
 
@@ -478,3 +382,135 @@
     });
   </script>
 {% endblock %}
+
+
+<style>
+                    /*Overall container*/
+                    #idb_main{
+                      float:left;
+                      font-family:Arial, Helvetica, sans-serif;
+                      background-color:#fff;
+                      }
+
+                      #idb_main h1{
+                        margin:0px;   
+                        border-radius:5px;
+                        -webkit-border-radius:5px;
+                        -moz-border-radius:5px;
+                        border:solid 1px #CCCCCC;
+                        padding:5px;
+                        padding-left:20px;
+                        font-size:14px;
+                        font-weight:bold;
+                        color:#000;
+                        border-bottom-width: 2px;
+                        border-bottom-color: #666666;
+                      }
+
+                      /*Scroll Box for all the reviews*/
+                      .scroll_box{
+                        float:left;
+                        overflow:scroll;
+                        overflow-y: auto;
+                        overflow-x: hidden;
+                      }
+
+                      /*Each review  box*/
+                      .review_strip{
+                        float:left;
+                        padding:5px;
+                        width: 100%;
+                        margin-top:0px;
+                        padding-bottom: 10px;
+                        border-bottom-width: 1px;
+                        border-bottom-style: solid;
+                        border-bottom-color: #DDDDDD;
+                      }
+
+                      /*Publication name*/
+                      .review_strip h2{
+                        font-size:13px;
+                        font-weight:bold;
+                        color:#333;
+                        margin:0px;
+                        padding:0px;
+                        padding-top: 2px;
+                        padding-left: 2px;
+                        float:left; 
+                      }
+                      .review_strip h2.linked{
+                        background:url(../images/light-grey-plus-32.png) left no-repeat;
+                        background-size:12px 12px;
+                        font-size:13px;
+                        font-weight:bold;
+                        color:#333;
+                        margin:0px;
+                        padding:0px;
+                        padding-top: 2px;
+                        padding-left: 18px;
+                        float:left;    
+                      }
+
+                      /*Publication name link hover*/
+                      .review_strip h2.linked:hover{
+                        color:#e84f4f;;
+                      }
+                      a.tooltip {outline:none; } a.tooltip strong {line-height:10px;} a.tooltip:hover {text-decoration:none;} a.tooltip span { z-index:10;display:none; padding:5px 5px; margin-top:0px; margin-left:50px; line-height:10px; } a.tooltip:hover span{ display:inline; position:absolute; border:0px solid #FFF; color:#EEE; background:#000 url(../images/css-tooltip-gradient-bg.png) repeat-x 0 0; } .callout {z-index:20;position:absolute;border:0;top:-8px;left:20px;} /*CSS3 extras*/ a.tooltip span { border-radius:2px; -moz-border-radius: 2px; -webkit-border-radius: 2px; -moz-box-shadow: 0px 0px 8px 4px #666; -webkit-box-shadow: 0px 0px 8px 4px #666; box-shadow: 0px 0px 8px 4px #666; opacity: 0.8; }
+
+
+                      /*Review Date*/
+                      .review_time{
+                        float:left;
+                        margin-left:15px;
+                        font-size:12px;
+                        padding-top: 2px;
+                        color:#999999;
+                      }
+
+                      /*Review smiley or sentiment (only displays if smiley option is set to true in widget script)*/
+                      .review_sentiment{
+                        float:right;
+                        margin-right:15px;
+                        font-size:12px; 
+                      }
+
+                      /*Review snippet text*/
+                      .review_strip p{
+                        color:#333;
+                        margin:0px;
+                        padding:0px;
+                        font-size:12px;
+                        line-height:22px;
+                        padding-bottom:10px;
+                        width:90%;
+                        clear:both;
+                        text-align: justify;
+                      }
+
+                      .scroll_box h4{margin:2px;}
+                      .scroll_box a{margin:2px;font-size:12px; color:#64717A;outline:none; text-decoration:none;}
+                      .scroll_box a:hover{color:#e84f4f;}
+                      /*.biography-block {background:url(../images/dot-sep.jpg)    left top repeat-x; padding:18px 0;}*/
+
+                      .biography-thumb-wrap {float:left; margin-right:14px;margin-top:10px;}
+                      /*.biography-thumb {width:169px; height:195px; background-color:#fff; -webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px; text-align:center; padding-top:10px; margin-bottom:9px;height:auto;}*/
+                      .biography-thumb img {display: inline-block; height: 70px; left: 0px; top: 0px; width: 50px;}
+                      /*.biography-thumb span {display:none; position:absolute;margin-top:100px; z-index:100; width:149px;  font-family:"DroidSansBold"; font-size:14px; color:#fff; -webkit-border-radius:4px; -moz-border-radius:4px; }*/
+                      /*.biography-thumb span img {display:none; position:absolute; z-index:100;width:80px; height:70px; left:80px; top:100; font-family:"DroidSansBold"; font-size:14px; color:#fff; -webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px; padding-top:40px;}*/
+
+                      .biography-r {overflow:hidden;}
+                      .biography-r h3 { font-size:14px; font-weight:normal; padding: 10px 0px 5px 0px;margin:0px;}
+                      .biography-r h5 { font-size:10px; font-weight:normal; padding:  0px 0px 5px 0px;margin:0px;}
+                      .biography-r p { font-size:14px; }
+                      .biography-r a {outline:none; text-decoration:none;}
+                      .link8 {font-size:12px; color:#64717A;}
+                      .link8:hover {color:#e84f4f;}
+
+                      .smileygreen {background:url(../images/embed/smiley-cloud-green1.png);}
+                      .smileygrey {background:url(../images/embed/smiley-cloud-grey1.png);}
+
+                      .smileygreen, .smileygrey {background-size: 24px 14px; background-position: 0px 0px; background-repeat: no-repeat; padding-left: 28px;  height:15px; margin-top: 3px; font-size: 11px; }
+
+</style>
+
+
