@@ -180,47 +180,52 @@
 
           {% if review['twitter_review']|length > 0 %}
           <div class='container-fluid' id='book-twitter-review' style='margin-bottom: 3%;'>
+
             <div class='card'>
+
               <h5 class='card-header'>
                 <img style='height: 35px; width: auto; margin-right: 0.5em;' src="/static/twitter-logo.png" alt="Twitter-Logo">
                 Tweets Mentioning This Book
               </h5>
+
               <div class='card-body'>
                 <div class='container rounded'>
                   <div class='row'>
                     {% for i in range(review['twitter_review']|length) %}
-                    {% if i < 8 %}
-                    <div class='col-sm-6'>
-                      <div style='height: 100%; width: 100%;'
-                        <p class='card-text'>
-                          <div class='card' style='height: 100%; width: 100%;'>
-                            <div class='card-body rounded'>
+                      {% if i < 8 %}
+                      <div class='col-sm-6'>
+                        <div style='height: 100%; width: 100%;'>
+                          <p class='card-text'>
+                            <div class='card' style='height: 100%; width: 100%;'>
+                              <div class='card-body rounded'>
 
-                              <div style='margin-bottom: 1em;'>
-                                <span>{{ review['twitter_review'][i]['review_content'] }}</span>
-                              </div>
-
-                              <div class='card-subtitle text-muted mb-2'>
-                                <div class='subjectivity'>
-                                  <span>Subjectivity: {{ '%.2f' % sentiments['twitter_review_sentiment'][i].subjectivity }} </span>
+                                <div style='margin-bottom: 1em;'>
+                                  <span>{{ review['twitter_review'][i]['review_content'] }}</span>
                                 </div>
 
-                                <div class='polarity'>
-                                  <span>Polarity: {{ '%.2f' % sentiments['twitter_review_sentiment'][i].polarity }}</span>
-                                </div>
-                              </div>
+                                <div class='card-subtitle text-muted mb-2'>
+                                  <div class='subjectivity'>
+                                    <span>Subjectivity: {{ '%.2f' % sentiments['twitter_review_sentiment'][i].subjectivity }} </span>
+                                  </div>
 
+                                  <div class='polarity'>
+                                    <span>Polarity: {{ '%.2f' % sentiments['twitter_review_sentiment'][i].polarity }}</span>
+                                  </div>
+                                </div>
+
+                              </div>
                             </div>
-                          </div>
-                        </p>
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    {% endif %}
+                      {% endif %}
                     {% endfor %}
                   </div>
                 </div>
               </div>
+
             </div>
+
           </div>
           {% endif %}
 
