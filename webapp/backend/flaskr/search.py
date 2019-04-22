@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import functools
 import math
+import re
 try:
     from urllib import quote, unquote
 except:
@@ -117,7 +118,10 @@ def search():
         else:
             books=books_by_integrate
     search_param=quote(search_param)
-
+    for book in books:
+        for k,v in book.items():
+            if isinstance(book[k], str):
+                book[k]=re.sub("[^A-Za-z0-9\.\,\?\!\(\)\;\:\'\"\\n\ \/\=\+\-\_\*\#\%_]+", '', v)
     return render_template('book/results.html',total=total,books=books,page=page,search_param=search_param,search_type=search_type)
 
 

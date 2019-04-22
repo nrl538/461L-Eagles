@@ -72,9 +72,8 @@ def get_book(isbn):
     '''
     
     for k,v in book.items():
-        if type(book[k])==str:
+        if isinstance(book[k], str):
             book[k]=re.sub("[^A-Za-z0-9\.\,\?\!\(\)\;\:\'\"\\n\ \/\=\+\-\_\*\#\%_]+", '', v)
-
     cursor.execute(
         'SELECT * FROM twitter WHERE twitter.book_id = %s;',(isbn,)
     )
