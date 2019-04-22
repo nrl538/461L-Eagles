@@ -7,7 +7,7 @@
       <div class='row'>
         <p id='book-id' style='display: none;'>{{ book['id'] }}</p>
 
-        <div class='col-2 align-middle text-center' style='margin-left: 5%; max-width: 30%;'>
+        <div class='col-2 align-middle text-center' style='margin-left: 5%; max-width: 349px;'>
 
           <div class='card align-middle justify-content-center' style='margin-bottom: 3em;'>
             <img style="height: 460px; width: 309px;" class='img-thumbnail' src="{{ book['cover'] }}" alt="{{ book['title'] }} - Book Cover">
@@ -24,7 +24,7 @@
             </div>
           </div>
 
-          <div class='card align-middle' style='max-width: 349px;'>
+          <div class='card align-middle' style='max-width: 349px; margin-bottom: 2em;'>
             <div class='card-body'>
               <h3 class='card-title'>Similar books</h3>
 
@@ -71,6 +71,51 @@
 
             </div>
           </div>
+
+          <div id='book-description' class='container-fluid' style='margin-bottom: 2em; width: 100%;'>
+            <h5 class='card-header'>
+              Description
+            </h5>
+
+            <div class='card'>
+
+              <div class='card-body'>
+
+                <p class='card-text'>
+                  {{ book['description'] }}
+                </p>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div id='book-details' class='container-fluid' style='margin-bottom: 2em; width: 100%;'>
+            <h5 class='card-header'>
+              Misc. Details
+            </h5>
+            <div class='card'>
+              <div class='card-body'>
+                <p class='card-text'>
+                  {{ book['details'] }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div id='book-purchase-links' class='container-fluid' style='margin-bottom: 2em;'>
+            <h5 class='card-header'>
+              Link to Purchase
+            </h5>
+            <div class='card'>
+              <div class='card-body'>
+                <a href="{{ book['purchase_link'] }}">
+                  <img style='max-width: 100%; height: auto;' src='/static/amazon-purchase.jpg' alt='Buy it on Amazon!'>
+                </a>
+              </div>
+            </div>
+          </div>
+
 
 
         </div>
@@ -246,48 +291,7 @@
             </div>
           </div>
 
-          <div id='book-description' class='container-fluid' style='margin-bottom: 3%;'>
-            <h3>Description</h3>
-            <hr class='align-middle'>
-
-            <div class='card'>
-              <div class='card-body'>
-                <p class='card-text'>
-                  <!-- Templatize after data is scraped -->
-                  {{ book['description'] }}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div id='book-details' class='container-fluid' style='margin-bottom: 3%;'>
-            <h3>Details</h3>
-            <hr class='align-middle'>
-
-            <div class='card'>
-              <div class='card-body'>
-                <p class='card-text'>
-                  <!-- Templatize after data is scraped -->
-                  {{ book['details'] }}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div id='book-purchase-links' class='container-fluid'>
-            <h3>Links to purchase</h3>
-            <hr class='align-middle'>
-            <div class='card'>
-              <div class='card-body'>
-                <!-- Templatize after data is scraped -->
-		<!--<a class="btn btn-outline-secondary" href="{{ book['purchase_link'] }}" style="background-color:#B1EDE8">Buy</a>-->
-		<a href="{{ book['purchase_link'] }}">
-		  <img style='max-width: 20%; height: auto;' src='/static/amazon-purchase.jpg' alt='Buy it on Amazon!'>
-		</a>
-              </div>
-            </div>
-          </div>
-      </div>
+               </div>
     {% else %}
       <div class='justify-content-center text-center'>
         <div style='padding: 5%;'>
