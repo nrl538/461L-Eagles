@@ -150,6 +150,10 @@ def get_titles(cur, search_param):
     books_by_title = cur.fetchall()
     titles=[]
     for book_title in books_by_title:
+        for k,v in book_title.items():
+            if isinstance(book_title[k], str):
+                book_title[k]=re.sub("[^A-Za-z0-9\.\,\?\!\(\)\;\:\'\"\\n\ \/\=\+\-\_\*\#\%_]+", '', v)
+
         book = book_title['TITLE']
         if book != 'title':
             titles.append(book)
@@ -163,6 +167,10 @@ def get_authors(cur, search_param):
     books_by_author = cur.fetchall()
     authors = []
     for book_author in books_by_author:
+        for k,v in book_author.items():
+            if isinstance(book_author[k], str):
+                book_author[k]=re.sub("[^A-Za-z0-9\.\,\?\!\(\)\;\:\'\"\\n\ \/\=\+\-\_\*\#\%_]+", '', v)
+
         author = book_author['AUTHOR']
         if author != 'author':
             authors.append(author)
@@ -175,6 +183,10 @@ def get_isbns(cur, search_param):
     books_by_isbn = cur.fetchall()
     isbns = []
     for book_isbn in books_by_isbn:
+        for k,v in book_isbn.items():
+            if isinstance(book_isbn[k], str):
+                book_isbn[k]=re.sub("[^A-Za-z0-9\.\,\?\!\(\)\;\:\'\"\\n\ \/\=\+\-\_\*\#\%_]+", '', v)
+
         isbn = book_isbn['ISBN']
         if isbn != 'isbn':
             isbns.append(isbn)
