@@ -182,7 +182,7 @@
           <div class='container-fluid' id='book-twitter-review' style='margin-bottom: 3%;'>
             <div class='card'>
               <h5 class='card-header'>
-                <img style='height: 35px; width: auto;' src="http://socialbarrel.com/wp-content/uploads/2018/12/Twitter.png" alt="Twitter-Logo">
+                <img style='height: 35px; width: auto; margin-right: 0.5em;' src="/static/twitter-logo.png" alt="Twitter-Logo">
                 Tweets Mentioning This Book
               </h5>
               <div class='card-body'>
@@ -227,7 +227,10 @@
           {% if review['amazon_review']|length %}
           <div class='container-fluid' id='book-amazon-review' style='margin-bottom: 3%;'>
             <div class='card'>
-              <h5 class='card-header'>Reviews from Amazon</h5>
+              <h5 class='card-header'>
+                <img style='height: 35px; width: auto; margin-right: 0.5em;' src="/static/amazon-purcase.jpg" alt="Amazon-Logo">
+                Reviews from Amazon
+              </h5>
               <div class='card-body'>
                 <p class='card-text'>
                 {% for i in range(review['amazon_review']|length) %}
@@ -271,7 +274,10 @@
           {% if review['BN_review']|length > 0 %}
           <div class='container-fluid' id='book-BN-review' style='margin-bottom: 3%;'>
             <div class='card'>
-              <h5 class='card-header'>Reviews from Barnes and Noble</h5>
+              <h5 class='card-header'>
+                <img style='height: 35px; width: auto; margin-right: 0.5em;' src="/static/barnes-and-noble-logo.jpg" alt="BN-Logo">
+                Reviews from Barnes and Noble
+              </h5>
               <div class='card-body'>
                 <p class='card-text'>
                 {% for i in range(review['BN_review']|length) %}
@@ -315,7 +321,11 @@
           {% if review['reddit_review']|length > 0 %}
           <div class='container-fluid' id='book-reddit-review' style='margin-bottom: 5%;'>
             <div class='card'>
-              <h5 class='card-header'>Reddit Posts About This Book</h5>
+              <h5 class='card-header'>
+                <img style='height: 35px; width: auto; margin-right: 0.5em;' src="/static/reddit-logo.png" alt="Reddit-Logo">
+
+                Reddit Posts About This Book
+              </h5>
               <div class='card-body'>
                 <p class='card-text'>
                 {% for i in range(review['reddit_review']|length) %}
