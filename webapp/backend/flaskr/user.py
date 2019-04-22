@@ -92,9 +92,7 @@ def save_book(book_id):
         return False
 
 def get_recently_viewed_query():
-    query = "select distinct(books.id), books.cover, "\
-            "recently_viewed.user_id, users.id, "\
-            "recently_viewed.book_id, recently_viewed.id from users "\
+    query = "select * from users "\
             "left outer join recently_viewed "\
             "on users.id = recently_viewed.user_id "\
             "right outer join books "\
