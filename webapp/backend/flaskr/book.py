@@ -19,8 +19,7 @@ def book_is_saved(book_id):
         else:
             return False
     else:
-        return False
-
+        return False 
 # added functionality for returning array of book
 def get_similar(id):
     cursor = get_db().cursor()
