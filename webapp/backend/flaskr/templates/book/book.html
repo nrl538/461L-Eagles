@@ -2,7 +2,6 @@
 
 {% block content %}
 <div class="jumbotron" style="padding-top:3em;">
-
   <div id='book-metadata'>
     {% if book is not none %}
       <div class='row'>
@@ -159,6 +158,21 @@
                   Written by {{ BN_review['review_author'] }} <br>
                   <!-- Templatize after data is scraped -->
                   {{ BN_review['review_content'] }}
+                </p>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          
+          <div class='container-fluid' id='book-reddit-review' style='margin-bottom: 5%;'>
+            <div class='card'>
+              <h5 class='card-header'>Reddit Review</h5>
+              <div class='card-body'>
+                {% for reddit_review in review['reddit_review'] %}
+                <p class='card-text'>
+                  Written by {{ reddit_review['review_author'] }} <br>
+                  <!-- Templatize after data is scraped -->
+                  {{ reddit_review['review_content'] }}
                 </p>
                 {% endfor %}
               </div>

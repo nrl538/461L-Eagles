@@ -1,3 +1,4 @@
+import re
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for, session
 )
@@ -63,37 +64,40 @@ def get_book(isbn):
         'SELECT * from books WHERE books.id = %s;', (isbn,)
     )
     book = cursor.fetchone()
+    
     '''
     cursor.execute(
         'SELECT * from reviews WHERE reviews.book_id = %s;', (isbn,)
     )
     audience_review = cursor.fetchone()
     '''
+    
+    for k,v in book.items():
+        if type(book[k])==str:
+            book[k]=re.sub("[^A-Za-z0-9\.\,\?\!\(\)\;\:\'\"\\n\ \/\=\+\-\_\*\#\%_]+", '', v)
 
     cursor.execute(
         'SELECT * FROM twitter WHERE twitter.book_id = %s;',(isbn,)
     )
     twitter_reviews = cursor.fetchall()
-    for twitter_review in twitter_reviews:
-        id_index = twitter_review['review_content'].find(str(isbn))
-        twitter_review['review_content'] = twitter_review['review_content'][:id_index]
-
+    
     cursor.execute(
         'SELECT * FROM amazon WHERE amazon.book_id = %s;', (isbn,)
     )
     amazon_reviews = cursor.fetchall()
-
-    for amazon_review in amazon_reviews:
-        id_index = amazon_review['review_content'].find(str(isbn))
-        amazon_review['review_content'] = amazon_review['review_content'][:id_index]
+    
 
     cursor.execute(
         'SELECT * FROM BN WHERE BN.book_id = %s;', (isbn,)
     )
     BN_reviews = cursor.fetchall()
-    for BN_review in BN_reviews:
-        id_index = BN_review['review_content'].find(str(isbn))
-        BN_review['review_content'] = BN_review['review_content'][:id_index]
+    
+        
+    cursor.execute(
+        'SELECT * FROM reddit WHERE reddit.book_id = %s;', (isbn,)
+    )
+    reddit_reviews = cursor.fetchall()
+   
     #initialize a dict to store all review sentiments
     #The key is the kind of review it is, and the value is a size 2 tuple representing the polarity and subjectivity
     all_reviews = {}
@@ -123,6 +127,14 @@ def get_book(isbn):
         BN_review_sentiments.append(BN_review_sentiment)
     all_reviews['BN_review'] = BN_reviews
     sentiments['BN_review_sentiment'] = BN_review_sentiments
+
+    reddit_review_sentiments=[]
+    for reddit_review in reddit_reviews:
+        reddit_review_sentiment = TextBlob(str(reddit_review['review_content'])).sentiment
+        reddit_review_sentiments.append(reddit_review_sentiment)
+    all_reviews['reddit_review'] = reddit_reviews
+    sentiments['reddit_review_sentiment'] = reddit_review_sentiments
+    
     return render_template('book/book.html', book=book, review=all_reviews, sentiments=sentiments, similar=similar, saved=book_is_saved(book['id']))
 
 

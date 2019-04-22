@@ -5,8 +5,9 @@ Created on Wed Apr 17 17:17:15 2019
 @author: Doly
 """
 import pandas as pd
+import csv
 import re
-dataframe=pd.read_csv('C:\\Users\\Doly\\Desktop/RedditResults.csv')
+dataframe=pd.read_csv('C:\\Users\\Doly\\Desktop/bookdata.csv')
 
 df=dataframe.values.tolist()
 for i in range(len(df)):
@@ -19,4 +20,4 @@ for i in range(len(df)):
         if type(df[i][j])==str:
             df[i][j]=re.sub("[^A-Za-z0-9\.\,\?\!\(\)\;\:\'\"\\n\ \/\=\+\-\_\*\#\%_]+", '', df[i][j])
 writerCSV=pd.DataFrame(data=df)   
-writerCSV.to_csv('C:\\Users\\Doly\\Desktop/fixedReddit.csv',encoding='utf-8')    
+writerCSV.to_csv('C:\\Users\\Doly\\Desktop/fixedbookdata.csv',encoding='utf-8')    

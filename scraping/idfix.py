@@ -14,7 +14,7 @@ for index, row in bookdata.iterrows():
     temp = row['title'].strip()
     df = books[books['title'].str.strip()==temp]
     try:
-        book_ids.append(df.index[0]+1)
+        book_ids.append(df.book_id.tolist()[0])
     except:
         print(row['title'], index)
         break
