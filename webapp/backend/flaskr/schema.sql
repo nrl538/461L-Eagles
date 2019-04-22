@@ -19,15 +19,11 @@ CREATE TABLE users (
 
 CREATE TABLE books (
  id INTEGER not null auto_increment PRIMARY KEY,
- title TEXT NOT NULL,
- author TEXT NOT NULL,
  isbn TEXT NOT NULL,
- cover TEXT NOT NULL,
- description TEXT NOT NULL,
- average_review FLOAT NOT NULL,
- purchase_link TEXT NOT NULL,
- date_published TEXT,
  isbn13 TEXT NOT NULL,
+ date_published TEXT,
+ title TEXT NOT NULL,
+ average_review FLOAT NOT NULL,
  ratings_count FLOAT NOT NULL,
  work_ratings_count FLOAT NOT NULL,
  work_text_reviews_count FLOAT NOT NULL,
@@ -36,7 +32,11 @@ CREATE TABLE books (
  ratings_3 FLOAT NOT NULL,
  ratings_4 FLOAT NOT NULL,
  ratings_5 FLOAT NOT NULL,
- details TEXT NOT NULL
+ cover TEXT NOT NULL,
+ author TEXT NOT NULL,
+ details TEXT NOT NULL,
+ description TEXT NOT NULL,
+ purchase_link TEXT NOT NULL
 );
 
 CREATE TABLE reviews (

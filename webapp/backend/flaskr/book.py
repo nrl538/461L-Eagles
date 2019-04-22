@@ -1,3 +1,4 @@
+
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for, session
 )
@@ -7,6 +8,8 @@ from flaskr.auth import login_required
 from flaskr.db import get_db
 
 bp = Blueprint('book', __name__)
+
+import re
 
 # added functionality for returning array of book
 def get_similar(id):
@@ -51,7 +54,9 @@ def get_book(isbn):
         'SELECT * from books WHERE books.id = %s;', (isbn,)
     )
     book = cursor.fetchone()
-
+    for k,v in book.items():
+        if type(book[k])==str:
+            book[k]=re.sub("[^A-Za-z0-9\.\,\?\!\(\)\;\:\'\"\\n\ \/\=\+\-\_\*\#\%_]+", '', v)
     cursor.execute(
         'SELECT * FROM twitter WHERE twitter.book_id = %s;',(isbn,)
     )
@@ -61,14 +66,13 @@ def get_book(isbn):
         'SELECT * FROM amazon WHERE amazon.book_id = %s;', (isbn,)
     )
     amazon_reviews = cursor.fetchall()
-
     
 
     cursor.execute(
         'SELECT * FROM BN WHERE BN.book_id = %s;', (isbn,)
     )
     BN_reviews = cursor.fetchall()
-   
+    
         
     cursor.execute(
         'SELECT * FROM reddit WHERE reddit.book_id = %s;', (isbn,)
