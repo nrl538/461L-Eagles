@@ -20,5 +20,5 @@ def show():
 # output of `git shortlog -s -n`
 # contributed_commits = re.findall(b'.*?(\d{1,3})\s(\w*?)\s', result)
 def get_commits():
-    result = subprocess.run(['git', 'shortlog', '-s', '-n'], stdout=subprocess.PIPE).stdout
+    result = subprocess.check_output(['git', 'shortlog', '-s', '-n'], stdout=subprocess.PIPE).stdout
     return result

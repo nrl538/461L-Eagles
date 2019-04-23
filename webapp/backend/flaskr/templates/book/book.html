@@ -7,13 +7,13 @@
       <div class='row'>
         <p id='book-id' style='display: none;'>{{ book['id'] }}</p>
 
-        <div class='col-2 align-middle text-center' style='margin-left: 5%; max-width: 30%;'>
+        <div class='col-2 align-middle text-center' style='margin-left: 5%; max-width: 349px;'>
 
           <div class='card align-middle justify-content-center' style='margin-bottom: 3em;'>
             <img style="height: 460px; width: 309px;" class='img-thumbnail' src="{{ book['cover'] }}" alt="{{ book['title'] }} - Book Cover">
             <div class='card-body'>
               <h3 class='card-title' style='max-width: 309px;'>{{ book['title'] }}</h3>
-              <p style='padding-bottom: 3em;' class='card-text'>{{ book['author'] }}</p>
+              <p style='padding-bottom: 1em;' class='card-text'>{{ book['author'] }}</p>
               {% if g.user %}
                 {% if saved %}
                   <button id='delete-button' type='button' class='btn btn-primary'>Removed From Saved Books</button>
@@ -24,7 +24,7 @@
             </div>
           </div>
 
-          <div class='card align-middle' style='max-width: 349px;'>
+          <div class='card align-middle' style='max-width: 349px; margin-bottom: 2em;'>
             <div class='card-body'>
               <h3 class='card-title'>Similar books</h3>
 
@@ -38,11 +38,13 @@
                     <li data-target='#similarBooksCarouselIndicators' data-slide-to='4'></li>
                   </ol>
 
-                  <div class='container text-center justify-content-center'>
-                    <div class='carousel-inner justify-content-center'>
+                  <div class='container'>
+                    <div class='offset-md-2'>
+                    <div class='center-block carousel-inner'>
+
                       <div style='width: 148px; height: 220px;' class='carousel-item active'>
                         <a href='/book/{{similar[0]["id"]}}'>
-                          <img style='width: 148px; height: 220px;' src='{{ similar[0]["cover"] }}'>
+                          <img class='img center-block' style='width: 148px; height: 220px;' src='{{ similar[0]["cover"] }}'>
                         </a>
                       </div>
 
@@ -63,11 +65,57 @@
                       <span class="sr-only">Next</span>
                     </a>
                   </div>
+                  </div>
                 </div>
               </div>
 
             </div>
           </div>
+
+          <div id='book-description' class='container-fluid' style='margin-bottom: 2em; width: 100%;'>
+            <h5 class='card-header'>
+              Description
+            </h5>
+
+            <div class='card'>
+
+              <div class='card-body'>
+
+                <p class='card-text'>
+                  {{ book['description'] }}
+                </p>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div id='book-details' class='container-fluid' style='margin-bottom: 2em; width: 100%;'>
+            <h5 class='card-header'>
+              Misc. Details
+            </h5>
+            <div class='card'>
+              <div class='card-body'>
+                <p class='card-text'>
+                  {{ book['details'] }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div id='book-purchase-links' class='container-fluid' style='margin-bottom: 2em;'>
+            <h5 class='card-header'>
+              Link to Purchase
+            </h5>
+            <div class='card'>
+              <div class='card-body'>
+                <a href="{{ book['purchase_link'] }}">
+                  <img style='max-width: 100%; height: auto;' src='/static/amazon-purchase.jpg' alt='Buy it on Amazon!'>
+                </a>
+              </div>
+            </div>
+          </div>
+
 
 
         </div>
@@ -93,10 +141,327 @@
 
           <div class='container-fluid' id='book-critic-review' style='margin-bottom: 3%;'>
             <div class='card'>
-              <h5 class='card-header'>Critic Reviews</h5>
+              <h5 class='card-header'>Critic Reviews From IDreamBooks</h5>
               <div class='card-body'>
                 <p class='card-text'>
-                  <style>
+                    <div class='container-fluid' id="idb_iframe_container">
+                    </div>
+
+                      <script type="text/javascript">
+                        var isbn = parseInt({{ book['isbn13'] }}); // Replace with ISBN / EISBN / ASIN of the book
+                        //var isbn = 9780743273565;
+                        //console.log(isbn);
+                        var api_key = "606f342ab6dc508aa72d9332945344c9e47c7f57"; //Replace with the developer key (Submit the form to get a key)
+
+                        //Optional Settings
+                        var smiley = 'true'; // Change to false if do not want to show smiley with each review
+                        var width = 700;     // Width of the reviews iframe
+                        var height = 400;    // Height of the reviews iframe
+
+
+                        // DO NOT EDIT   
+                        (function() {
+                        var wf = document.createElement('script');
+                        var host = "idreambooks.com";  
+                        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                        '://'+ host+'/reviews_widget.js?api_key='+ api_key +'&isbn='+ isbn +
+                        '&smiley='+ smiley +'&width='+width + '&height=' + height;
+                        wf.type = 'text/javascript';
+                        wf.async = 'true';
+                        var s = document.getElementsByTagName('script')[0];
+                        s.parentNode.insertBefore(wf, s);
+                        })();
+
+                      </script>
+                  </p>
+                </div>
+            </div>
+          </div>
+
+          {% if review['twitter_review']|length > 0 %}
+          <div class='container-fluid' id='book-twitter-review' style='margin-bottom: 3%;'>
+
+            <div class='card'>
+
+              <h5 class='card-header'>
+                <img style='height: 35px; width: auto; margin-right: 0.5em;' src="/static/twitter-logo.png" alt="Twitter-Logo">
+                Tweets Mentioning This Book
+              </h5>
+
+              <div class='card-body'>
+                <div class='container rounded'>
+                  <div class='row'>
+                    {% for i in range(review['twitter_review']|length) %}
+                      {% if i < 8 %}
+                      <div class='col-sm-6'>
+                        <div style='height: 100%; width: 100%;'>
+                          <p class='card-text'>
+                            <div class='card' style='height: 100%; width: 100%;'>
+                              <div class='card-body rounded'>
+
+                                <div style='margin-bottom: 1em;'>
+                                  <span>{{ review['twitter_review'][i]['review_content'] }}</span>
+                                </div>
+
+                                <div class='card-subtitle text-muted mb-2'>
+                                  <div class='subjectivity'>
+                                    <span>Subjectivity: {{ '%.2f' % sentiments['twitter_review_sentiment'][i].subjectivity }} </span>
+                                  </div>
+
+                                  <div class='polarity'>
+                                    <span>Polarity: {{ '%.2f' % sentiments['twitter_review_sentiment'][i].polarity }}</span>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </p>
+                        </div>
+                      </div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+          {% endif %}
+
+          {% if review['amazon_review']|length %}
+          <div class='container-fluid' id='book-amazon-review' style='margin-bottom: 3%;'>
+            <div class='card'>
+              <h5 class='card-header'>
+                <img style='height: 35px; width: auto; margin-right: 0.5em;' src="/static/amazon-purchase.jpg" alt="Amazon-Logo">
+                Reviews from Amazon
+              </h5>
+              <div class='card-body'>
+                <p class='card-text'>
+                {% for i in range(review['amazon_review']|length) %}
+                <div class='card'>
+                  <div class='card-body rounded'>
+                    <div class='row'>
+                      <div>
+                        {{ review['amazon_review'][i]['review_content']}}
+                      </div>
+                    </div>
+
+                    <div class='row'>
+                      <div class='col-md-3 offset-md-9 justify-content-end text-right card-subtitle text-muted mb-2'>
+                        <div>
+                          Written by {{ review['amazon_review'][i]['review_author'] }}
+                        </div>
+
+                        <div class='subjectivity'>
+                          <span>
+                            Subjectivity {{ '%.2f' % sentiments['amazon_review_sentiment'][i].subjectivity }}
+                          </span>
+                        </div>
+
+                        <div class='polarity'>
+                          <span>
+                            Polarity {{ '%.2f' % sentiments['amazon_review_sentiment'][i].polarity }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+
+          {% if review['BN_review']|length > 0 %}
+          <div class='container-fluid' id='book-BN-review' style='margin-bottom: 3%;'>
+            <div class='card'>
+              <h5 class='card-header'>
+                <img style='height: 35px; width: auto; margin-right: 0.5em;' src="/static/barnes-and-noble-logo.jpg" alt="BN-Logo">
+                Reviews from Barnes and Noble
+              </h5>
+              <div class='card-body'>
+                <p class='card-text'>
+                {% for i in range(review['BN_review']|length) %}
+                <div class='card'>
+
+                  <div class='card-body rounded'>
+
+                    <div class='row'>
+                        <div>
+                        {{ review['BN_review'][i]['review_content'] }}
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                      <div class='col-md-3 offset-md-9 justify-content-end text-right card-subtitle text-muted mb-2'>
+                        <div>
+                          Written by {{ review['BN_review'][i]['review_author'] }}
+                        </div>
+
+                        <div class='subjectivity'>
+                          <span>Subjectivity {{ '%.2f' % sentiments['BN_review_sentiment'][i].subjectivity }}</span>
+                        </div>
+
+                        <div class='polarity'>
+                          <span>Polarity {{ '%.2f' % sentiments['BN_review_sentiment'][i].polarity }}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                {% endfor %}
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if review['reddit_review']|length > 0 %}
+          <div class='container-fluid' id='book-reddit-review' style='margin-bottom: 5%;'>
+            <div class='card'>
+              <h5 class='card-header'>
+                <img style='height: 35px; width: auto; margin-right: 0.5em;' src="/static/reddit-logo.png" alt="Reddit-Logo">
+
+                Reddit Posts About This Book
+              </h5>
+              <div class='card-body'>
+                <p class='card-text'>
+                {% for i in range(review['reddit_review']|length) %}
+                  {% if i < 6 %}
+                  <div class='card'>
+                    <div class='card-body rounded'>
+                      <div class='row'>
+                        <div>
+                          {{ review['reddit_review'][i]['review_content'] }}
+                        </div>
+                      </div>
+
+                      <div class='row'>
+                        <div class='col-md-3 offset-md-9 justify-content-end text-right card-subtitle text-muted mb-2'>
+                          <div>
+                            Written by {{ review['reddit_review'][i]['review_author'] }}
+                          </div>
+
+                          <div class='subjectivity'>
+                            <span>Subjectivity {{ '%.2f' % sentiments['reddit_review_sentiment'][i].subjectivity }}</span>
+                          </div>
+
+                          <div class='polarity'>
+                            <span>Polarity {{ '%.2f' % sentiments['reddit_review_sentiment'][i].polarity }}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endif %}
+                {% endfor %}
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+      </div>
+
+    </div>
+    {% else %}
+      <div class='justify-content-center text-center'>
+        <div style='padding: 5%;'>
+          <p> Sorry, but BookBrain is still undergoing development, and we do not currently have this book listed. </p>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+.book-thumbnail {
+  max-width: 120px;
+  max-height: 150px;
+  height: 150px;
+  width: 120px;
+}
+
+.large-book-cover {
+  height: 460px;
+  width: 309px;
+}
+</style>
+
+  {{ super() }}
+
+  <script>
+    function register_save_button() {
+      $('#save-button').mouseup( function() {
+        $.ajax({
+          url: '/profile',
+          type: 'POST',
+          dataType: 'json',
+          data: { book_id: $('#book-id').text() },
+          contentType: "application/json; charset=utf-8;"
+        });
+
+        $(this).attr('disabled', 'true');
+
+        var newButton = "<button id='delete-button' class='btn btn-primary' type='button'>Remove From Saved Books</button>";
+        $(this).parent().append(newButton);
+        $(this).css("display", "none");
+        register_delete_button();
+      });
+    }
+
+    function register_delete_button() {
+      $('#delete-button').mouseup( function() {
+        $.ajax({
+          url: '/profile',
+          type: 'POST',
+          dataType: 'json',
+          data: { book_id: $('#book-id').text(), remove: true },
+          contentType: "application/json; charset=utf-8;"
+        });
+
+        $(this).attr('disabled', 'true');
+
+        var newButton = "<button id='save-button' class='btn btn-primary' type='button'>Remove From Saved Books</button>";
+        $(this).parent().append(newButton);
+        $(this).css("display", "none");
+        register_save_button();
+      });
+    }
+
+    $(document).ready(function() {
+      register_save_button();
+      register_delete_button();
+
+      $('.subjectivity').each(function() {
+        var toolTipIcon = "<img src='/static/help.png' style='height: 15px; width: 15px;' class='sentiment-tool-tip' data-toggle='tooltip' data-placement='right' title='The subjectivity score measures how subjective a review is with 0 being completely objective and 1 being completely subjective. BookBrain calculates these scores based on machine learning and the word choice of the reviewer.'>";
+        $(this).append(toolTipIcon);
+      });
+
+      $('.polarity').each(function() {
+        var toolTipIcon = "<img src='/static/help.png' style='height: 15px; width: 15px;' class='sentiment-tool-tip' data-toggle='tooltip' data-place,ent='right' title='The polarity score measure how positive or negative a review is with -1 being completely negative and 1 being complete positive. BookBrain calculates these scores based on machine learning and the word choice of the reviewer.'>";
+        $(this).append(toolTipIcon);
+      });
+
+      window.setTimeout(function() {
+        if ( !$.trim( $('#idb_iframe_container').html() ).length )
+        {
+          $('#book-critic-review').remove();
+        }
+      }, 3000);
+    });
+  </script>
+{% endblock %}
+
+
+<style>
                     /*Overall container*/
                     #idb_main{
                       float:left;
@@ -223,258 +588,6 @@
 
                       .smileygreen, .smileygrey {background-size: 24px 14px; background-position: 0px 0px; background-repeat: no-repeat; padding-left: 28px;  height:15px; margin-top: 3px; font-size: 11px; }
 
-                      </style>
-
-                      <div id="idb_iframe_container">
-                      </div>
-
-                      <script type="text/javascript">
-                        var isbn = {{ book['isbn'] }}; // Replace with ISBN / EISBN / ASIN of the book
-                        var api_key = "606f342ab6dc508aa72d9332945344c9e47c7f57"; //Replace with the developer key (Submit the form to get a key)
-
-                        //Optional Settings
-                        var smiley = 'true'; // Change to false if do not want to show smiley with each review
-                        var width = 700;     // Width of the reviews iframe
-                        var height = 400;    // Height of the reviews iframe
-
-
-                        // DO NOT EDIT   
-                        (function() {
-                        var wf = document.createElement('script');
-                        var host = "idreambooks.com";  
-                        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-                        '://'+ host+'/reviews_widget.js?api_key='+ api_key +'&isbn='+ isbn +
-                        '&smiley='+ smiley +'&width='+width + '&height=' + height;
-                        wf.type = 'text/javascript';
-                        wf.async = 'true';
-                        var s = document.getElementsByTagName('script')[0];
-                        s.parentNode.insertBefore(wf, s);
-                        })();
-
-                      </script>
-                  </p>
-                </div>
-            </div>
-          </div>
-
-          <div class='container-fluid' id='book-twitter-review' style='margin-bottom: 3%;'>
-            <div class='card'>
-              <h5 class='card-header'>
-                <img style='height: 35px; width: auto;' src="http://socialbarrel.com/wp-content/uploads/2018/12/Twitter.png" alt="Twitter-Logo">
-                Tweets Mentioning This Book
-              </h5>
-              <div class='card-body'>
-                <div class='container rounded'>
-                  <div class='row'>
-                    {% for i in range(review['twitter_review']|length) %}
-                    {% if i < 8 %}
-                    <div class='col-sm-6'>
-                      <p class='card-text'>
-                        <div class='card'>
-                          <div class='card-body'>
-                            <div style='margin-bottom: 1em;'>
-                              <span>{{ review['twitter_review'][i]['review_content'] }}</span>
-                            </div>
-
-                            <div class='card-subtitle text-muted mb-2'>
-                              <div class='subjectivity'>
-                                <span> Subjectivity: {{ '%.2f' % sentiments['twitter_review_sentiment'][i].subjectivity }} </span>
-                              </div>
-
-                              <div class='polarity'>
-                                <span>Polarity: {{ '%.2f' % sentiments['twitter_review_sentiment'][i].polarity }}</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </p>
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class='container-fluid' id='book-amazon-review' style='margin-bottom: 3%;'>
-            <div class='card'>
-              <h5 class='card-header'>Amazon Review</h5>
-              <div class='card-body'>
-                {% for amazon_review in review['amazon_review'] %}
-                <p class='card-text'>
-                  Written by {{ amazon_review['review_author'] }} <br>
-                  <!-- Templatize after data is scraped -->
-                  {{ amazon_review['review_content'] }}
-                </p>
-                {% endfor %}
-              </div>
-              </div>
-            </div>
-          </div>
-
-          <div class='container-fluid' id='book-BN-review' style='margin-bottom: 3%;'>
-            <div class='card'>
-              <h5 class='card-header'>BN Review</h5>
-              <div class='card-body'>
-                {% for i in range(review['BN_review']|length) %}
-                <p class='card-text'>
-                  <div class='subjectivity'>
-                    <span>Subjectivity {{ '%.2f' % sentiments['BN_review_sentiment'][i].subjectivity }}</span>
-                  </div>
-
-                  <div class='polarity'>
-                    <span>Polarity {{ '%.2f' % sentiments['BN_review_sentiment'][i].polarity }}</span>
-                  </div>
-
-                  <div style='padding-bottom: 1em;'>
-                    Written by {{ review['BN_review'][i]['review_author'] }}
-                  </div>
-
-                  <div>
-                  {{ review['BN_review'][i]['review_content'] }}
-                  </div>
-                </p>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-
-          <div class='container-fluid' id='book-reddit-review' style='margin-bottom: 5%;'>
-            <div class='card'>
-              <h5 class='card-header'>Reddit Review</h5>
-              <div class='card-body'>
-                {% for reddit_review in review['reddit_review'] %}
-                <p class='card-text'>
-                  Written by {{ reddit_review['review_author'] }} <br>
-                  <!-- Templatize after data is scraped -->
-                  {{ reddit_review['review_content'] }}
-                </p>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-
-          <div id='book-description' class='container-fluid' style='margin-bottom: 3%;'>
-            <h3>Description</h3>
-            <hr class='align-middle'>
-
-            <div class='card'>
-              <div class='card-body'>
-                <p class='card-text'>
-                  <!-- Templatize after data is scraped -->
-                  {{ book['description'] }}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div id='book-details' class='container-fluid' style='margin-bottom: 3%;'>
-            <h3>Details</h3>
-            <hr class='align-middle'>
-
-            <div class='card'>
-              <div class='card-body'>
-                <p class='card-text'>
-                  <!-- Templatize after data is scraped -->
-                  {{ book['details'] }}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div id='book-purchase-links' class='container-fluid'>
-            <h3>Links to purchase</h3>
-            <hr class='align-middle'>
-            <div class='card'>
-              <div class='card-body'>
-                <!-- Templatize after data is scraped -->
-		<!--<a class="btn btn-outline-secondary" href="{{ book['purchase_link'] }}" style="background-color:#B1EDE8">Buy</a>-->
-		<a href="{{ book['purchase_link'] }}">
-		  <img style='max-width: 20%; height: auto;' src='/static/amazon-purchase.jpg' alt='Buy it on Amazon!'>
-		</a>
-              </div>
-            </div>
-          </div>
-      </div>
-    {% else %}
-      <div class='justify-content-center text-center'>
-        <div style='padding: 5%;'>
-          <p> Sorry, but BookBrain is still undergoing development, and we do not currently have this book listed. </p>
-        </div>
-      </div>
-    {% endif %}
-  </div>
-</div>
-
-<style>
-.book-thumbnail {
-  max-width: 120px;
-  max-height: 150px;
-  height: 150px;
-  width: 120px;
-}
-
-.large-book-cover {
-  height: 460px;
-  width: 309px;
-}
 </style>
 
-  {{ super() }}
 
-  <script>
-    function register_save_button() {
-      $('#save-button').mouseup( function() {
-        $.ajax({
-          url: '/profile',
-          type: 'POST',
-          dataType: 'json',
-          data: { book_id: $('#book-id').text() },
-          contentType: "application/json; charset=utf-8;"
-        });
-
-        $(this).attr('disabled', 'true');
-
-        var newButton = "<button id='delete-button' class='btn btn-primary' type='button'>Remove From Saved Books</button>";
-        $(this).parent().append(newButton);
-        $(this).css("display", "none");
-        register_delete_button();
-      });
-    }
-
-    function register_delete_button() {
-      $('#delete-button').mouseup( function() {
-        $.ajax({
-          url: '/profile',
-          type: 'POST',
-          dataType: 'json',
-          data: { book_id: $('#book-id').text(), remove: true },
-          contentType: "application/json; charset=utf-8;"
-        });
-
-        $(this).attr('disabled', 'true');
-
-        var newButton = "<button id='save-button' class='btn btn-primary' type='button'>Remove From Saved Books</button>";
-        $(this).parent().append(newButton);
-        $(this).css("display", "none");
-        register_save_button();
-      });
-    }
-
-    $(document).ready(function() {
-      register_save_button();
-      register_delete_button();
-
-      $('.subjectivity').each(function() {
-        var toolTipIcon = "<img src='/static/help.png' style='height: 15px; width: 15px;' class='sentiment-tool-tip' data-toggle='tooltip' data-placement='right' title='The subjectivity score measures how subjective a review is with 0 being completely objective and 1 being completely subjective. BookBrain calculates these scores based on machine learning and the word choice of the reviewer.'>";
-        $(this).append(toolTipIcon);
-      });
-
-      $('.polarity').each(function() {
-        var toolTipIcon = "<img src='/static/help.png' style='height: 15px; width: 15px;' class='sentiment-tool-tip' data-toggle='tooltip' data-place,ent='right' title='The polarity score measure how positive or negative a review is with -1 being completely negative and 1 being complete positive. BookBrain calculates these scores based on machine learning and the word choice of the reviewer.'>";
-        $(this).append(toolTipIcon);
-      });
-    });
-  </script>
-{% endblock %}
