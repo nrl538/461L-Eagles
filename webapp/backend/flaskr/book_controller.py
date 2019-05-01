@@ -4,7 +4,7 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 from textblob import TextBlob
-from flaskr.auth import login_required
+from flaskr.auth_controller import login_required
 from flaskr.db import get_db
 
 bp = Blueprint('book', __name__)
