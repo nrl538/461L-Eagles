@@ -15,10 +15,11 @@ from flaskr.model import Model
 
 class Book(Model):
     table = 'books'
-    cursor = None
 
     def __init__(self, isbn):
         with app.app_context():
+            self.cursor = get_db().cursor()
+
             self.cursor.execute(
                 'SELECT * from books where books.id = %s;', (isbn,)
             )
@@ -59,8 +60,6 @@ class Book(Model):
             self.reddit_reviews = None
 
     def find(isbn):
-        if Book.cursor is None:
-            Book.cursor = get_db().cursor()
         return Book(isbn);
 
     def to_dict(self):
