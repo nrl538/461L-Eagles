@@ -7,6 +7,9 @@ from textblob import TextBlob
 from flaskr.auth_controller import login_required
 from flaskr.db import get_db
 
+# Import models
+from flaskr.book import Book
+
 bp = Blueprint('book', __name__)
 
 def book_is_saved(book_id):
@@ -59,21 +62,16 @@ def get_book(isbn):
     similar = get_similar(isbn)
 
     cursor = get_db().cursor()
-    cursor.execute(
-        'SELECT * from books WHERE books.id = %s;', (isbn,)
-    )
-    book = cursor.fetchone()
-    
+
+    book = Book.find(isbn)
+
     '''
     cursor.execute(
         'SELECT * from reviews WHERE reviews.book_id = %s;', (isbn,)
     )
     audience_review = cursor.fetchone()
     '''
-    
-    for k,v in book.items():
-        if isinstance(book[k], str):
-            book[k]=re.sub("[^A-Za-z0-9\.\,\?\!\(\)\;\:\'\"\\n\ \/\=\+\-\_\*\#\%_]+", '', v)
+
     cursor.execute(
         'SELECT * FROM twitter WHERE twitter.book_id = %s;',(isbn,)
     )
@@ -133,6 +131,6 @@ def get_book(isbn):
     all_reviews['reddit_review'] = reddit_reviews
     sentiments['reddit_review_sentiment'] = reddit_review_sentiments
     
-    return render_template('book/book.html', book=book, review=all_reviews, sentiments=sentiments, similar=similar, saved=book_is_saved(book['id']))
+    return render_template('book/book.html', book=book, review=all_reviews, sentiments=sentiments, similar=similar, saved=book_is_saved(book.id))
 
 
